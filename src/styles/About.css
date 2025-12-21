@@ -1,0 +1,48 @@
+.section-about {
+  background: #ffffff;
+}
+
+.about-grid {
+  display: grid;
+  gap: 32px;
+}
+
+@media (min-width: 900px) {
+  .about-grid {
+    grid-template-columns: 1.3fr 0.7fr;
+    align-items: center;
+  }
+}
+
+.about-text {
+  max-width: 560px;
+}
+
+.about-paragraph {
+  margin-top: 14px;
+  font-size: 0.95rem;
+  color: var(--color-text-muted);
+}
+
+.about-card {
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 20px;
+  padding: 20px;
+}
+
+.about-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 10px;
+  font-size: 0.85rem;
+  color: #374151;
+}
+
+.about-list li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}

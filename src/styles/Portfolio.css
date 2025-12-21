@@ -1,0 +1,51 @@
+
+.section-portfolio {
+  background: #ffffff;
+}
+
+.portfolio-grid {
+  margin-top: 32px;
+  display: grid;
+  gap: 20px;
+}
+
+@media (min-width: 900px) {
+  .portfolio-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.portfolio-card {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.portfolio-thumb {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 18px;
+  margin-bottom: 12px;
+  background: #e5e7eb;
+}
+
+
+.portfolio-title {
+  font-size: 0.98rem;
+  font-weight: 600;
+}
+
+.portfolio-text {
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+}
+
+.portfolio-status {
+  margin-top: 6px;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: var(--color-primary);
+}
+

@@ -1,0 +1,145 @@
+:root {
+  --color-bg: #f3f4f6;
+  --color-white: #ffffff;
+  --color-primary: #4f46e5;
+  --color-primary-dark: #4338ca;
+  --color-accent: #06b6d4;
+  --color-text: #111827;
+  --color-text-muted: #6b7280;
+  --color-border: #e5e7eb;
+  --radius-lg: 24px;
+  --shadow-soft: 0 18px 45px rgba(15, 23, 42, 0.08);
+  --shadow-card: 0 10px 30px rgba(15, 23, 42, 0.06);
+  --max-width: 1120px;
+  --transition: 0.18s ease-out;
+  --font-sans: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  color: var(--color-text);
+  background: var(--color-bg);
+}
+
+.app-root {
+  min-height: 100vh;
+  background: #f9fafb;
+}
+
+main {
+  padding-top: 72px;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+section {
+  scroll-margin-top: 80px; 
+}
+
+
+/* Secciones genéricas */
+
+.section {
+  padding: 80px 16px;
+}
+
+.section-inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+}
+
+.section-header.center {
+  text-align: center;
+}
+
+.section-title {
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 0;
+  color: var(--color-text);
+}
+
+.section-subtitle {
+  margin-top: 12px;
+  font-size: 0.98rem;
+  color: var(--color-text-muted);
+}
+
+/* Cards genéricas */
+
+.card {
+  background: #ffffff;
+  border-radius: var(--radius-lg);
+  padding: 20px;
+  box-shadow: var(--shadow-card);
+  border: 1px solid var(--color-border);
+}
+
+/* Botones genéricos */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  padding: 10px 22px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  border: 1px solid transparent;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background var(--transition), color var(--transition),
+    border-color var(--transition), transform var(--transition),
+    box-shadow var(--transition);
+}
+
+.btn-primary {
+  background: var(--color-primary);
+  color: #fff;
+  box-shadow: 0 10px 25px rgba(79, 70, 229, 0.35);
+}
+
+.btn-primary:hover {
+  background: var(--color-primary-dark);
+  transform: translateY(-1px);
+}
+
+.btn-outline {
+  border-color: #e5e7eb;
+  color: #4b5563;
+  background: #fff;
+}
+
+.btn-outline:hover {
+  border-color: #c7d2fe;
+  color: var(--color-primary-dark);
+}
+
+.btn-small {
+  padding: 8px 16px;
+  font-size: 0.8rem;
+}
+
+.btn-light {
+  background: rgba(255, 255, 255, 0.1);
+  color: #e0e7ff;
+  border-color: rgba(191, 219, 254, 0.6);
+}
+
+.btn-light:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.btn.full {
+  width: 100%;
+}

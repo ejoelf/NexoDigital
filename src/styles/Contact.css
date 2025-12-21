@@ -1,0 +1,200 @@
+.section-contact {
+  background: #f3f4f6;
+}
+
+.contact-inner {
+  max-width: 900px;
+}
+
+.contact-grid {
+  margin-top: 32px;
+  display: grid;
+  gap: 24px;
+}
+
+@media (min-width: 900px) {
+  .contact-grid {
+    grid-template-columns: 3fr 2fr;
+  }
+}
+
+.contact-form {
+  padding: 22px;
+}
+
+.form-group {
+  margin-bottom: 14px;
+}
+
+.form-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #4b5563;
+}
+
+.form-input {
+  margin-top: 4px;
+  width: 100%;
+  border-radius: 18px;
+  border: 1px solid #d1d5db;
+  padding: 8px 10px;
+  font-size: 0.86rem;
+  outline: none;
+  transition: border-color var(--transition), box-shadow var(--transition);
+  resize: vertical;
+}
+
+.form-input:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 1px rgba(79, 70, 229, 0.35);
+}
+
+.form-textarea {
+  min-height: 110px;
+}
+
+.contact-side {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.contact-kicker {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: #c7d2fe;
+}
+
+.contact-kicker--muted {
+  color: #6b7280;
+}
+
+.contact-side-title {
+  margin: 8px 0 0;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.contact-text {
+  margin-top: 8px;
+  font-size: 0.9rem;
+  color: rgba(224, 231, 255, 0.92);
+}
+
+.contact-side-note {
+  margin-top: 10px;
+  font-size: 0.78rem;
+  color: rgba(224, 231, 255, 0.85);
+}
+
+.contact-info {
+  background: #ffffff;
+}
+
+.contact-email-link {
+  display: inline-block;
+  margin-top: 10px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #111827;
+  text-decoration: none;
+}
+
+.contact-email-link:hover {
+  color: var(--color-primary);
+  text-decoration: underline;
+}
+
+.contact-note {
+  margin-top: 6px;
+  font-size: 0.78rem;
+  color: var(--color-text-muted);
+}
+
+.contact-status {
+  margin-bottom: 10px;
+  font-size: 0.8rem;
+  padding: 8px 10px;
+  border-radius: 999px;
+}
+
+.contact-status--error {
+  background: #fef2f2;
+  color: #b91c1c;
+  border: 1px solid #fecaca;
+}
+
+.contact-status--success {
+  background: #ecfdf5;
+  color: #15803d;
+  border: 1px solid #bbf7d0;
+}
+
+/* --- Card WhatsApp: gana a .card sin !important --- */
+.contact-side .card.contact-highlight {
+  background: linear-gradient(
+    to bottom right,
+    rgba(79, 70, 229, 0.96),
+    rgba(37, 99, 235, 0.92)
+  );
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  color: #eef2ff;
+}
+
+/* Ajustes de textos dentro de la card */
+.contact-side .card.contact-highlight .contact-kicker {
+  color: rgba(199, 210, 254, 0.95);
+}
+
+.contact-side .t  .card.contact-highlight .contact-text {
+  color: rgba(224, 231, 255, 0.92);
+}
+
+/* --- Botón WhatsApp: más sólido para que no se vea “transparente” --- */
+.contact-side .card.contact-highlight .btn.contact-wa-btn {
+  margin-top: 10px;
+  background: rgba(255, 255, 255, 0.92);
+  color: #1f2937;
+  border-color: rgba(255, 255, 255, 0.92);
+  box-shadow: 0 10px 25px rgba(15, 23, 42, 0.12);
+}
+
+.contact-side .card.contact-highlight .btn.contact-wa-btn:hover {
+  background: rgba(255, 255, 255, 1);
+  transform: translateY(-1px);
+}
+
+
+.contact-socials {
+  margin-top: 10px;
+  display: grid;
+  gap: 10px;
+}
+
+.contact-social {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  color: #111827;
+  padding: 10px 12px;
+  border-radius: 16px;
+  border: none;
+  background: transparent;
+  transition: transform var(--transition), border-color var(--transition),
+    box-shadow var(--transition), color var(--transition);
+}
+
+.contact-social:hover {
+  transform: translateY(-1px);
+  border-color: rgba(79, 70, 229, 0.25);
+  box-shadow: 0 10px 25px rgba(15, 23, 42, 0.06);
+  color: var(--color-primary-dark);
+}
+
+.contact-social-text {
+  font-size: 0.9rem;
+  font-weight: 600;
+}
