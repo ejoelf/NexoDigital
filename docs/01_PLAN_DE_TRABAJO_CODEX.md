@@ -267,4 +267,4 @@ Agregar capacidades avanzadas una vez que la base sea estable.
 
 ## 13. Prompt base para Codex
 
-Usar el archivo `docs/07_PROMPTS_CODEX.md` para ejecutar cada bloque. No pedir a Codex que haga todo el proyecto completo de una sola vez.
+Usar el archivo `docs/06_PROMPTS_CODEX.md` para ejecutar cada bloque. No pedir a Codex que haga todo el proyecto completo de una sola vez.
