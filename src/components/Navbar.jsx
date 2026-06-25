@@ -3,9 +3,9 @@ import "../styles/Navbar.css";
 
 const LINKS = [
   { href: "#inicio", label: "Inicio", id: "inicio" },
-  { href: "#sobre", label: "Sobre nosotros", id: "sobre" },
+  { href: "#sobre", label: "NexoDigital", id: "sobre" },
   { href: "#servicios", label: "Servicios", id: "servicios" },
-  { href: "#portfolio", label: "Portfolio", id: "portfolio" },
+  { href: "#portfolio", label: "Proyectos", id: "portfolio" },
   { href: "#contacto", label: "Contacto", id: "contacto" },
 ];
 
@@ -16,12 +16,13 @@ function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState("inicio");
 
-  const sectionIds = useMemo(() => LINKS.map((l) => l.id), []);
+  const sectionIds = useMemo(() => LINKS.map((link) => link.id), []);
 
   useEffect(() => {
     function handleScroll() {
       setIsScrolled(window.scrollY > 10);
     }
+
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
@@ -37,7 +38,6 @@ function Navbar() {
 
     function updateActiveSection() {
       const scrollPos = window.scrollY + NAV_OFFSET;
-
       let currentId = sections[0].id;
 
       for (const section of sections) {
@@ -83,10 +83,12 @@ function Navbar() {
             alt="NexoDigital - soluciones digitales e inteligencia artificial"
             className="navbar-logo-image"
           />
-          <span className="navbar-logo-text">NexoDigital</span>
+          <span className="navbar-logo-copy">
+            <span className="navbar-logo-text">NexoDigital</span>
+            <span className="navbar-logo-subtitle">Studio tecnológico</span>
+          </span>
         </a>
 
-        {/* Desktop */}
         <div className="navbar-links navbar-links--desktop">
           {LINKS.map((link) => (
             <a
@@ -100,11 +102,10 @@ function Navbar() {
             </a>
           ))}
           <a href="#contacto" className="navbar-cta">
-            Agendá una reunión
+            Diagnóstico inicial
           </a>
         </div>
 
-        {/* Mobile toggle */}
         <button
           type="button"
           className="navbar-toggle"
@@ -118,7 +119,6 @@ function Navbar() {
         </button>
       </nav>
 
-      {/* Mobile menu */}
       <div
         className={`navbar-links navbar-links--mobile ${
           isMobileOpen ? "navbar-links--mobile-open" : ""
@@ -141,7 +141,7 @@ function Navbar() {
           className="navbar-cta navbar-cta--mobile"
           onClick={handleNavClick}
         >
-          Agendá una reunión
+          Diagnóstico inicial
         </a>
       </div>
     </header>

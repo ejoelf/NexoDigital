@@ -4,45 +4,101 @@
 
 .about-grid {
   display: grid;
-  gap: 32px;
-}
-
-@media (min-width: 900px) {
-  .about-grid {
-    grid-template-columns: 1.3fr 0.7fr;
-    align-items: center;
-  }
+  gap: 34px;
 }
 
 .about-text {
-  max-width: 560px;
+  max-width: 670px;
+}
+
+.about-eyebrow {
+  margin: 0 0 12px;
+  color: #0f766e;
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0;
+  text-transform: uppercase;
 }
 
 .about-paragraph {
-  margin-top: 14px;
-  font-size: 0.95rem;
+  margin-top: 15px;
+  font-size: 0.98rem;
+  line-height: 1.78;
   color: var(--color-text-muted);
 }
 
+.about-tags {
+  margin-top: 22px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.about-tags span {
+  border: 1px solid rgba(226, 232, 240, 0.92);
+  border-radius: 999px;
+  padding: 8px 11px;
+  background: #f8fafc;
+  color: #334155;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
 .about-card {
-  background: #f9fafb;
-  border: 1px solid #e5e7eb;
-  border-radius: 20px;
-  padding: 20px;
+  background: linear-gradient(180deg, #0f172a, #111827);
+  border: 1px solid rgba(148, 163, 184, 0.28);
+  border-radius: 18px;
+  padding: 24px;
+  color: #e5e7eb;
+  box-shadow: 0 24px 60px rgba(15, 23, 42, 0.18);
+}
+
+.about-card-kicker {
+  margin: 0;
+  color: #67e8f9;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.about-card-title {
+  margin: 10px 0 0;
+  font-size: 1.24rem;
+  line-height: 1.25;
+  color: #ffffff;
 }
 
 .about-list {
   list-style: none;
   padding: 0;
-  margin: 0;
+  margin: 20px 0 0;
   display: grid;
-  gap: 10px;
-  font-size: 0.85rem;
-  color: #374151;
+  gap: 13px;
+  font-size: 0.9rem;
+  color: rgba(226, 232, 240, 0.88);
 }
 
 .about-list li {
   display: flex;
-  align-items: center;
-  gap: 8px;
+  align-items: flex-start;
+  gap: 10px;
+  line-height: 1.55;
+}
+
+.about-list-marker {
+  width: 8px;
+  height: 8px;
+  margin-top: 7px;
+  border-radius: 999px;
+  background: #22c55e;
+  box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.14);
+  flex: 0 0 auto;
+}
+
+@media (min-width: 900px) {
+  .about-grid {
+    grid-template-columns: 1.25fr 0.75fr;
+    align-items: center;
+  }
 }

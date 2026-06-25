@@ -7,32 +7,56 @@ function About() {
       <div className="section-inner">
         <div className="about-grid">
           <div className="about-text">
+            <p className="about-eyebrow">Qué es NexoDigital</p>
             <h2 className="section-title">
-              Construimos soluciones digitales con criterio y enfoque real
+              Una empresa tecnológica boutique para negocios que quieren
+              ordenar, vender y crecer.
             </h2>
             <p className="about-paragraph">
-              En NexoDigital ayudamos a negocios y profesionales a mejorar sus
-              procesos, su presencia digital y su relación con los clientes
-              mediante tecnología bien aplicada.
+              NexoDigital no nace para hacer páginas sueltas. Creamos presencia
+              digital, software, CRMs, automatizaciones e integraciones que
+              ayudan a que un negocio trabaje con más foco y menos fricción.
             </p>
             <p className="about-paragraph">
-              No ofrecemos soluciones genéricas ni promesas vacías: analizamos
-              cada caso, entendemos el contexto y desarrollamos herramientas que
-              realmente aportan valor.
+              Antes de diseñar o programar, entendemos cómo funciona el negocio:
+              qué vende, cómo capta clientes, qué procesos se repiten, dónde se
+              pierde tiempo y qué tecnología puede generar una mejora concreta.
             </p>
             <p className="about-paragraph">
-              Trabajamos de forma cercana, clara y ordenada, priorizando
-              resultados concretos y soluciones que puedan escalar con el
-              crecimiento de cada proyecto.
+              El objetivo es construir bases digitales mantenibles: webs que
+              convierten, sistemas que ordenan, IA aplicada con criterio y una
+              línea futura de buenas prácticas de seguridad para proteger lo que
+              el negocio va creando.
             </p>
+
+            <div className="about-tags" aria-label="Áreas de trabajo">
+              <span>Web comercial</span>
+              <span>Software a medida</span>
+              <span>CRM</span>
+              <span>IA aplicada</span>
+            </div>
           </div>
 
           <div className="about-card">
+            <p className="about-card-kicker">Forma de trabajo</p>
+            <h3 className="about-card-title">Tecnología con criterio operativo</h3>
             <ul className="about-list">
-              <li>✔ Análisis real antes de desarrollar</li>
-              <li>✔ Soluciones pensadas para tu negocio</li>
-              <li>✔ Comunicación clara y sin vueltas</li>
-              <li>✔ Tecnología moderna y escalable</li>
+              <li>
+                <span className="about-list-marker" aria-hidden="true" />
+                Análisis real antes de desarrollar.
+              </li>
+              <li>
+                <span className="about-list-marker" aria-hidden="true" />
+                Soluciones pensadas para el flujo del negocio.
+              </li>
+              <li>
+                <span className="about-list-marker" aria-hidden="true" />
+                Comunicación clara, entregas ordenadas y foco comercial.
+              </li>
+              <li>
+                <span className="about-list-marker" aria-hidden="true" />
+                Base técnica preparada para mantenimiento y crecimiento.
+              </li>
             </ul>
           </div>
         </div>

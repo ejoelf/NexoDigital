@@ -244,26 +244,6 @@ function Contact() {
       <span className="contact-social-text">Instagram</span>
     </a>
 
-    <a
-      className="contact-social"
-      href="https://www.facebook.com/TU_PAGINA"
-      target="_blank"
-      rel="noreferrer"
-      aria-label="Facebook de NexoDigital"
-      title="Facebook"
-    >
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 24 24"
-        width="20"
-        height="20"
-        fill="currentColor"
-        aria-hidden="true"
-      >
-        <path d="M13.5 22v-8h2.7l.3-3H13.5V9.1c0-.9.3-1.5 1.6-1.5H16.6V5c-.3 0-1.3-.1-2.5-.1-2.5 0-4.2 1.5-4.2 4.3V11H7.5v3H9.9v8h3.6Z"/>
-      </svg>
-      <span className="contact-social-text">Facebook</span>
-    </a>
   </div>
 
   <p className="contact-note">

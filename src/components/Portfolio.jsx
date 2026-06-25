@@ -1,5 +1,5 @@
 import React from "react";
-import { motion, useReducedMotion } from "framer-motion";
+import { motion as Motion, useReducedMotion } from "framer-motion";
 import "../styles/Portfolio.css";
 
 function Portfolio() {
@@ -42,7 +42,7 @@ function Portfolio() {
 
         <div className="portfolio-grid">
           {projects.map((project) => (
-            <motion.article
+            <Motion.article
               key={project.name}
               className="card portfolio-card"
               initial={reduceMotion ? false : { opacity: 0, y: 20 }}
@@ -72,7 +72,7 @@ function Portfolio() {
               >
                 Demo / video (pronto)
               </button>
-            </motion.article>
+            </Motion.article>
           ))}
         </div>
       </div>

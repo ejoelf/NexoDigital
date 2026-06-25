@@ -1,6 +1,9 @@
 .hero {
-  background: linear-gradient(to bottom, #eef2ff, #ffffff, #f9fafb);
-  padding: 96px 16px 80px;
+  background:
+    radial-gradient(circle at 15% 12%, rgba(6, 182, 212, 0.16), transparent 28%),
+    radial-gradient(circle at 88% 18%, rgba(16, 185, 129, 0.12), transparent 24%),
+    linear-gradient(to bottom, #f8fafc, #ffffff 58%, #f9fafb);
+  padding: 104px 16px 84px;
 }
 
 .hero-inner {
@@ -8,7 +11,240 @@
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  gap: 40px;
+  gap: 42px;
+}
+
+.hero-text {
+  max-width: 650px;
+}
+
+.hero-kicker {
+  display: inline-flex;
+  align-items: center;
+  margin: 0;
+  padding: 7px 11px;
+  border: 1px solid rgba(6, 182, 212, 0.22);
+  border-radius: 999px;
+  background: rgba(236, 254, 255, 0.72);
+  color: #0f766e;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.hero-title {
+  margin: 18px 0 0;
+  font-size: clamp(2.35rem, 6vw, 4.55rem);
+  line-height: 1.04;
+  letter-spacing: 0;
+  color: #0f172a;
+  max-width: 760px;
+}
+
+.hero-subtitle {
+  margin: 18px 0 0;
+  max-width: 610px;
+  font-size: 1.04rem;
+  line-height: 1.75;
+  color: #475569;
+}
+
+.hero-buttons {
+  margin-top: 28px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.hero-trust {
+  margin: 22px 0 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  font-size: 0.82rem;
+  color: #475569;
+}
+
+.hero-trust li {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 10px;
+  border: 1px solid rgba(226, 232, 240, 0.9);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.72);
+}
+
+.hero-trust-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 999px;
+  background: #10b981;
+  box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.12);
+  flex: 0 0 auto;
+}
+
+.hero-note {
+  margin-top: 18px;
+  max-width: 570px;
+  font-size: 0.9rem;
+  line-height: 1.65;
+  color: #64748b;
+}
+
+.hero-card-wrapper {
+  max-width: 410px;
+  width: 100%;
+  position: relative;
+}
+
+.hero-card-wrapper::before {
+  content: "";
+  position: absolute;
+  inset: -18px;
+  background: radial-gradient(
+    circle at 42% 25%,
+    rgba(6, 182, 212, 0.18),
+    rgba(16, 185, 129, 0.12),
+    transparent 68%
+  );
+  filter: blur(18px);
+  z-index: 0;
+  pointer-events: none;
+}
+
+.hero-card {
+  position: relative;
+  z-index: 1;
+  background: rgba(255, 255, 255, 0.92);
+  border-radius: 18px;
+  padding: 18px;
+  box-shadow: 0 24px 60px rgba(15, 23, 42, 0.12);
+  border: 1px solid rgba(226, 232, 240, 0.92);
+  transition: transform 0.18s ease-out, box-shadow 0.18s ease-out;
+}
+
+.hero-card-wrapper:hover .hero-card {
+  transform: translateY(-2px);
+  box-shadow: 0 28px 70px rgba(15, 23, 42, 0.16);
+}
+
+.hero-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  font-size: 0.74rem;
+  color: #64748b;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.hero-card-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  white-space: nowrap;
+  font-size: 0.72rem;
+  padding: 6px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(209, 250, 229, 0.9);
+  background: rgba(236, 253, 245, 0.92);
+  color: #047857;
+}
+
+.hero-card-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: rgba(34, 197, 94, 0.9);
+  box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.14);
+}
+
+.hero-card-body {
+  margin-top: 14px;
+  display: grid;
+  gap: 12px;
+}
+
+.hero-card-block {
+  border-radius: 14px;
+  background: #f8fafc;
+  padding: 13px;
+  border: 1px solid rgba(226, 232, 240, 0.72);
+}
+
+.hero-card-block-main {
+  background: linear-gradient(135deg, #eef2ff, #ecfeff);
+  border-color: rgba(199, 210, 254, 0.85);
+}
+
+.hero-card-title {
+  margin: 0;
+  font-size: 0.92rem;
+  font-weight: 800;
+  color: #0f172a;
+}
+
+.hero-card-text {
+  font-size: 0.82rem;
+  line-height: 1.55;
+  margin: 6px 0 0;
+  color: #475569;
+}
+
+.hero-metrics {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.hero-metrics div {
+  min-width: 0;
+  border-radius: 14px;
+  padding: 11px;
+  background: #ffffff;
+  border: 1px solid rgba(226, 232, 240, 0.9);
+}
+
+.hero-metric-value,
+.hero-metric-label {
+  display: block;
+}
+
+.hero-metric-value {
+  font-size: 0.88rem;
+  font-weight: 800;
+  color: #4f46e5;
+}
+
+.hero-metric-label {
+  margin-top: 3px;
+  font-size: 0.72rem;
+  color: #64748b;
+}
+
+.hero-card-grid {
+  display: grid;
+  gap: 10px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.hero-card-label {
+  margin: 0;
+  font-size: 0.78rem;
+  font-weight: 800;
+  color: #111827;
+}
+
+.hero-card-small {
+  font-size: 0.75rem;
+  color: #64748b;
+  line-height: 1.45;
+  margin: 5px 0 0;
 }
 
 @media (min-width: 900px) {
@@ -19,191 +255,27 @@
   }
 }
 
-.hero-text {
-  max-width: 560px;
+@media (max-width: 560px) {
+  .hero {
+    padding-top: 88px;
+  }
+
+  .hero-card-grid,
+  .hero-metrics {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-buttons .btn {
+    width: 100%;
+  }
 }
-
-.hero-kicker {
-  text-transform: uppercase;
-  letter-spacing: 0.2em;
-  font-size: 0.7rem;
-  color: var(--color-primary);
-  font-weight: 600;
-}
-
-.hero-title {
-  margin: 16px 0 0;
-  font-size: 2.4rem;
-  line-height: 1.15;
-  letter-spacing: -0.04em;
-}
-
-.hero-subtitle {
-  margin-top: 12px;
-  font-size: 1rem;
-  color: var(--color-text-muted);
-}
-
-.hero-buttons {
-  margin-top: 24px;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-}
-
-.hero-note {
-  margin-top: 14px;
-  font-size: 0.8rem;
-  color: #9ca3af;
-}
-
-/* Tarjeta */
-
-.hero-card-wrapper {
-  max-width: 380px;
-  width: 100%;
-}
-
-.hero-card {
-  background: #ffffff;
-  border-radius: 26px;
-  padding: 16px;
-  box-shadow: var(--shadow-soft);
-  border: 1px solid #e5e7eb;
-}
-
-.hero-card-header {
-  display: flex;
-  justify-content: space-between;
-  font-size: 0.7rem;
-  color: #9ca3af;
-  padding-bottom: 8px;
-  border-bottom: 1px solid #e5e7eb;
-}
-
-.hero-card-body {
-  margin-top: 12px;
-  display: grid;
-  gap: 10px;
-}
-
-.hero-card-block {
-  border-radius: 18px;
-  background: #f9fafb;
-  padding: 10px;
-}
-
-.hero-card-block-main {
-  background: #eef2ff;
-}
-
-.hero-card-title {
-  font-size: 0.8rem;
-  font-weight: 600;
-}
-
-.hero-card-text {
-  font-size: 0.78rem;
-  margin-top: 3px;
-  color: var(--color-text-muted);
-}
-
-.hero-card-grid {
-  display: grid;
-  gap: 10px;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-}
-
-.hero-card-label {
-  font-size: 0.7rem;
-  font-weight: 600;
-  color: #111827;
-}
-
-.hero-card-small {
-  font-size: 0.72rem;
-  color: #6b7280;
-  margin-top: 4px;
-}
-
-.hero-trust {
-  margin-top: 18px;
-  padding: 0;
-  list-style: none;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 14px;
-  font-size: 0.78rem;
-  color: #6b7280;
-}
-
-.hero-trust li {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-
-
-.hero-card-wrapper {
-  position: relative;
-}
-
-.hero-card-wrapper::before {
-  content: "";
-  position: absolute;
-  inset: -18px;
-  background: radial-gradient(
-    circle at 35% 25%,
-    rgba(79, 70, 229, 0.22),
-    rgba(6, 182, 212, 0.12),
-    transparent 65%
-  );
-  filter: blur(18px);
-  z-index: 0;
-  pointer-events: none;
-}
-
-.hero-card {
-  position: relative;
-  z-index: 1;
-  transition: transform 0.18s ease-out, box-shadow 0.18s ease-out;
-}
-
-.hero-card-wrapper:hover .hero-card {
-  transform: translateY(-2px) rotate(-0.2deg);
-  box-shadow: 0 22px 55px rgba(15, 23, 42, 0.14);
-}
-
-
-.hero-card-pill {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 0.72rem;
-  padding: 6px 10px;
-  border-radius: 999px;
-  border: 1px solid rgba(226, 232, 240, 0.9);
-  background: rgba(249, 250, 251, 0.9);
-  color: #6b7280;
-}
-
-
-.hero-card-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 999px;
-  background: rgba(34, 197, 94, 0.9);
-  box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.14);
-}
-
 
 @media (prefers-reduced-motion: reduce) {
   .hero-card {
     transition: none;
   }
+
   .hero-card-wrapper:hover .hero-card {
     transform: none;
   }
 }
-
-

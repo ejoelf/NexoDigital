@@ -1,5 +1,5 @@
 import React from "react";
-import { motion, useReducedMotion } from "framer-motion";
+import { motion as Motion, useReducedMotion } from "framer-motion";
 import "../styles/Hero.css";
 
 function Hero() {
@@ -8,48 +8,57 @@ function Hero() {
   return (
     <section id="inicio" className="hero">
       <div className="hero-inner">
-        <motion.div
+        <Motion.div
           className="hero-text"
           initial={reduceMotion ? false : { opacity: 0, y: 30 }}
           whileInView={reduceMotion ? false : { opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
         >
-          <p className="hero-kicker">Soluciones digitales inteligentes</p>
+          <p className="hero-kicker">Web, software, CRM e IA para negocios</p>
 
           <h1 className="hero-title">
-            Potenciamos tu negocio con tecnología, diseño e inteligencia
-            artificial.
+            Creamos tecnología para que tu negocio venda mejor, se ordene y
+            pueda escalar.
           </h1>
 
           <p className="hero-subtitle">
-            Desarrollo web, sistemas a medida e IA aplicada para que tu negocio
-            crezca, automatice tareas y brinde una mejor experiencia a sus
-            clientes.
+            NexoDigital diseña y desarrolla webs profesionales, sistemas a
+            medida, CRMs y automatizaciones con IA para negocios que necesitan
+            operar con más claridad y convertir mejor.
           </p>
 
           <div className="hero-buttons">
             <a href="#contacto" className="btn btn-primary">
-              Agendar reunión gratuita
+              Agendar diagnóstico
             </a>
             <a href="#portfolio" className="btn btn-outline">
-              Ver proyectos
+              Ver trabajos
             </a>
           </div>
 
           <ul className="hero-trust">
-            <li>✔ Respuesta en el día</li>
-            <li>✔ Soluciones a medida</li>
-            <li>✔ Sin compromiso inicial</li>
+            <li>
+              <span className="hero-trust-dot" aria-hidden="true" />
+              Análisis antes de desarrollar
+            </li>
+            <li>
+              <span className="hero-trust-dot" aria-hidden="true" />
+              Soluciones preparadas para crecer
+            </li>
+            <li>
+              <span className="hero-trust-dot" aria-hidden="true" />
+              Comunicación clara desde el inicio
+            </li>
           </ul>
 
           <p className="hero-note">
-            Trabajamos con personas y equipos que quieren mejorar procesos,
-            vender más y aprovechar la tecnología de forma inteligente.
+            No trabajamos como una agencia genérica: pensamos cada proyecto
+            como una pieza del sistema digital que sostiene tu negocio.
           </p>
-        </motion.div>
+        </Motion.div>
 
-        <motion.div
+        <Motion.div
           className="hero-card-wrapper"
           initial={reduceMotion ? false : { opacity: 0, x: 40 }}
           whileInView={reduceMotion ? false : { opacity: 1, x: 0 }}
@@ -57,40 +66,56 @@ function Hero() {
           viewport={{ once: true }}
         >
           <div className="hero-card">
-           <div className="hero-card-header">
-            <span>Dashboard NexoDigital</span>
-            <span className="hero-card-pill">
-            <span className="hero-card-dot" aria-hidden="true" />
-              Demo
-            </span>
-          </div>    
+            <div className="hero-card-header">
+              <span>Centro digital NexoDigital</span>
+              <span className="hero-card-pill">
+                <span className="hero-card-dot" aria-hidden="true" />
+                En evolución
+              </span>
+            </div>
+
             <div className="hero-card-body">
               <div className="hero-card-block hero-card-block-main">
-                <p className="hero-card-title">Chatbot para WhatsApp</p>
+                <p className="hero-card-title">Web + CRM + automatización</p>
                 <p className="hero-card-text">
-                  Responde consultas y toma reservas automáticamente, las 24 hs.
+                  Una base digital conectada para captar consultas, ordenar
+                  clientes y automatizar tareas repetitivas.
                 </p>
+              </div>
+
+              <div className="hero-metrics">
+                <div>
+                  <span className="hero-metric-value">01</span>
+                  <span className="hero-metric-label">Presencia</span>
+                </div>
+                <div>
+                  <span className="hero-metric-value">02</span>
+                  <span className="hero-metric-label">Gestión</span>
+                </div>
+                <div>
+                  <span className="hero-metric-value">03</span>
+                  <span className="hero-metric-label">Escala</span>
+                </div>
               </div>
 
               <div className="hero-card-grid">
                 <div className="hero-card-block">
-                  <p className="hero-card-label">Sitios web</p>
+                  <p className="hero-card-label">Webs que convierten</p>
                   <p className="hero-card-small">
-                    Rápidos, modernos y listos para convertir visitas en
-                    clientes.
+                    Experiencias claras, rápidas y orientadas a consulta real.
                   </p>
                 </div>
 
                 <div className="hero-card-block">
-                  <p className="hero-card-label">Sistemas a medida</p>
+                  <p className="hero-card-label">IA aplicada</p>
                   <p className="hero-card-small">
-                    Inventarios, paneles internos y más, adaptados a tu negocio.
+                    Flujos simples para ahorrar tiempo sin perder control.
                   </p>
                 </div>
               </div>
             </div>
           </div>
-        </motion.div>
+        </Motion.div>
       </div>
     </section>
   );
