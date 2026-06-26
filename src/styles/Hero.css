@@ -72,6 +72,7 @@
   display: inline-flex;
   align-items: center;
   gap: 8px;
+  max-width: 100%;
   padding: 8px 10px;
   border: 1px solid rgba(226, 232, 240, 0.9);
   border-radius: 999px;
@@ -258,6 +259,15 @@
 @media (max-width: 560px) {
   .hero {
     padding-top: 88px;
+  }
+
+  .hero-title {
+    font-size: clamp(2.15rem, 11vw, 2.75rem);
+  }
+
+  .hero-trust {
+    align-items: stretch;
+    flex-direction: column;
   }
 
   .hero-card-grid,

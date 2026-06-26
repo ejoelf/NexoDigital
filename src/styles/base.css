@@ -143,3 +143,14 @@ section {
 .btn.full {
   width: 100%;
 }
+
+@media (max-width: 640px) {
+  .section {
+    padding: 64px 16px;
+  }
+
+  .section-title {
+    font-size: 1.72rem;
+    line-height: 1.18;
+  }
+}

@@ -3,9 +3,9 @@ import "../styles/Navbar.css";
 
 const LINKS = [
   { href: "#inicio", label: "Inicio", id: "inicio" },
-  { href: "#sobre", label: "NexoDigital", id: "sobre" },
   { href: "#servicios", label: "Servicios", id: "servicios" },
-  { href: "#portfolio", label: "Proyectos", id: "portfolio" },
+  { href: "#ecosistema", label: "Ecosistema", id: "ecosistema" },
+  { href: "#portfolio", label: "Trabajos", id: "portfolio" },
   { href: "#contacto", label: "Contacto", id: "contacto" },
 ];
 
