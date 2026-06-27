@@ -1,0 +1,401 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum UserRole {
+  ADMIN
+  MEMBER
+  COLLABORATOR
+  READONLY
+}
+
+enum UserStatus {
+  ACTIVE
+  INVITED
+  DISABLED
+}
+
+enum ClientStatus {
+  LEAD
+  ACTIVE
+  PAUSED
+  INACTIVE
+}
+
+enum ProjectType {
+  WEBSITE
+  LANDING
+  ECOMMERCE
+  CRM
+  SAAS
+  INTERNAL_SYSTEM
+  CUSTOM_SOFTWARE
+  AUTOMATION
+}
+
+enum ProjectStatus {
+  IDEA
+  ANALYSIS
+  DESIGN
+  DEVELOPMENT
+  TESTING
+  DEPLOYED
+  MAINTENANCE
+  PAUSED
+  CLOSED
+}
+
+enum WorkStatus {
+  IDEA
+  ANALYSIS
+  DESIGN
+  DEVELOPMENT
+  REVIEW
+  PUBLISHED
+  MAINTENANCE
+  PAUSED
+  CLOSED
+}
+
+enum ProviderCategory {
+  FRONTEND
+  BACKEND
+  DATABASE
+  AUTH
+  STORAGE
+  AI
+  EMAIL
+  DOMAIN
+  HOSTING
+  PAYMENTS
+  ANALYTICS
+  SECURITY
+  MONITORING
+  OTHER
+}
+
+enum ProviderStatus {
+  ACTIVE
+  CANDIDATE
+  DEPRECATED
+}
+
+enum BillingFrequency {
+  MONTHLY
+  YEARLY
+  ONE_TIME
+  USAGE_BASED
+}
+
+enum SubscriptionStatus {
+  ACTIVE
+  TRIAL
+  CANCELLED
+  EXPIRED
+  PAUSED
+}
+
+enum DomainStatus {
+  ACTIVE
+  EXPIRING
+  EXPIRED
+  TRANSFERRED
+  PARKED
+}
+
+enum RenewalEntityType {
+  SUBSCRIPTION
+  DOMAIN
+  PROVIDER_SERVICE
+  LICENSE
+  OTHER
+}
+
+enum RenewalStatus {
+  PENDING
+  PAID
+  OVERDUE
+  CANCELLED
+}
+
+enum CostCategory {
+  INFRASTRUCTURE
+  DOMAIN
+  EMAIL
+  AI
+  DEVELOPMENT
+  MAINTENANCE
+  LICENSE
+  PAYMENT_FEE
+  OTHER
+}
+
+enum DocumentType {
+  BRIEF
+  PROPOSAL
+  CONTRACT
+  INVOICE
+  MANUAL
+  TECHNICAL_NOTE
+  DECISION
+  PROMPT
+  ASSET
+  OTHER
+}
+
+enum DocumentVisibility {
+  INTERNAL
+  CLIENT_SHARED
+  PUBLIC
+}
+
+model User {
+  id           String     @id @default(cuid())
+  name         String
+  email        String     @unique
+  passwordHash String
+  role         UserRole   @default(MEMBER)
+  status       UserStatus @default(INVITED)
+  lastLoginAt  DateTime?
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+
+  documents     Document[]
+  refreshTokens RefreshToken[]
+}
+
+model RefreshToken {
+  id        String    @id @default(cuid())
+  userId    String
+  tokenHash String    @unique
+  expiresAt DateTime
+  revokedAt DateTime?
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([expiresAt])
+}
+
+model Client {
+  id           String       @id @default(cuid())
+  businessName String
+  displayName  String?
+  contactName  String?
+  email        String?
+  phone        String?
+  whatsapp     String?
+  industry     String?
+  country      String?
+  city         String?
+  address      String?
+  status       ClientStatus @default(LEAD)
+  notes        String?
+  createdAt    DateTime     @default(now())
+  updatedAt    DateTime     @updatedAt
+
+  projects      Project[]
+  works         Work[]
+  subscriptions Subscription[]
+  domains       Domain[]
+  renewals      Renewal[]
+  costs         Cost[]
+  documents     Document[]
+}
+
+model Project {
+  id                   String        @id @default(cuid())
+  clientId             String?
+  name                 String
+  slug                 String        @unique
+  type                 ProjectType
+  status               ProjectStatus @default(IDEA)
+  description          String?
+  frontendRepositoryUrl String?
+  backendRepositoryUrl  String?
+  publicUrl            String?
+  startDate            DateTime?
+  launchDate           DateTime?
+  maintenanceStartDate DateTime?
+  notes                String?
+  createdAt            DateTime      @default(now())
+  updatedAt            DateTime      @updatedAt
+
+  client        Client?        @relation(fields: [clientId], references: [id], onDelete: SetNull)
+  works         Work[]
+  subscriptions Subscription[]
+  domains       Domain[]
+  renewals      Renewal[]
+  costs         Cost[]
+  documents     Document[]
+}
+
+model Work {
+  id                    String     @id @default(cuid())
+  projectId             String?
+  clientId              String?
+  title                 String
+  slug                  String     @unique
+  clientName            String?
+  category              String
+  industry              String?
+  shortDescription      String
+  longDescription       String?
+  mainImageUrl          String?
+  galleryUrls           String[]
+  publicUrl             String?
+  frontendRepositoryUrl String?
+  backendRepositoryUrl  String?
+  technologies          String[]
+  includedServices      String[]
+  status                WorkStatus @default(IDEA)
+  publishedAt           DateTime?
+  isPublic              Boolean    @default(false)
+  featured              Boolean    @default(false)
+  displayOrder          Int        @default(0)
+  internalLearnings     String?
+  internalNotes         String?
+  createdAt             DateTime   @default(now())
+  updatedAt             DateTime   @updatedAt
+
+  project   Project?   @relation(fields: [projectId], references: [id], onDelete: SetNull)
+  client    Client?    @relation(fields: [clientId], references: [id], onDelete: SetNull)
+  documents Document[]
+}
+
+model Provider {
+  id           String           @id @default(cuid())
+  name         String
+  category     ProviderCategory
+  websiteUrl   String?
+  accountOwner String?
+  billingType  String?
+  notes        String?
+  isOfficial   Boolean          @default(false)
+  status       ProviderStatus   @default(CANDIDATE)
+  createdAt    DateTime         @default(now())
+  updatedAt    DateTime         @updatedAt
+
+  subscriptions Subscription[]
+  domains       Domain[]
+  costs         Cost[]
+}
+
+model Subscription {
+  id                     String             @id @default(cuid())
+  providerId             String?
+  clientId               String?
+  projectId              String?
+  paymentResponsibleName String?
+  name                   String
+  serviceType            String
+  planName               String?
+  currency               String             @default("USD")
+  amount                 Decimal            @db.Decimal(10, 2)
+  billingFrequency       BillingFrequency
+  startDate              DateTime?
+  renewalDate            DateTime?
+  status                 SubscriptionStatus @default(ACTIVE)
+  invoiceUrl             String?
+  notes                  String?
+  createdAt              DateTime           @default(now())
+  updatedAt              DateTime           @updatedAt
+
+  provider Provider? @relation(fields: [providerId], references: [id], onDelete: SetNull)
+  client   Client?   @relation(fields: [clientId], references: [id], onDelete: SetNull)
+  project  Project?  @relation(fields: [projectId], references: [id], onDelete: SetNull)
+  costs    Cost[]
+}
+
+model Domain {
+  id                     String       @id @default(cuid())
+  domainName             String       @unique
+  clientId               String?
+  projectId              String?
+  providerId             String?
+  registrar              String?
+  dnsProvider            String?
+  purchaseDate           DateTime?
+  expirationDate         DateTime?
+  autoRenew              Boolean      @default(false)
+  paymentResponsibleName String?
+  status                 DomainStatus @default(ACTIVE)
+  notes                  String?
+  createdAt              DateTime     @default(now())
+  updatedAt              DateTime     @updatedAt
+
+  client   Client?   @relation(fields: [clientId], references: [id], onDelete: SetNull)
+  project  Project?  @relation(fields: [projectId], references: [id], onDelete: SetNull)
+  provider Provider? @relation(fields: [providerId], references: [id], onDelete: SetNull)
+}
+
+model Renewal {
+  id                     String            @id @default(cuid())
+  entityType             RenewalEntityType
+  entityId               String?
+  clientId               String?
+  projectId              String?
+  dueDate                DateTime
+  amount                 Decimal?          @db.Decimal(10, 2)
+  currency               String            @default("USD")
+  paymentResponsibleName String?
+  status                 RenewalStatus     @default(PENDING)
+  paidAt                 DateTime?
+  receiptUrl             String?
+  notes                  String?
+  createdAt              DateTime          @default(now())
+  updatedAt              DateTime          @updatedAt
+
+  client  Client?  @relation(fields: [clientId], references: [id], onDelete: SetNull)
+  project Project? @relation(fields: [projectId], references: [id], onDelete: SetNull)
+}
+
+model Cost {
+  id             String           @id @default(cuid())
+  clientId       String?
+  projectId      String?
+  providerId     String?
+  subscriptionId String?
+  concept        String
+  category       CostCategory
+  amount         Decimal          @db.Decimal(10, 2)
+  currency       String           @default("USD")
+  frequency      BillingFrequency
+  date           DateTime         @default(now())
+  notes          String?
+  createdAt      DateTime         @default(now())
+  updatedAt      DateTime         @updatedAt
+
+  client       Client?       @relation(fields: [clientId], references: [id], onDelete: SetNull)
+  project      Project?      @relation(fields: [projectId], references: [id], onDelete: SetNull)
+  provider     Provider?     @relation(fields: [providerId], references: [id], onDelete: SetNull)
+  subscription Subscription? @relation(fields: [subscriptionId], references: [id], onDelete: SetNull)
+}
+
+model Document {
+  id              String             @id @default(cuid())
+  clientId        String?
+  projectId       String?
+  workId          String?
+  title           String
+  type            DocumentType
+  url             String
+  storageProvider String?
+  visibility      DocumentVisibility @default(INTERNAL)
+  notes           String?
+  createdByUserId String?
+  createdAt       DateTime           @default(now())
+  updatedAt       DateTime           @updatedAt
+
+  client        Client?  @relation(fields: [clientId], references: [id], onDelete: SetNull)
+  project       Project? @relation(fields: [projectId], references: [id], onDelete: SetNull)
+  work          Work?    @relation(fields: [workId], references: [id], onDelete: SetNull)
+  createdByUser User?    @relation(fields: [createdByUserId], references: [id], onDelete: SetNull)
+}
