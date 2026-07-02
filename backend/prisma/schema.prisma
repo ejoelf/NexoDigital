@@ -173,6 +173,7 @@ model User {
 
   documents     Document[]
   refreshTokens RefreshToken[]
+  auditLogs     AuditLog[]
 }
 
 model RefreshToken {
@@ -188,6 +189,26 @@ model RefreshToken {
 
   @@index([userId])
   @@index([expiresAt])
+}
+
+model AuditLog {
+  id         String   @id @default(cuid())
+  userId     String?
+  action     String
+  entityType String
+  entityId   String?
+  metadata   Json?
+  ip         String?
+  userAgent  String?
+  createdAt  DateTime @default(now())
+
+  user User? @relation(fields: [userId], references: [id], onDelete: SetNull)
+
+  @@index([userId])
+  @@index([action])
+  @@index([entityType])
+  @@index([entityId])
+  @@index([createdAt])
 }
 
 model Client {

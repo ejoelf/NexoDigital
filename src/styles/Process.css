@@ -8,7 +8,7 @@
 
 .process-eyebrow {
   margin: 0 0 10px;
-  color: #0f766e;
+  color: var(--color-primary);
   font-size: 0.75rem;
   font-weight: 800;
   letter-spacing: 0;
@@ -33,7 +33,7 @@
   bottom: 18px;
   left: 17px;
   width: 1px;
-  background: linear-gradient(180deg, #67e8f9, #c7d2fe);
+  background: var(--brand-gradient);
 }
 
 .process-step {
@@ -55,7 +55,7 @@
   width: 36px;
   height: 36px;
   border-radius: 999px;
-  background: #0f172a;
+  background: var(--brand-graphite);
   color: #ffffff;
   font-size: 0.75rem;
   font-weight: 800;
@@ -88,7 +88,7 @@
   margin: 12px 0 0;
   padding-top: 12px;
   border-top: 1px solid rgba(226, 232, 240, 0.92);
-  color: #0f766e;
+  color: var(--color-primary);
   font-size: 0.84rem;
   line-height: 1.55;
   font-weight: 700;

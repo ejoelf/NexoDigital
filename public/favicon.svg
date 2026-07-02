@@ -1,0 +1,15 @@
+<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="NexoDigital favicon">
+  <defs>
+    <linearGradient id="bg" x1="8" y1="8" x2="56" y2="56" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#0B1320"/>
+      <stop offset="1" stop-color="#1E293B"/>
+    </linearGradient>
+    <linearGradient id="nexoGradient" x1="14" y1="12" x2="50" y2="52" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#2563EB"/>
+      <stop offset="1" stop-color="#06B6D4"/>
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="16" fill="url(#bg)"/>
+  <path d="M14 47V19.5C14 15.7 18.48 13.67 21.34 16.18L37.4 30.3V17H46V44.5C46 48.3 41.52 50.33 38.66 47.82L22.6 33.7V47H14Z" fill="url(#nexoGradient)"/>
+  <path d="M50 16.5V47.5C50 50.9 45.99 52.72 43.43 50.47L39.5 47V37L41.8 39.03V16.5H50Z" fill="#06B6D4"/>
+</svg>

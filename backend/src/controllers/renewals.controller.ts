@@ -1,4 +1,5 @@
 import type { Request, Response } from "express";
+import { auditEntityMutation } from "../services/audit.service.js";
 import {
   cancelRenewal,
   createRenewal,
@@ -20,22 +21,31 @@ export async function showRenewal(request: Request, response: Response) {
 }
 
 export async function storeRenewal(request: Request, response: Response) {
+  const renewal = await createRenewal(request.body);
+  await auditEntityMutation(request, "RENEWAL_CREATED", "RENEWAL", renewal);
+
   response.status(201).json({
     ok: true,
-    renewal: await createRenewal(request.body),
+    renewal,
   });
 }
 
 export async function putRenewal(request: Request, response: Response) {
+  const renewal = await updateRenewal(routeId(request), request.body);
+  await auditEntityMutation(request, "RENEWAL_UPDATED", "RENEWAL", renewal);
+
   response.json({
     ok: true,
-    renewal: await updateRenewal(routeId(request), request.body),
+    renewal,
   });
 }
 
 export async function destroyRenewal(request: Request, response: Response) {
+  const renewal = await cancelRenewal(routeId(request));
+  await auditEntityMutation(request, "RENEWAL_ARCHIVED", "RENEWAL", renewal);
+
   response.json({
     ok: true,
-    renewal: await cancelRenewal(routeId(request)),
+    renewal,
   });
 }

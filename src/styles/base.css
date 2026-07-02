@@ -1,19 +1,33 @@
 :root {
-  --color-bg: #f3f4f6;
-  --color-white: #ffffff;
-  --color-primary: #4f46e5;
-  --color-primary-dark: #4338ca;
-  --color-accent: #06b6d4;
-  --color-text: #111827;
-  --color-text-muted: #6b7280;
-  --color-border: #e5e7eb;
+  --brand-blue: #2563eb;
+  --brand-cyan: #06b6d4;
+  --brand-graphite: #0b1320;
+  --brand-slate: #1e293b;
+  --brand-light: #f3f5f7;
+  --brand-white: #ffffff;
+  --brand-gradient: linear-gradient(135deg, #2563eb 0%, #06b6d4 100%);
+  --color-bg: var(--brand-light);
+  --color-surface: var(--brand-white);
+  --color-surface-dark: var(--brand-graphite);
+  --color-white: var(--brand-white);
+  --color-primary: var(--brand-blue);
+  --color-primary-dark: #1d4ed8;
+  --color-accent: var(--brand-cyan);
+  --color-text: var(--brand-graphite);
+  --color-text-muted: #475569;
+  --color-border: #dbe3ea;
+  --color-focus: rgba(37, 99, 235, 0.32);
   --radius-lg: 24px;
+  --radius-md: 14px;
+  --radius-sm: 8px;
   --shadow-soft: 0 18px 45px rgba(15, 23, 42, 0.08);
   --shadow-card: 0 10px 30px rgba(15, 23, 42, 0.06);
+  --shadow-brand: 0 18px 42px rgba(37, 99, 235, 0.22);
   --max-width: 1120px;
   --transition: 0.18s ease-out;
-  --font-sans: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-    sans-serif;
+  --font-brand: "Sora", "Inter", system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", sans-serif;
+  --font-sans: var(--font-brand);
 }
 
 *,
@@ -31,7 +45,7 @@ body {
 
 .app-root {
   min-height: 100vh;
-  background: #f9fafb;
+  background: #f8fafc;
 }
 
 main {
@@ -43,7 +57,7 @@ html {
 }
 
 section {
-  scroll-margin-top: 80px; 
+  scroll-margin-top: 80px;
 }
 
 
@@ -106,7 +120,7 @@ section {
 .btn-primary {
   background: var(--color-primary);
   color: #fff;
-  box-shadow: 0 10px 25px rgba(79, 70, 229, 0.35);
+  box-shadow: var(--shadow-brand);
 }
 
 .btn-primary:hover {
@@ -121,7 +135,7 @@ section {
 }
 
 .btn-outline:hover {
-  border-color: #c7d2fe;
+  border-color: rgba(37, 99, 235, 0.32);
   color: var(--color-primary-dark);
 }
 

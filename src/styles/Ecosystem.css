@@ -1,6 +1,6 @@
 .section-ecosystem {
   background:
-    radial-gradient(circle at 88% 16%, rgba(79, 70, 229, 0.12), transparent 26%),
+    radial-gradient(circle at 88% 16%, rgba(37, 99, 235, 0.12), transparent 26%),
     linear-gradient(180deg, #f8fafc, #ffffff);
 }
 
@@ -11,7 +11,7 @@
 
 .ecosystem-eyebrow {
   margin: 0 0 10px;
-  color: #0f766e;
+  color: var(--color-primary);
   font-size: 0.75rem;
   font-weight: 800;
   letter-spacing: 0;
@@ -71,7 +71,7 @@
   height: 34px;
   border-radius: 999px;
   background: #ecfeff;
-  color: #0f766e;
+  color: var(--color-primary);
   font-size: 0.76rem;
   font-weight: 800;
   border: 1px solid rgba(6, 182, 212, 0.18);
@@ -96,7 +96,7 @@
 
 .ecosystem-focus {
   margin: 10px 0 0;
-  color: #0f766e;
+  color: var(--color-primary);
   font-size: 0.9rem;
   line-height: 1.5;
   font-weight: 700;

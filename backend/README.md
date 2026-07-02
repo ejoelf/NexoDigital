@@ -10,6 +10,12 @@ Stack V1:
 - Prisma
 - PostgreSQL
 
+## Documentacion V1
+
+- [API.md](./API.md): endpoints, roles y headers para consumir la API.
+- [FRONTEND_HANDOFF.md](./FRONTEND_HANDOFF.md): guia para conectar el futuro panel privado.
+- [V1_TEST_CHECKLIST.md](./V1_TEST_CHECKLIST.md): checklist de pruebas antes del frontend.
+
 ## Scripts
 
 ```bash
@@ -48,7 +54,7 @@ Body:
 ```json
 {
   "email": "admin@example.com",
-  "password": "password-local"
+  "password": "<ADMIN_PASSWORD_LOCAL>"
 }
 ```
 
@@ -317,11 +323,172 @@ Campos principales: `clientId`, `projectId`, `providerId`, `subscriptionId`, `na
 
 No guardar contrasenas, secretos de proveedores, datos de tarjetas ni pagos reales en estos modulos.
 
+## Alertas internas y resumen operativo
+
+Las alertas de esta V1 son calculadas por endpoint. No se guardan en base de datos, no envian emails y no ejecutan cron jobs.
+
+Todas las rutas requieren:
+
+```txt
+Authorization: Bearer ACCESS_TOKEN
+```
+
+Endpoints:
+
+```txt
+GET /api/alerts/summary
+GET /api/alerts/upcoming-renewals
+GET /api/alerts/expired-renewals
+GET /api/alerts/expiring-domains
+GET /api/alerts/active-subscriptions
+GET /api/alerts/recurring-costs
+```
+
+Los endpoints `summary`, `upcoming-renewals` y `expiring-domains` aceptan `days`:
+
+```txt
+GET /api/alerts/summary?days=30
+```
+
+Reglas de calculo:
+
+- renovaciones proximas: vencen entre hoy y los proximos `days` dias, con estado distinto de `PAID` y `CANCELLED`;
+- renovaciones vencidas: `dueDate` menor a hoy, con estado distinto de `PAID` y `CANCELLED`;
+- dominios por vencer: `expirationDate` entre hoy y los proximos `days` dias, con estado `ACTIVE`;
+- suscripciones activas: estados `ACTIVE` y `TRIAL`;
+- costos recurrentes: costos `ACTIVE` con frecuencia `MONTHLY`, `YEARLY` o `USAGE_BASED`;
+- costos estimados: se agrupan por moneda y se devuelven como estimado mensual/anual.
+
+`days` debe ser un entero entre `1` y `365`. Si no se envia, se usa `30`.
+
+## Dashboard operativo
+
+El dashboard es calculado por endpoint. No persiste metricas, no crea auditoria y no ejecuta automatizaciones.
+
+Todas las rutas requieren:
+
+```txt
+Authorization: Bearer ACCESS_TOKEN
+```
+
+Endpoints:
+
+```txt
+GET /api/dashboard/overview
+GET /api/dashboard/operations
+GET /api/dashboard/financials
+GET /api/dashboard/recent-activity
+```
+
+Los endpoints `overview`, `operations` y `financials` aceptan `days` para ventanas de vencimientos:
+
+```txt
+GET /api/dashboard/overview?days=30
+```
+
+Resumen de datos:
+
+- `overview`: clientes, proyectos, trabajos, proveedores oficiales, suscripciones, dominios, renovaciones, costos recurrentes y alertas.
+- `operations`: proyectos/clientes/trabajos por estado, proximas renovaciones, dominios por vencer, suscripciones activas y ultimos proyectos/trabajos.
+- `financials`: costos activos por moneda, costos recurrentes estimados, costos por proveedor/proyecto, suscripciones por moneda y proximas renovaciones con monto.
+- `recent-activity`: ultimos clientes, proyectos, trabajos, suscripciones, dominios, renovaciones y costos segun fechas de creacion/actualizacion.
+
+El dashboard no devuelve notas internas extensas, secretos, contrasenas, datos de tarjetas ni credenciales de proveedores.
+
+## Seguridad, auditoria y rate limiting
+
+### Auditoria
+
+La auditoria se guarda en la tabla `AuditLog`. No se guardan passwords, tokens, secrets, cookies ni headers de autorizacion en metadata.
+
+Endpoints:
+
+```txt
+GET /api/audit-logs
+GET /api/audit-logs/:id
+```
+
+Requieren:
+
+```txt
+Authorization: Bearer ACCESS_TOKEN
+```
+
+Solo rol `ADMIN` puede consultar auditoria. El modelo actual no tiene rol `FOUNDER`.
+
+Filtros soportados en `GET /api/audit-logs`:
+
+```txt
+action
+entityType
+userId
+from
+to
+limit
+```
+
+Ejemplo:
+
+```txt
+GET /api/audit-logs?entityType=CLIENT&limit=50
+```
+
+Eventos auditados inicialmente:
+
+- `AUTH_LOGIN_SUCCESS`
+- `AUTH_LOGIN_FAILED`
+- `AUTH_REFRESH_TOKEN`
+- `AUTH_REFRESH_FAILED`
+- `AUTH_LOGOUT`
+- `CLIENT_CREATED`, `CLIENT_UPDATED`, `CLIENT_ARCHIVED`
+- `PROJECT_CREATED`, `PROJECT_UPDATED`, `PROJECT_ARCHIVED`
+- `WORK_CREATED`, `WORK_UPDATED`, `WORK_ARCHIVED`
+- `PROVIDER_CREATED`, `PROVIDER_UPDATED`, `PROVIDER_ARCHIVED`
+- `SUBSCRIPTION_CREATED`, `SUBSCRIPTION_UPDATED`, `SUBSCRIPTION_ARCHIVED`
+- `DOMAIN_CREATED`, `DOMAIN_UPDATED`, `DOMAIN_ARCHIVED`
+- `RENEWAL_CREATED`, `RENEWAL_UPDATED`, `RENEWAL_ARCHIVED`
+- `COST_CREATED`, `COST_UPDATED`, `COST_ARCHIVED`
+
+### Rate limiting
+
+Rate limiting en memoria para V1:
+
+- Login: 10 intentos cada 15 minutos por IP.
+- API general: 600 requests por minuto por IP.
+
+Estos limites son deliberadamente suaves para no bloquear desarrollo local. En produccion conviene moverlos a Redis/servicio externo si hay multiples instancias.
+
+### Permisos
+
+- Lecturas internas: requieren token valido.
+- Crear/editar/archivar clientes, proyectos, trabajos y modulos operativos: `ADMIN` o `MEMBER`.
+- Auditoria: solo `ADMIN`.
+- El backend no expone passwords, tokens ni secretos en respuestas.
+
 ## Variables de entorno
 
 Copiar `.env.example` a `.env` cuando se configure el entorno real.
 
 No subir `.env` al repositorio.
+
+Variables base esperadas:
+
+```txt
+DATABASE_URL
+PORT
+NODE_ENV
+CORS_ORIGIN
+JWT_ACCESS_SECRET
+JWT_REFRESH_SECRET
+JWT_ACCESS_EXPIRES_IN
+JWT_REFRESH_EXPIRES_IN
+ADMIN_EMAIL
+ADMIN_PASSWORD
+ADMIN_NAME
+ADMIN_ROLE
+```
+
+En produccion, `CORS_ORIGIN` debe apuntar al dominio exacto del panel privado. No dejar origenes abiertos.
 
 Variables requeridas para auth:
 
@@ -386,4 +553,8 @@ No imprimir ni compartir valores reales de `.env`, tokens ni contraseñas.
 
 ## Estado actual
 
-Esta fase implementa autenticación base. No implementa CRUDs completos, IA, emails, pagos ni storage real.
+Backend CRM V1 listo para ser consumido por el futuro panel privado.
+
+Incluye auth, clientes, proyectos, trabajos, proveedores, suscripciones, dominios, renovaciones, costos, alertas, dashboard, auditoria y rate limiting basico.
+
+No incluye IA, emails, cron jobs, pagos reales, storage real ni panel frontend.

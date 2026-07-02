@@ -67,7 +67,14 @@ function Hero() {
         >
           <div className="hero-card">
             <div className="hero-card-header">
-              <span>Centro digital NexoDigital</span>
+              <span className="hero-card-brand">
+                <img
+                  src="/brand/nexodigital-isotipo.svg"
+                  alt=""
+                  aria-hidden="true"
+                />
+                Centro digital NexoDigital
+              </span>
               <span className="hero-card-pill">
                 <span className="hero-card-dot" aria-hidden="true" />
                 En evolución

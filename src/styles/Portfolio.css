@@ -1,6 +1,6 @@
 .section-portfolio {
   background:
-    radial-gradient(circle at 12% 10%, rgba(16, 185, 129, 0.1), transparent 24%),
+    radial-gradient(circle at 12% 10%, rgba(6, 182, 212, 0.12), transparent 24%),
     linear-gradient(180deg, #ffffff, #f8fafc);
 }
 
@@ -11,7 +11,7 @@
 
 .portfolio-eyebrow {
   margin: 0 0 10px;
-  color: #0f766e;
+  color: var(--color-primary);
   font-size: 0.75rem;
   font-weight: 800;
   letter-spacing: 0;
@@ -86,7 +86,7 @@
 }
 
 .portfolio-card.is-featured {
-  border-color: rgba(16, 185, 129, 0.32);
+  border-color: rgba(37, 99, 235, 0.34);
 }
 
 .portfolio-media {
@@ -172,7 +172,7 @@
 .portfolio-client {
   margin: 7px 0 0;
   font-size: 0.8rem;
-  color: #0f766e;
+  color: var(--color-primary);
   font-weight: 700;
 }
 

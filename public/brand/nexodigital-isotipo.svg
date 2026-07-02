@@ -1,0 +1,14 @@
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">NexoDigital Isotipo</title>
+  <desc id="desc">Isotipo geometrico de NexoDigital construido como una N modular con gradiente azul y cian.</desc>
+  <defs>
+    <linearGradient id="nexoGradient" x1="112" y1="96" x2="400" y2="416" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#2563EB"/>
+      <stop offset="1" stop-color="#06B6D4"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="112" fill="none"/>
+  <path d="M116 374V156C116 131.699 144.637 118.731 162.893 134.767L290 246.5V144H354V356C354 380.301 325.363 393.269 307.107 377.233L180 265.5V374H116Z" fill="url(#nexoGradient)"/>
+  <path d="M180 144L332 278V356L180 222V144Z" fill="white" fill-opacity="0.18"/>
+  <path d="M396 138V356C396 380.301 367.363 393.269 349.107 377.233L322 353.4V275.4L332 284.2V138H396Z" fill="#06B6D4"/>
+</svg>

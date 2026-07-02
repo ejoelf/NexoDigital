@@ -9,8 +9,9 @@ import TechStack from "./components/TechStack";
 import Portfolio from "./components/Portfolio";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
+import CrmApp from "./crm/CrmApp";
 
-export default function App() {
+function PublicWebsite() {
   return (
     <div className="app-root">
       <Navbar />
@@ -27,4 +28,12 @@ export default function App() {
       <Footer />
     </div>
   );
+}
+
+export default function App() {
+  if (window.location.pathname.startsWith("/crm")) {
+    return <CrmApp />;
+  }
+
+  return <PublicWebsite />;
 }

@@ -1,4 +1,5 @@
 import type { Request, Response } from "express";
+import { auditEntityMutation } from "../services/audit.service.js";
 import {
   archiveProvider,
   createProvider,
@@ -20,22 +21,31 @@ export async function showProvider(request: Request, response: Response) {
 }
 
 export async function storeProvider(request: Request, response: Response) {
+  const provider = await createProvider(request.body);
+  await auditEntityMutation(request, "PROVIDER_CREATED", "PROVIDER", provider);
+
   response.status(201).json({
     ok: true,
-    provider: await createProvider(request.body),
+    provider,
   });
 }
 
 export async function putProvider(request: Request, response: Response) {
+  const provider = await updateProvider(routeId(request), request.body);
+  await auditEntityMutation(request, "PROVIDER_UPDATED", "PROVIDER", provider);
+
   response.json({
     ok: true,
-    provider: await updateProvider(routeId(request), request.body),
+    provider,
   });
 }
 
 export async function destroyProvider(request: Request, response: Response) {
+  const provider = await archiveProvider(routeId(request));
+  await auditEntityMutation(request, "PROVIDER_ARCHIVED", "PROVIDER", provider);
+
   response.json({
     ok: true,
-    provider: await archiveProvider(routeId(request)),
+    provider,
   });
 }

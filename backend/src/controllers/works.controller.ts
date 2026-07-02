@@ -1,4 +1,5 @@
 import type { Request, Response } from "express";
+import { auditEntityMutation } from "../services/audit.service.js";
 import {
   archiveWork,
   createWork,
@@ -34,22 +35,31 @@ export async function showWork(request: Request, response: Response) {
 }
 
 export async function storeWork(request: Request, response: Response) {
+  const work = await createWork(request.body);
+  await auditEntityMutation(request, "WORK_CREATED", "WORK", work);
+
   response.status(201).json({
     ok: true,
-    work: await createWork(request.body),
+    work,
   });
 }
 
 export async function putWork(request: Request, response: Response) {
+  const work = await updateWork(routeId(request), request.body);
+  await auditEntityMutation(request, "WORK_UPDATED", "WORK", work);
+
   response.json({
     ok: true,
-    work: await updateWork(routeId(request), request.body),
+    work,
   });
 }
 
 export async function destroyWork(request: Request, response: Response) {
+  const work = await archiveWork(routeId(request));
+  await auditEntityMutation(request, "WORK_ARCHIVED", "WORK", work);
+
   response.json({
     ok: true,
-    work: await archiveWork(routeId(request)),
+    work,
   });
 }

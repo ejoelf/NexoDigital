@@ -1,4 +1,5 @@
 import type { Request, Response } from "express";
+import { auditEntityMutation } from "../services/audit.service.js";
 import {
   cancelSubscription,
   createSubscription,
@@ -23,22 +24,46 @@ export async function showSubscription(request: Request, response: Response) {
 }
 
 export async function storeSubscription(request: Request, response: Response) {
+  const subscription = await createSubscription(request.body);
+  await auditEntityMutation(
+    request,
+    "SUBSCRIPTION_CREATED",
+    "SUBSCRIPTION",
+    subscription,
+  );
+
   response.status(201).json({
     ok: true,
-    subscription: await createSubscription(request.body),
+    subscription,
   });
 }
 
 export async function putSubscription(request: Request, response: Response) {
+  const subscription = await updateSubscription(routeId(request), request.body);
+  await auditEntityMutation(
+    request,
+    "SUBSCRIPTION_UPDATED",
+    "SUBSCRIPTION",
+    subscription,
+  );
+
   response.json({
     ok: true,
-    subscription: await updateSubscription(routeId(request), request.body),
+    subscription,
   });
 }
 
 export async function destroySubscription(request: Request, response: Response) {
+  const subscription = await cancelSubscription(routeId(request));
+  await auditEntityMutation(
+    request,
+    "SUBSCRIPTION_ARCHIVED",
+    "SUBSCRIPTION",
+    subscription,
+  );
+
   response.json({
     ok: true,
-    subscription: await cancelSubscription(routeId(request)),
+    subscription,
   });
 }

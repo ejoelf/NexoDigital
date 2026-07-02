@@ -79,8 +79,8 @@ function Navbar() {
       <nav className="navbar-inner">
         <a href="#inicio" className="navbar-logo" onClick={handleNavClick}>
           <img
-            src="/logoND.jpg"
-            alt="NexoDigital - soluciones digitales e inteligencia artificial"
+            src="/brand/nexodigital-logo-horizontal.svg"
+            alt="NexoDigital"
             className="navbar-logo-image"
           />
           <span className="navbar-logo-copy">

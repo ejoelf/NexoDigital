@@ -1,5 +1,5 @@
 .footer {
-  background: #0b1220;
+  background: var(--brand-graphite);
   color: rgba(226, 232, 240, 0.9);
   padding: 60px 16px 28px;
   border-top: 1px solid rgba(148, 163, 184, 0.16);
@@ -22,21 +22,18 @@
 .footer-logo {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
   text-decoration: none;
 }
 
 .footer-logo-image {
-  height: 34px;
+  height: 48px;
   width: auto;
-  border-radius: 8px;
+  max-width: 210px;
   display: block;
 }
 
 .footer-logo-text {
-  font-weight: 700;
-  color: rgba(226, 232, 240, 0.95);
-  letter-spacing: 0;
+  display: none;
 }
 
 .footer-description {
@@ -62,7 +59,7 @@
   font-size: 0.8rem;
   text-transform: uppercase;
   letter-spacing: 0.16em;
-  color: rgba(165, 180, 252, 0.9);
+  color: rgba(6, 182, 212, 0.92);
   margin: 0 0 10px;
 }
 
@@ -76,7 +73,7 @@
 }
 
 .footer-link:hover {
-  color: rgba(165, 180, 252, 0.95);
+  color: var(--brand-cyan);
   transform: translateX(1px);
 }
 

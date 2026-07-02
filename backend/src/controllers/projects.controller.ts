@@ -1,4 +1,5 @@
 import type { Request, Response } from "express";
+import { auditEntityMutation } from "../services/audit.service.js";
 import {
   closeProject,
   createProject,
@@ -26,22 +27,31 @@ export async function showProject(request: Request, response: Response) {
 }
 
 export async function storeProject(request: Request, response: Response) {
+  const project = await createProject(request.body);
+  await auditEntityMutation(request, "PROJECT_CREATED", "PROJECT", project);
+
   response.status(201).json({
     ok: true,
-    project: await createProject(request.body),
+    project,
   });
 }
 
 export async function putProject(request: Request, response: Response) {
+  const project = await updateProject(routeId(request), request.body);
+  await auditEntityMutation(request, "PROJECT_UPDATED", "PROJECT", project);
+
   response.json({
     ok: true,
-    project: await updateProject(routeId(request), request.body),
+    project,
   });
 }
 
 export async function destroyProject(request: Request, response: Response) {
+  const project = await closeProject(routeId(request));
+  await auditEntityMutation(request, "PROJECT_ARCHIVED", "PROJECT", project);
+
   response.json({
     ok: true,
-    project: await closeProject(routeId(request)),
+    project,
   });
 }

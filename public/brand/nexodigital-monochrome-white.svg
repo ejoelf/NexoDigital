@@ -1,0 +1,9 @@
+<svg width="1200" height="320" viewBox="0 0 1200 320" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">NexoDigital Logo Monocromatico Blanco</title>
+  <desc id="desc">Version monocromatica blanca del logo de NexoDigital para fondos oscuros.</desc>
+  <path d="M60 242V88C60 70.84 80.21 61.68 93.1 73.01L182.8 151.9V79H228V229C228 246.16 207.79 255.32 194.9 243.99L105.2 165.1V242H60Z" fill="#FFFFFF"/>
+  <path d="M257.5 74.5V228.5C257.5 245.66 237.29 254.82 224.4 243.49L205.2 226.6V171.5L212.5 177.9V74.5H257.5Z" fill="#FFFFFF"/>
+  <text x="330" y="156" font-family="Sora, Inter, Arial, sans-serif" font-size="76" font-weight="700" letter-spacing="-3" fill="#FFFFFF">Nexo</text>
+  <text x="536" y="156" font-family="Sora, Inter, Arial, sans-serif" font-size="76" font-weight="400" letter-spacing="-3" fill="#FFFFFF">Digital</text>
+  <text x="335" y="205" font-family="Sora, Inter, Arial, sans-serif" font-size="20" font-weight="600" letter-spacing="8" fill="#FFFFFF">TRANSFORMAMOS NEGOCIOS</text>
+</svg>

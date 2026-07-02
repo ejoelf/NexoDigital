@@ -11,8 +11,8 @@ function Footer() {
           <div className="footer-brand">
             <a href="#inicio" className="footer-logo">
               <img
-                src="/logoND.jpg"
-                alt="NexoDigital - soluciones digitales e inteligencia artificial"
+                src="/brand/nexodigital-monochrome-white.svg"
+                alt="NexoDigital"
                 loading="lazy"
                 className="footer-logo-image"
               />
