@@ -135,6 +135,12 @@ enum CostCategory {
   OTHER
 }
 
+enum CostStatus {
+  ACTIVE
+  ARCHIVED
+  CANCELLED
+}
+
 enum DocumentType {
   BRIEF
   PROPOSAL
@@ -213,28 +219,36 @@ model Client {
 model Project {
   id                   String        @id @default(cuid())
   clientId             String?
+  frontendProviderId   String?
+  backendProviderId    String?
+  databaseProviderId   String?
   name                 String
   slug                 String        @unique
   type                 ProjectType
   status               ProjectStatus @default(IDEA)
   description          String?
+  domain               String?
   frontendRepositoryUrl String?
   backendRepositoryUrl  String?
   publicUrl            String?
   startDate            DateTime?
+  estimatedDeliveryDate DateTime?
   launchDate           DateTime?
   maintenanceStartDate DateTime?
   notes                String?
   createdAt            DateTime      @default(now())
   updatedAt            DateTime      @updatedAt
 
-  client        Client?        @relation(fields: [clientId], references: [id], onDelete: SetNull)
-  works         Work[]
-  subscriptions Subscription[]
-  domains       Domain[]
-  renewals      Renewal[]
-  costs         Cost[]
-  documents     Document[]
+  client           Client?    @relation(fields: [clientId], references: [id], onDelete: SetNull)
+  frontendProvider Provider?  @relation("ProjectFrontendProvider", fields: [frontendProviderId], references: [id], onDelete: SetNull)
+  backendProvider  Provider?  @relation("ProjectBackendProvider", fields: [backendProviderId], references: [id], onDelete: SetNull)
+  databaseProvider Provider?  @relation("ProjectDatabaseProvider", fields: [databaseProviderId], references: [id], onDelete: SetNull)
+  works            Work[]
+  subscriptions    Subscription[]
+  domains          Domain[]
+  renewals         Renewal[]
+  costs            Cost[]
+  documents        Document[]
 }
 
 model Work {
@@ -275,8 +289,11 @@ model Provider {
   name         String
   category     ProviderCategory
   websiteUrl   String?
+  accountEmail String?
   accountOwner String?
   billingType  String?
+  recommendedUse String?
+  internalOwner String?
   notes        String?
   isOfficial   Boolean          @default(false)
   status       ProviderStatus   @default(CANDIDATE)
@@ -286,6 +303,9 @@ model Provider {
   subscriptions Subscription[]
   domains       Domain[]
   costs         Cost[]
+  frontendProjects Project[] @relation("ProjectFrontendProvider")
+  backendProjects  Project[] @relation("ProjectBackendProvider")
+  databaseProjects Project[] @relation("ProjectDatabaseProvider")
 }
 
 model Subscription {
@@ -347,6 +367,7 @@ model Renewal {
   currency               String            @default("USD")
   paymentResponsibleName String?
   status                 RenewalStatus     @default(PENDING)
+  reminderDays           Int?
   paidAt                 DateTime?
   receiptUrl             String?
   notes                  String?
@@ -369,6 +390,7 @@ model Cost {
   currency       String           @default("USD")
   frequency      BillingFrequency
   date           DateTime         @default(now())
+  status         CostStatus       @default(ACTIVE)
   notes          String?
   createdAt      DateTime         @default(now())
   updatedAt      DateTime         @updatedAt
