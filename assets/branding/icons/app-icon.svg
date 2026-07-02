@@ -1,0 +1,16 @@
+<svg width="1024" height="1024" viewBox="0 0 1024 1024" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="NexoDigital app icon">
+  <defs>
+    <linearGradient id="bg" x1="128" y1="128" x2="896" y2="896" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#0B1320"/>
+      <stop offset="1" stop-color="#1E293B"/>
+    </linearGradient>
+    <linearGradient id="nexoGradient" x1="224" y1="192" x2="800" y2="832" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#2563EB"/>
+      <stop offset="1" stop-color="#06B6D4"/>
+    </linearGradient>
+  </defs>
+  <rect width="1024" height="1024" rx="236" fill="url(#bg)"/>
+  <path d="M220 748V316C220 267.4 277.27 241.46 313.79 273.53L568 497V292H696V716C696 764.6 638.73 790.54 602.21 758.47L348 535V748H220Z" fill="url(#nexoGradient)"/>
+  <path d="M348 292L652 560V716L348 448V292Z" fill="white" fill-opacity="0.16"/>
+  <path d="M792 276V712C792 760.6 734.73 786.54 698.21 754.47L644 706.8V550.8L664 568.4V276H792Z" fill="#06B6D4"/>
+</svg>
