@@ -1,0 +1,15 @@
+<svg width="720" height="720" viewBox="0 0 720 720" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">NexoDigital Logo Vertical</title>
+  <desc id="desc">Versión vertical del logo de NexoDigital con isotipo superior y wordmark centrado.</desc>
+  <defs>
+    <linearGradient id="nexoGradient" x1="230" y1="90" x2="490" y2="350" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#2563EB"/>
+      <stop offset="1" stop-color="#06B6D4"/>
+    </linearGradient>
+  </defs>
+  <path d="M230 338V142C230 120.39 255.45 108.86 271.68 123.12L386 223.55V131H438V321C438 342.61 412.55 354.14 396.32 339.88L282 239.45V338H230Z" fill="url(#nexoGradient)"/>
+  <path d="M282 131L421.5 253.85V321L282 198.15V131Z" fill="white" fill-opacity="0.18"/>
+  <path d="M484 123V321C484 342.61 458.55 354.14 442.32 339.88L418 318.5V249.2L421.5 252.25V123H484Z" fill="#06B6D4"/>
+  <text x="360" y="470" text-anchor="middle" font-family="Sora, Inter, Arial, sans-serif" font-size="70" font-weight="700" letter-spacing="-3" fill="#0B1320">Nexo<tspan font-weight="400">Digital</tspan></text>
+  <text x="360" y="525" text-anchor="middle" font-family="Sora, Inter, Arial, sans-serif" font-size="18" font-weight="600" letter-spacing="8" fill="#2563EB">TRANSFORMAMOS NEGOCIOS</text>
+</svg>

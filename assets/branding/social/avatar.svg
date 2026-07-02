@@ -1,0 +1,12 @@
+<svg width="1080" height="1080" viewBox="0 0 1080 1080" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="NexoDigital social avatar">
+  <defs>
+    <radialGradient id="bg" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(300 240) rotate(47.5) scale(1000)">
+      <stop offset="0" stop-color="#2563EB"/>
+      <stop offset="0.55" stop-color="#06B6D4"/>
+      <stop offset="1" stop-color="#0B1320"/>
+    </radialGradient>
+  </defs>
+  <rect width="1080" height="1080" rx="540" fill="url(#bg)"/>
+  <path d="M300 760V340C300 292.75 355.68 267.53 391.19 298.7L638.5 516V317H763V729C763 776.25 707.32 801.47 671.81 770.3L424.5 553V760H300Z" fill="#FFFFFF"/>
+  <path d="M424.5 317L720 577.5V729L424.5 468.5V317Z" fill="#FFFFFF" fill-opacity="0.22"/>
+</svg>

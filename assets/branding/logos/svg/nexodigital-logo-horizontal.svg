@@ -1,0 +1,16 @@
+<svg width="1200" height="320" viewBox="0 0 1200 320" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">NexoDigital Logo Horizontal</title>
+  <desc id="desc">Logo horizontal de NexoDigital con isotipo geométrico y wordmark.</desc>
+  <defs>
+    <linearGradient id="nexoGradient" x1="60" y1="66" x2="250" y2="254" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#2563EB"/>
+      <stop offset="1" stop-color="#06B6D4"/>
+    </linearGradient>
+  </defs>
+  <path d="M60 242V88C60 70.84 80.21 61.68 93.1 73.01L182.8 151.9V79H228V229C228 246.16 207.79 255.32 194.9 243.99L105.2 165.1V242H60Z" fill="url(#nexoGradient)"/>
+  <path d="M105.2 79L212.5 173.6V228.9L105.2 134.3V79Z" fill="white" fill-opacity="0.18"/>
+  <path d="M257.5 74.5V228.5C257.5 245.66 237.29 254.82 224.4 243.49L205.2 226.6V171.5L212.5 177.9V74.5H257.5Z" fill="#06B6D4"/>
+  <text x="330" y="156" font-family="Sora, Inter, Arial, sans-serif" font-size="76" font-weight="700" letter-spacing="-3" fill="#0B1320">Nexo</text>
+  <text x="536" y="156" font-family="Sora, Inter, Arial, sans-serif" font-size="76" font-weight="400" letter-spacing="-3" fill="#0B1320">Digital</text>
+  <text x="335" y="205" font-family="Sora, Inter, Arial, sans-serif" font-size="20" font-weight="600" letter-spacing="8" fill="#2563EB">TRANSFORMAMOS NEGOCIOS</text>
+</svg>
