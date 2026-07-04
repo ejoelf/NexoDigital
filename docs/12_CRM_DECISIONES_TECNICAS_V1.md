@@ -312,25 +312,23 @@ Regla:
 
 Decisión recomendada para V1:
 
-- web pública estable en su deploy actual;
-- backend CRM en Render;
-- base PostgreSQL en Neon;
-- panel interno en Vercel o Render Static Site según stack final.
+- web pública y CRM privado en Hostinger como build React/Vite único;
+- backend CRM en Railway;
+- base PostgreSQL en Neon existente;
+- rutas `/crm/*` servidas por Hostinger con fallback SPA a `index.html`.
 
 Propuesta:
 
 ```txt
-Web pública:
-  Vercel o Hostinger, según estrategia final del formulario.
+Frontend:
+  Hostinger.
+  Incluye web pública `/` y CRM privado `/crm/*`.
 
 Backend CRM:
-  Render Web Service.
+  Railway Web Service.
 
 Base de datos:
-  Neon PostgreSQL.
-
-Panel CRM:
-  Vercel si es React/Vite estático.
+  Neon PostgreSQL existente.
 ```
 
 Reglas:
@@ -338,7 +336,9 @@ Reglas:
 - no mover la web pública solo por crear el CRM;
 - no conectar frontend público a backend hasta tener API estable;
 - separar variables de entorno por servicio;
-- documentar `.env.example` cuando se programe backend.
+- `VITE_API_BASE_URL` debe apuntar a la URL pública del backend en Railway;
+- `CORS_ORIGIN` en Railway debe apuntar al dominio real de Hostinger;
+- no crear otra base de datos: Railway debe usar `DATABASE_URL` de Neon.
 
 ---
 
@@ -461,7 +461,7 @@ Email:
   sin email automático en backend base; Resend para alertas futuras
 
 Deploy:
-  Render para backend, Neon para DB, Vercel/Hostinger para web pública
+  Hostinger para frontend, Railway para backend, Neon para DB
 ```
 
 ---

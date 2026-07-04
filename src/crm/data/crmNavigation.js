@@ -40,6 +40,7 @@ export const crmNavigation = [
     path: "/crm/audit-logs",
     key: "audit-logs",
     section: "Control",
+    adminOnly: true,
   },
   {
     label: "Configuracion",

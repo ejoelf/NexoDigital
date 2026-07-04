@@ -24,6 +24,7 @@ npm run build
 npm run start
 npm run prisma:generate
 npm run prisma:migrate
+npm run prisma:deploy
 npm run seed:admin
 ```
 
@@ -490,6 +491,14 @@ ADMIN_ROLE
 
 En produccion, `CORS_ORIGIN` debe apuntar al dominio exacto del panel privado. No dejar origenes abiertos.
 
+Para la V1 de NexoDigital:
+
+- frontend público + CRM privado: Hostinger;
+- backend: Railway;
+- base de datos: Neon PostgreSQL existente.
+
+En Railway, `DATABASE_URL` debe apuntar a Neon y `CORS_ORIGIN` debe apuntar al dominio real de Hostinger.
+
 Variables requeridas para auth:
 
 ```txt
@@ -550,6 +559,44 @@ POST /api/auth/logout
 ```
 
 No imprimir ni compartir valores reales de `.env`, tokens ni contraseñas.
+
+## Deploy V1 en Railway
+
+Configurar Railway con root directory:
+
+```txt
+backend/
+```
+
+Build command:
+
+```bash
+npm install && npm run prisma:generate && npm run build
+```
+
+Start command:
+
+```bash
+npm run start
+```
+
+Migraciones productivas sobre Neon:
+
+```bash
+npm run prisma:deploy
+```
+
+Seed admin inicial:
+
+```bash
+npm run seed:admin
+```
+
+Healthcheck recomendado:
+
+```txt
+/health
+```
 
 ## Estado actual
 

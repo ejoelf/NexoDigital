@@ -122,9 +122,10 @@ Mantener React + Vite para la web actual, ordenando componentes, estilos y conte
 
 ### Proveedores oficiales NexoDigital V1
 
-- Frontend: Vercel / Hostinger según proyecto.
-- Backend: Render.
-- DB: Neon.
+- Frontend V1 NexoDigital: Hostinger.
+- Backend V1 CRM: Railway.
+- DB V1: Neon.
+- Alternativas futuras: Render / Vercel según proyecto, no como deploy principal de esta V1.
 - IA: OpenAI API.
 - Email transaccional: Resend.
 - Email marketing: Brevo.

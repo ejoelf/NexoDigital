@@ -201,8 +201,8 @@ Campos sugeridos:
 
 Proveedores oficiales iniciales:
 
-- Vercel.
-- Render.
+- Hostinger.
+- Railway.
 - Neon.
 - Supabase.
 - OpenAI.

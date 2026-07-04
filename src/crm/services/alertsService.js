@@ -21,3 +21,13 @@ export function getExpiringDomains(request, days = 30) {
     (data) => data.domains,
   );
 }
+
+export function getActiveSubscriptions(request) {
+  return request("/api/alerts/active-subscriptions").then(
+    (data) => data.subscriptions,
+  );
+}
+
+export function getRecurringCosts(request) {
+  return request("/api/alerts/recurring-costs").then((data) => data.costs);
+}

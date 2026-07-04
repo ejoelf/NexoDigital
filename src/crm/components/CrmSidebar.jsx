@@ -1,7 +1,13 @@
 import React from "react";
 import { crmNavigation } from "../data/crmNavigation";
+import { useAuth } from "../hooks/useAuth";
 
 function CrmSidebar({ activeKey }) {
+  const { user } = useAuth();
+  const visibleNavigation = crmNavigation.filter(
+    (item) => !item.adminOnly || user?.role === "ADMIN",
+  );
+
   return (
     <aside className="crm-sidebar">
       <a className="crm-sidebar-brand" href="/crm/dashboard">
@@ -12,7 +18,7 @@ function CrmSidebar({ activeKey }) {
       </a>
 
       <nav className="crm-sidebar-nav" aria-label="Navegacion CRM">
-        {crmNavigation.map((item) => (
+        {visibleNavigation.map((item) => (
           <a
             key={item.key}
             className={`crm-nav-link ${

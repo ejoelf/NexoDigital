@@ -126,10 +126,11 @@ Mostrar stack y proveedores usados por NexoDigital:
 - Prisma.
 - OpenAI API.
 - GitHub.
-- Vercel.
-- Render.
+- Hostinger.
+- Railway.
 - Neon.
 - Supabase.
+- Render / Vercel como alternativas futuras, no como deploy principal V1.
 
 ### 4.8 Contacto
 

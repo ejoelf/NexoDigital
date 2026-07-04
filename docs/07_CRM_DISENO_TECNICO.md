@@ -89,9 +89,10 @@ La decisión debe tomarse antes de programar el panel.
 
 ### Proveedores oficiales a contemplar
 
-- Frontend: Vercel / Hostinger según proyecto.
-- Backend: Render.
-- DB: Neon.
+- Frontend V1: Hostinger.
+- Backend V1: Railway.
+- DB V1: Neon.
+- Render / Vercel: alternativas futuras, no deploy principal de esta V1.
 - Alternativa DB/Auth/Storage: Supabase.
 - IA: OpenAI.
 - Email transaccional: Resend.
