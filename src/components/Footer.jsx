@@ -83,7 +83,7 @@ function Footer() {
               <a className="footer-link" href="#ecosistema">
                 CRM, software y SaaS
               </a>
-              <a className="footer-link" href="#ecosistema">
+              <a className="footer-link" href="#inteligencia">
                 IA y automatización
               </a>
               <a className="footer-link" href="#servicios">

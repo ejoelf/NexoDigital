@@ -3,6 +3,7 @@ import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import About from "./components/About";
 import Services from "./components/Services";
+import IntelligenceAutomation from "./components/IntelligenceAutomation";
 import Ecosystem from "./components/Ecosystem";
 import Process from "./components/Process";
 import TechStack from "./components/TechStack";
@@ -19,6 +20,7 @@ function PublicWebsite() {
         <Hero />
         <About />
         <Services />
+        <IntelligenceAutomation />
         <Ecosystem />
         <Process />
         <TechStack />
