@@ -2,15 +2,22 @@ export const works = [
   {
     id: "nexodigital",
     title: "NexoDigital",
-    client: "NexoDigital",
-    category: "Web institucional",
+    client: "Proyecto propio",
+    category: "Web + CRM interno",
     industry: "Tecnología y soluciones digitales",
-    description:
-      "Sitio oficial de NexoDigital, pensado como base comercial para presentar servicios, trabajos realizados y la evolución futura del ecosistema interno.",
+    need:
+      "Construir una presencia comercial capaz de explicar servicios diversos y, al mismo tiempo, ordenar la operación interna de la agencia.",
+    solution:
+      "Una experiencia pública conectada con un CRM privado para gestionar clientes, proyectos, trabajos, alertas y seguimiento operativo.",
+    scope: [
+      "Estrategia y arquitectura",
+      "Web pública",
+      "CRM interno",
+      "Base para automatizaciones",
+    ],
     status: "Publicado",
     image: "/og-image.jpg",
     url: "https://nexo-digital.tech/",
-    technologies: ["React", "Vite", "CSS", "Framer Motion"],
     featured: true,
     isPublic: true,
   },
@@ -18,14 +25,21 @@ export const works = [
     id: "nico-galicia-stylist-mens",
     title: "Nico Galicia Stylist Mens",
     client: "Nico Galicia Stylist Mens",
-    category: "Web comercial",
+    category: "Presencia digital",
     industry: "Estética masculina",
-    description:
-      "Presencia digital para marca personal de barbería y estilismo masculino, orientada a mostrar servicios, generar confianza y facilitar nuevas consultas.",
-    status: "En desarrollo",
+    need:
+      "Presentar una marca personal de barbería y estilismo con una imagen más profesional y un camino simple para recibir consultas.",
+    solution:
+      "Una web comercial enfocada en servicios, confianza, identidad de marca y contacto directo desde cualquier dispositivo.",
+    scope: [
+      "Identidad digital",
+      "Servicios",
+      "Experiencia móvil",
+      "Contacto por WhatsApp",
+    ],
+    status: "En evolución",
     image: "",
     url: "",
-    technologies: ["React", "Vite", "CSS", "SEO local"],
     featured: true,
     isPublic: true,
   },
@@ -35,12 +49,19 @@ export const works = [
     client: "Tapicería Líder",
     category: "Web comercial",
     industry: "Tapicería automotor",
-    description:
-      "Sitio web para taller especializado en tapicería de volantes de autos, enfocado en mostrar trabajos, servicios y canales simples de contacto.",
+    need:
+      "Mostrar la calidad de los trabajos de tapicería de volantes y facilitar que nuevos clientes entiendan el servicio y consulten.",
+    solution:
+      "Un sitio visual centrado en trabajos realizados, especialidades, proceso y canales de contacto accesibles.",
+    scope: [
+      "Galería de trabajos",
+      "Servicios",
+      "Propuesta de valor",
+      "Captación de consultas",
+    ],
     status: "En desarrollo",
     image: "/projects/tapiceria-lider.jpg",
     url: "",
-    technologies: ["React", "Vite", "CSS", "WhatsApp"],
     featured: true,
     isPublic: true,
   },
@@ -50,12 +71,19 @@ export const works = [
     client: "CF MetalPintura",
     category: "Web institucional",
     industry: "Metalúrgica, pintura y servicios",
-    description:
-      "Página institucional para presentar servicios metalúrgicos, pintura general, instalaciones eléctricas y trabajos en durlock con foco en captación de consultas.",
+    need:
+      "Ordenar una oferta de servicios amplia y transmitir capacidad profesional a potenciales clientes particulares y empresas.",
+    solution:
+      "Una web institucional que organiza cada especialidad, presenta trabajos y dirige las consultas hacia el servicio adecuado.",
+    scope: [
+      "Arquitectura de servicios",
+      "Presentación institucional",
+      "Trabajos realizados",
+      "Formulario de contacto",
+    ],
     status: "En desarrollo",
     image: "/projects/cf-metalurgica.jpg",
     url: "",
-    technologies: ["React", "Vite", "CSS", "Formulario"],
     featured: false,
     isPublic: true,
   },
@@ -65,12 +93,19 @@ export const works = [
     client: "Electricidad Zacarías",
     category: "Web + sistema",
     industry: "Servicios eléctricos",
-    description:
-      "Proyecto digital para ordenar la presencia comercial de un servicio eléctrico y preparar una base escalable para futuras funcionalidades operativas.",
+    need:
+      "Mejorar la presencia comercial y preparar una base digital que pueda acompañar futuras necesidades operativas.",
+    solution:
+      "Un proyecto escalable que comienza con la captación de consultas y puede sumar gestión interna y seguimiento de trabajos.",
+    scope: [
+      "Presencia comercial",
+      "Captación de clientes",
+      "Base operativa",
+      "Crecimiento por etapas",
+    ],
     status: "En desarrollo",
     image: "",
     url: "",
-    technologies: ["React", "Node.js", "PostgreSQL", "CRM"],
     featured: false,
     isPublic: true,
   },
@@ -78,14 +113,21 @@ export const works = [
     id: "turnosgo",
     title: "TurnosGo",
     client: "Producto propio",
-    category: "SaaS",
+    category: "Plataforma SaaS",
     industry: "Gestión de turnos",
-    description:
-      "Concepto de producto SaaS para gestionar turnos, clientes y recordatorios en negocios que dependen de reservas y agenda diaria.",
+    need:
+      "Crear una herramienta que ayude a negocios con agenda a organizar reservas, clientes, comunicaciones y operación diaria.",
+    solution:
+      "Un ecosistema SaaS pensado para comercios, profesionales y clientes finales, con automatizaciones y crecimiento modular.",
+    scope: [
+      "Agenda y reservas",
+      "Panel para comercios",
+      "Experiencia del cliente",
+      "Comunicaciones automáticas",
+    ],
     status: "En planificación",
     image: "",
     url: "",
-    technologies: ["SaaS", "CRM", "Automatización", "IA"],
     featured: false,
     isPublic: true,
   },

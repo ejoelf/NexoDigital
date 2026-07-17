@@ -1,42 +1,56 @@
 export const processSteps = [
   {
-    id: "diagnostico",
-    title: "Diagnóstico y objetivo del negocio",
+    id: "descubrir",
+    label: "Descubrimos",
+    title: "Entendemos el negocio y el problema real",
     summary:
-      "Antes de diseñar o programar, entendemos qué necesita ordenar, vender o automatizar el negocio.",
+      "Conversamos sobre cómo funciona hoy el negocio, qué quiere mejorar, dónde se pierde tiempo y qué experiencia necesita ofrecer a sus clientes.",
     outcome:
-      "Definición clara del problema, prioridades, alcance inicial y criterio de éxito.",
+      "Objetivos, prioridades y contexto suficiente para no construir una solución genérica.",
   },
   {
-    id: "solucion",
-    title: "Diseño de solución",
+    id: "definir",
+    label: "Definimos",
+    title: "Convertimos la necesidad en un plan claro",
     summary:
-      "Traducimos la necesidad en una propuesta concreta: web, sistema, CRM, integración o flujo automatizado.",
+      "Ordenamos el alcance, separamos lo imprescindible de lo que puede evolucionar después y elegimos el tipo de solución más conveniente.",
     outcome:
-      "Estructura funcional, contenido base, experiencia de usuario y decisiones técnicas principales.",
+      "Una propuesta comprensible, etapas definidas y expectativas alineadas desde el inicio.",
   },
   {
-    id: "desarrollo",
-    title: "Desarrollo web, sistema o CRM",
+    id: "disenar",
+    label: "Diseñamos",
+    title: "Damos forma a la experiencia",
     summary:
-      "Construimos la solución con una base mantenible, responsive y preparada para evolucionar.",
+      "Diseñamos la estructura, los recorridos y la identidad visual para que cada pantalla sea clara, coherente y fácil de usar.",
     outcome:
-      "Implementación ordenada, componentes reutilizables y pruebas sobre el flujo principal.",
+      "Una experiencia pensada para las personas que van a visitar, comprar o trabajar con la solución.",
   },
   {
-    id: "automatizacion",
-    title: "Automatización, IA e integraciones",
+    id: "construir",
+    label: "Construimos",
+    title: "Desarrollamos una base sólida y escalable",
     summary:
-      "Cuando aporta valor, conectamos herramientas, formularios, WhatsApp, email, APIs o IA aplicada.",
+      "Creamos la web, aplicación, CRM, software o plataforma, conectando las funciones necesarias y revisando los flujos principales.",
     outcome:
-      "Menos tareas repetitivas, datos mejor conectados y una operación más simple.",
+      "Una solución funcional, responsive y preparada para mantenimiento y crecimiento.",
   },
   {
-    id: "mejora",
-    title: "Publicación, medición y mejora continua",
+    id: "lanzar",
+    label: "Lanzamos",
+    title: "Publicamos y comprobamos el funcionamiento real",
     summary:
-      "Publicamos, revisamos el comportamiento real y dejamos una base para mantenimiento y mejoras futuras.",
+      "Configuramos el entorno final, revisamos accesos, formularios, dispositivos y recorridos antes de poner la solución en manos de sus usuarios.",
     outcome:
-      "Proyecto online, ajustes iniciales, documentación mínima y próximos pasos definidos.",
+      "El proyecto queda disponible, probado y acompañado durante su puesta en marcha.",
+  },
+  {
+    id: "mejorar",
+    label: "Mejoramos",
+    title: "Evolucionamos según el uso y nuevas necesidades",
+    summary:
+      "La tecnología no termina el día del lanzamiento. Podemos mantener, optimizar, automatizar y sumar nuevas funciones cuando el negocio lo requiera.",
+    outcome:
+      "Una relación de largo plazo y una solución que puede evolucionar sin empezar de cero.",
   },
 ];
