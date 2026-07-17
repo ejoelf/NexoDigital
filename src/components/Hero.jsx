@@ -2,127 +2,278 @@ import React from "react";
 import { motion as Motion, useReducedMotion } from "framer-motion";
 import "../styles/Hero.css";
 
+const TRUST_POINTS = [
+  "Estrategia antes de diseñar",
+  "Soluciones pensadas a medida",
+  "Tecnología con propósito",
+];
+
 function Hero() {
   const reduceMotion = useReducedMotion();
 
+  const reveal = reduceMotion
+    ? {}
+    : {
+        initial: { opacity: 0, y: 28 },
+        animate: { opacity: 1, y: 0 },
+      };
+
   return (
     <section id="inicio" className="hero">
+      <div className="hero-background" aria-hidden="true">
+        <span className="hero-background-orb hero-background-orb--blue" />
+        <span className="hero-background-orb hero-background-orb--cyan" />
+        <span className="hero-background-grid" />
+      </div>
+
       <div className="hero-inner">
         <Motion.div
-          className="hero-text"
-          initial={reduceMotion ? false : { opacity: 0, y: 30 }}
-          whileInView={reduceMotion ? false : { opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
+          className="hero-content"
+          {...reveal}
+          transition={{ duration: 0.72, ease: [0.22, 1, 0.36, 1] }}
         >
-          <p className="hero-kicker">Web, software, CRM e IA para negocios</p>
+          <p className="hero-kicker">
+            <span className="hero-kicker-dot" aria-hidden="true" />
+            Agencia de transformación digital
+          </p>
 
           <h1 className="hero-title">
-            Creamos tecnología para que tu negocio venda mejor, se ordene y
-            pueda escalar.
+            Creamos experiencias digitales que{" "}
+            <span className="nd-gradient-text">hacen crecer tu negocio.</span>
           </h1>
 
           <p className="hero-subtitle">
-            NexoDigital diseña y desarrolla webs profesionales, sistemas a
-            medida, CRMs y automatizaciones con IA para negocios que necesitan
-            operar con más claridad y convertir mejor.
+            Diseñamos webs, aplicaciones, software, CRM y plataformas SaaS.
+            Integramos automatizaciones, inteligencia artificial, marketing y
+            redes sociales para construir una presencia digital conectada.
           </p>
 
           <div className="hero-buttons">
-            <a href="#contacto" className="btn btn-primary">
-              Agendar diagnóstico
+            <a href="#contacto" className="btn btn-primary hero-primary-action">
+              Contanos tu proyecto
+              <span aria-hidden="true">↗</span>
             </a>
-            <a href="#portfolio" className="btn btn-outline">
-              Ver trabajos
+            <a href="#servicios" className="btn hero-secondary-action">
+              Explorar soluciones
+              <span aria-hidden="true">↓</span>
             </a>
           </div>
 
-          <ul className="hero-trust">
-            <li>
-              <span className="hero-trust-dot" aria-hidden="true" />
-              Análisis antes de desarrollar
-            </li>
-            <li>
-              <span className="hero-trust-dot" aria-hidden="true" />
-              Soluciones preparadas para crecer
-            </li>
-            <li>
-              <span className="hero-trust-dot" aria-hidden="true" />
-              Comunicación clara desde el inicio
-            </li>
+          <ul className="hero-trust" aria-label="Principios de trabajo">
+            {TRUST_POINTS.map((point) => (
+              <li key={point}>
+                <span className="hero-trust-icon" aria-hidden="true">
+                  ✓
+                </span>
+                {point}
+              </li>
+            ))}
           </ul>
-
-          <p className="hero-note">
-            No trabajamos como una agencia genérica: pensamos cada proyecto
-            como una pieza del sistema digital que sostiene tu negocio.
-          </p>
         </Motion.div>
 
         <Motion.div
-          className="hero-card-wrapper"
-          initial={reduceMotion ? false : { opacity: 0, x: 40 }}
-          whileInView={reduceMotion ? false : { opacity: 1, x: 0 }}
-          transition={{ duration: 0.6, delay: 0.1 }}
-          viewport={{ once: true }}
+          className="hero-visual"
+          initial={reduceMotion ? false : { opacity: 0, x: 42, scale: 0.96 }}
+          animate={reduceMotion ? undefined : { opacity: 1, x: 0, scale: 1 }}
+          transition={{
+            duration: 0.86,
+            delay: 0.12,
+            ease: [0.22, 1, 0.36, 1],
+          }}
         >
-          <div className="hero-card">
-            <div className="hero-card-header">
-              <span className="hero-card-brand">
-                <img
-                  src="/brand/nexodigital-isotipo.svg"
-                  alt=""
-                  aria-hidden="true"
-                />
-                Centro digital NexoDigital
+          <div className="hero-stage">
+            <div className="hero-stage-halo" aria-hidden="true" />
+
+            <Motion.div
+              className="hero-floating-card hero-floating-card--automation"
+              animate={
+                reduceMotion
+                  ? undefined
+                  : { y: [0, -9, 0], rotate: [-1, 1, -1] }
+              }
+              transition={{
+                duration: 6,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }}
+            >
+              <span className="hero-floating-icon" aria-hidden="true">
+                ⚡
               </span>
-              <span className="hero-card-pill">
-                <span className="hero-card-dot" aria-hidden="true" />
-                En evolución
+              <span>
+                <strong>Automatización</strong>
+                <small>Procesos conectados</small>
               </span>
+              <span className="hero-floating-status">Activa</span>
+            </Motion.div>
+
+            <Motion.div
+              className="hero-floating-card hero-floating-card--ai"
+              animate={
+                reduceMotion
+                  ? undefined
+                  : { y: [0, 8, 0], rotate: [1, -1, 1] }
+              }
+              transition={{
+                duration: 7,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }}
+            >
+              <span className="hero-ai-symbol" aria-hidden="true">
+                AI
+              </span>
+              <span>
+                <strong>IA integrada</strong>
+                <small>Respuestas y análisis</small>
+              </span>
+            </Motion.div>
+
+            <div className="hero-dashboard">
+              <div className="hero-browser-bar">
+                <span className="hero-browser-dots" aria-hidden="true">
+                  <i />
+                  <i />
+                  <i />
+                </span>
+                <span className="hero-browser-address">
+                  nexo.digital / command-center
+                </span>
+                <span className="hero-browser-live">
+                  <i aria-hidden="true" />
+                  conectado
+                </span>
+              </div>
+
+              <div className="hero-dashboard-shell">
+                <aside className="hero-dashboard-sidebar" aria-hidden="true">
+                  <img
+                    src="/brand/nexodigital-isotipo.svg"
+                    alt=""
+                    className="hero-dashboard-logo"
+                  />
+                  <span className="hero-sidebar-item hero-sidebar-item--active" />
+                  <span className="hero-sidebar-item" />
+                  <span className="hero-sidebar-item" />
+                  <span className="hero-sidebar-item" />
+                </aside>
+
+                <div className="hero-dashboard-main">
+                  <div className="hero-dashboard-heading">
+                    <div>
+                      <span>Centro de crecimiento</span>
+                      <strong>Tu negocio, conectado.</strong>
+                    </div>
+                    <span className="hero-dashboard-chip">En tiempo real</span>
+                  </div>
+
+                  <div className="hero-dashboard-metrics">
+                    <article>
+                      <span>Presencia digital</span>
+                      <strong>Activa</strong>
+                      <small>Web, contenido y campañas</small>
+                    </article>
+                    <article>
+                      <span>Operación</span>
+                      <strong>Ordenada</strong>
+                      <small>CRM y procesos internos</small>
+                    </article>
+                    <article>
+                      <span>Automatización</span>
+                      <strong>Conectada</strong>
+                      <small>Menos tareas repetitivas</small>
+                    </article>
+                  </div>
+
+                  <div className="hero-dashboard-lower">
+                    <div className="hero-chart-card">
+                      <div className="hero-card-heading">
+                        <span>Impulso digital</span>
+                        <small>ecosistema NexoDigital</small>
+                      </div>
+                      <div className="hero-chart" aria-hidden="true">
+                        <span style={{ "--bar-height": "38%" }} />
+                        <span style={{ "--bar-height": "52%" }} />
+                        <span style={{ "--bar-height": "46%" }} />
+                        <span style={{ "--bar-height": "68%" }} />
+                        <span style={{ "--bar-height": "78%" }} />
+                        <span style={{ "--bar-height": "90%" }} />
+                      </div>
+                    </div>
+
+                    <div className="hero-activity-card">
+                      <div className="hero-card-heading">
+                        <span>Flujo conectado</span>
+                        <small>últimas acciones</small>
+                      </div>
+                      <ul>
+                        <li>
+                          <i className="hero-activity-dot hero-activity-dot--blue" />
+                          Nueva consulta captada
+                        </li>
+                        <li>
+                          <i className="hero-activity-dot hero-activity-dot--cyan" />
+                          CRM actualizado
+                        </li>
+                        <li>
+                          <i className="hero-activity-dot hero-activity-dot--green" />
+                          Seguimiento programado
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
 
-            <div className="hero-card-body">
-              <div className="hero-card-block hero-card-block-main">
-                <p className="hero-card-title">Web + CRM + automatización</p>
-                <p className="hero-card-text">
-                  Una base digital conectada para captar consultas, ordenar
-                  clientes y automatizar tareas repetitivas.
-                </p>
-              </div>
-
-              <div className="hero-metrics">
-                <div>
-                  <span className="hero-metric-value">01</span>
-                  <span className="hero-metric-label">Presencia</span>
+            <Motion.div
+              className="hero-phone"
+              animate={reduceMotion ? undefined : { y: [0, -7, 0] }}
+              transition={{
+                duration: 6.5,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }}
+            >
+              <div className="hero-phone-notch" aria-hidden="true" />
+              <div className="hero-phone-screen">
+                <div className="hero-phone-header">
+                  <img src="/brand/nexodigital-isotipo.svg" alt="" />
+                  <span>Experiencia móvil</span>
                 </div>
-                <div>
-                  <span className="hero-metric-value">02</span>
-                  <span className="hero-metric-label">Gestión</span>
+                <div className="hero-phone-hero">
+                  <span>Todo tu negocio</span>
+                  <strong>en movimiento.</strong>
                 </div>
-                <div>
-                  <span className="hero-metric-value">03</span>
-                  <span className="hero-metric-label">Escala</span>
+                <div className="hero-phone-card">
+                  <span>Próxima acción</span>
+                  <strong>Seguimiento de oportunidad</strong>
+                  <small>Automatizado y listo</small>
                 </div>
-              </div>
-
-              <div className="hero-card-grid">
-                <div className="hero-card-block">
-                  <p className="hero-card-label">Webs que convierten</p>
-                  <p className="hero-card-small">
-                    Experiencias claras, rápidas y orientadas a consulta real.
-                  </p>
-                </div>
-
-                <div className="hero-card-block">
-                  <p className="hero-card-label">IA aplicada</p>
-                  <p className="hero-card-small">
-                    Flujos simples para ahorrar tiempo sin perder control.
-                  </p>
+                <div className="hero-phone-nav" aria-hidden="true">
+                  <i />
+                  <i className="hero-phone-nav-active" />
+                  <i />
                 </div>
               </div>
+            </Motion.div>
+
+            <div className="hero-stage-label" aria-hidden="true">
+              <span>Web</span>
+              <i />
+              <span>Apps</span>
+              <i />
+              <span>CRM</span>
+              <i />
+              <span>IA</span>
             </div>
           </div>
         </Motion.div>
+      </div>
+
+      <div className="hero-scroll-hint" aria-hidden="true">
+        <span />
+        Descubrí NexoDigital
       </div>
     </section>
   );

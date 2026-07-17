@@ -4,12 +4,12 @@ import "../styles/Navbar.css";
 const LINKS = [
   { href: "#inicio", label: "Inicio", id: "inicio" },
   { href: "#servicios", label: "Servicios", id: "servicios" },
-  { href: "#ecosistema", label: "Ecosistema", id: "ecosistema" },
-  { href: "#portfolio", label: "Trabajos", id: "portfolio" },
+  { href: "#ecosistema", label: "Soluciones", id: "ecosistema" },
+  { href: "#portfolio", label: "Proyectos", id: "portfolio" },
   { href: "#contacto", label: "Contacto", id: "contacto" },
 ];
 
-const NAV_OFFSET = 90;
+const NAV_OFFSET = 96;
 
 function Navbar() {
   const [isMobileOpen, setIsMobileOpen] = useState(false);
@@ -20,7 +20,7 @@ function Navbar() {
 
   useEffect(() => {
     function handleScroll() {
-      setIsScrolled(window.scrollY > 10);
+      setIsScrolled(window.scrollY > 18);
     }
 
     window.addEventListener("scroll", handleScroll, { passive: true });
@@ -32,7 +32,7 @@ function Navbar() {
       .map((id) => document.getElementById(id))
       .filter(Boolean);
 
-    if (!sections.length) return;
+    if (!sections.length) return undefined;
 
     let ticking = false;
 
@@ -60,7 +60,6 @@ function Navbar() {
     }
 
     updateActiveSection();
-
     window.addEventListener("scroll", onScroll, { passive: true });
     window.addEventListener("resize", updateActiveSection);
 
@@ -71,22 +70,18 @@ function Navbar() {
   }, [sectionIds]);
 
   const handleNavClick = () => {
-    if (isMobileOpen) setIsMobileOpen(false);
+    setIsMobileOpen(false);
   };
 
   return (
     <header className={`navbar ${isScrolled ? "navbar--scrolled" : ""}`}>
-      <nav className="navbar-inner">
+      <nav className="navbar-inner" aria-label="Navegación principal">
         <a href="#inicio" className="navbar-logo" onClick={handleNavClick}>
           <img
-            src="/brand/nexodigital-logo-horizontal.svg"
+            src="/brand/nexodigital-monochrome-white.svg"
             alt="NexoDigital"
             className="navbar-logo-image"
           />
-          <span className="navbar-logo-copy">
-            <span className="navbar-logo-text">NexoDigital</span>
-            <span className="navbar-logo-subtitle">Studio tecnológico</span>
-          </span>
         </a>
 
         <div className="navbar-links navbar-links--desktop">
@@ -97,20 +92,26 @@ function Navbar() {
               className={`navbar-link ${
                 activeSection === link.id ? "navbar-link--active" : ""
               }`}
+              aria-current={activeSection === link.id ? "page" : undefined}
             >
               {link.label}
             </a>
           ))}
+
           <a href="#contacto" className="navbar-cta">
-            Diagnóstico inicial
+            Hablemos
+            <span aria-hidden="true">↗</span>
           </a>
         </div>
 
         <button
           type="button"
-          className="navbar-toggle"
-          aria-label="Abrir menú de navegación"
+          className={`navbar-toggle ${
+            isMobileOpen ? "navbar-toggle--open" : ""
+          }`}
+          aria-label={isMobileOpen ? "Cerrar menú" : "Abrir menú"}
           aria-expanded={isMobileOpen}
+          aria-controls="navbar-mobile-menu"
           onClick={() => setIsMobileOpen((prev) => !prev)}
         >
           <span className="navbar-toggle-line" />
@@ -120,6 +121,7 @@ function Navbar() {
       </nav>
 
       <div
+        id="navbar-mobile-menu"
         className={`navbar-links navbar-links--mobile ${
           isMobileOpen ? "navbar-links--mobile-open" : ""
         }`}
@@ -131,17 +133,20 @@ function Navbar() {
             className={`navbar-link navbar-link--mobile ${
               activeSection === link.id ? "navbar-link--active" : ""
             }`}
+            aria-current={activeSection === link.id ? "page" : undefined}
             onClick={handleNavClick}
           >
             {link.label}
           </a>
         ))}
+
         <a
           href="#contacto"
           className="navbar-cta navbar-cta--mobile"
           onClick={handleNavClick}
         >
-          Diagnóstico inicial
+          Contanos tu proyecto
+          <span aria-hidden="true">↗</span>
         </a>
       </div>
     </header>
