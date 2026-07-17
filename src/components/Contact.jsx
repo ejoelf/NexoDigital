@@ -8,6 +8,15 @@ const INITIAL_FORM = {
   message: "",
 };
 
+const PROJECT_TYPES = [
+  "Web o landing",
+  "App móvil",
+  "CRM o software",
+  "SaaS",
+  "Automatización e IA",
+  "Marketing y redes",
+];
+
 function Contact() {
   const [form, setForm] = useState(INITIAL_FORM);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -66,7 +75,7 @@ function Contact() {
 
       if (response.ok && data && data.ok) {
         setSuccessMessage(
-          "¡Gracias por escribirnos! Ya recibimos tu mensaje y te vamos a responder a la brevedad."
+          "¡Gracias por escribirnos! Recibimos tu mensaje y vamos a revisarlo personalmente."
         );
         setForm(INITIAL_FORM);
         return;
@@ -81,11 +90,11 @@ function Contact() {
 
       if (response.status === 404) {
         setErrorMessage(
-          "El formulario está listo, pero /contact.php no existe en el servidor actual. En local (Vite) no se puede enviar por PHP. Probalo una vez subido a Hostinger."
+          "El envío directo no está disponible en este entorno. Podés escribirnos por WhatsApp o email."
         );
       } else {
         setErrorMessage(
-          "Ocurrió un error al enviar el mensaje. Probá de nuevo en unos minutos."
+          "Ocurrió un error al enviar el mensaje. Probá nuevamente o contactanos por WhatsApp."
         );
       }
     } catch (error) {
@@ -94,7 +103,7 @@ function Contact() {
       );
 
       setErrorMessage(
-        "No pudimos conectar con el servidor. Revisá tu conexión o intentá más tarde."
+        "No pudimos conectar con el servidor. Revisá tu conexión o escribinos por WhatsApp."
       );
     } finally {
       setIsSubmitting(false);
@@ -103,155 +112,219 @@ function Contact() {
 
   return (
     <section id="contacto" className="section section-contact">
+      <div className="contact-background" aria-hidden="true">
+        <span className="contact-grid-lines" />
+        <span className="contact-orb contact-orb--blue" />
+        <span className="contact-orb contact-orb--cyan" />
+      </div>
+
       <div className="section-inner contact-inner">
-        <div className="section-header center">
-          <h2 className="section-title">¿Hablamos sobre tu proyecto?</h2>
-          <p className="section-subtitle">
-            Contanos qué tipo de negocio tenés y qué te gustaría mejorar. Te
-            respondemos en el día con una propuesta clara.
+        <div className="contact-header">
+          <div>
+            <p className="contact-eyebrow">Empecemos por una conversación</p>
+            <h2 className="section-title">
+              Contanos dónde está hoy tu negocio y{" ""}
+              <span>hasta dónde querés llevarlo.</span>
+            </h2>
+          </div>
+
+          <p className="contact-intro">
+            No hace falta que sepas qué tecnología necesitás. Explicanos el
+            objetivo, el problema o la idea y te ayudamos a convertirlo en un
+            camino concreto.
           </p>
         </div>
 
+        <div className="contact-project-types" aria-label="Tipos de proyectos">
+          {PROJECT_TYPES.map((type) => (
+            <span key={type}>{type}</span>
+          ))}
+        </div>
+
         <div className="contact-grid">
-          <form className="card contact-form" onSubmit={handleSubmit} noValidate>
-            <div className="form-group">
-              <label className="form-label" htmlFor="name">
-                Nombre
-              </label>
-              <input
-                id="name"
-                name="name"
-                type="text"
-                className="form-input"
-                placeholder="Cómo te llamás"
-                value={form.name}
-                onChange={handleChange}
-                autoComplete="name"
-              />
+          <form className="contact-form" onSubmit={handleSubmit} noValidate>
+            <div className="contact-form-heading">
+              <div>
+                <p>Tu proyecto</p>
+                <h3>Contanos lo esencial</h3>
+              </div>
+              <span>01</span>
             </div>
 
-            <div className="form-group">
-              <label className="form-label" htmlFor="email">
-                Email
-              </label>
-              <input
-                id="email"
-                name="email"
-                type="email"
-                className="form-input"
-                placeholder="tu@correo.com"
-                value={form.email}
-                onChange={handleChange}
-                autoComplete="email"
-              />
+            <div className="contact-form-fields">
+              <div className="form-group">
+                <label className="form-label" htmlFor="name">
+                  Nombre
+                </label>
+                <input
+                  id="name"
+                  name="name"
+                  type="text"
+                  className="form-input"
+                  placeholder="Cómo te llamás"
+                  value={form.name}
+                  onChange={handleChange}
+                  autoComplete="name"
+                />
+              </div>
+
+              <div className="form-group">
+                <label className="form-label" htmlFor="email">
+                  Email
+                </label>
+                <input
+                  id="email"
+                  name="email"
+                  type="email"
+                  className="form-input"
+                  placeholder="tu@correo.com"
+                  value={form.email}
+                  onChange={handleChange}
+                  autoComplete="email"
+                />
+              </div>
+
+              <div className="form-group form-group--full">
+                <label className="form-label" htmlFor="business">
+                  Negocio, marca o proyecto
+                </label>
+                <input
+                  id="business"
+                  name="business"
+                  type="text"
+                  className="form-input"
+                  placeholder="Peluquería, comercio, empresa, producto digital..."
+                  value={form.business}
+                  onChange={handleChange}
+                  autoComplete="organization"
+                />
+              </div>
+
+              <div className="form-group form-group--full">
+                <label className="form-label" htmlFor="message">
+                  ¿Qué te gustaría crear o mejorar?
+                </label>
+                <textarea
+                  id="message"
+                  name="message"
+                  rows={5}
+                  className="form-input form-textarea"
+                  placeholder="Contanos qué necesitás resolver, qué idea tenés o qué parte de tu negocio querés transformar."
+                  value={form.message}
+                  onChange={handleChange}
+                />
+              </div>
             </div>
 
-            <div className="form-group">
-              <label className="form-label" htmlFor="business">
-                Tipo de negocio
-              </label>
-              <input
-                id="business"
-                name="business"
-                type="text"
-                className="form-input"
-                placeholder="Peluquería, hotel, restaurante, comercio..."
-                value={form.business}
-                onChange={handleChange}
-              />
+            <div className="contact-form-footer">
+              <div className="contact-form-note">
+                <span aria-hidden="true">✓</span>
+                <p>Leemos cada consulta y respondemos con contexto, no con mensajes automáticos.</p>
+              </div>
+
+              {errorMessage && (
+                <p
+                  className="contact-status contact-status--error"
+                  role="alert"
+                >
+                  {errorMessage}
+                </p>
+              )}
+
+              {successMessage && (
+                <p
+                  className="contact-status contact-status--success"
+                  role="status"
+                >
+                  {successMessage}
+                </p>
+              )}
+
+              <button
+                type="submit"
+                className="btn btn-primary contact-submit"
+                disabled={isSubmitting}
+              >
+                {isSubmitting ? "Enviando..." : "Enviar consulta"}
+                {!isSubmitting && <span aria-hidden="true">↗</span>}
+              </button>
             </div>
-
-            <div className="form-group">
-              <label className="form-label" htmlFor="message">
-                ¿Qué te gustaría mejorar?
-              </label>
-              <textarea
-                id="message"
-                name="message"
-                rows={4}
-                className="form-input form-textarea"
-                placeholder="Contanos brevemente tu idea o proyecto."
-                value={form.message}
-                onChange={handleChange}
-              />
-            </div>
-
-            {errorMessage && (
-              <p className="contact-status contact-status--error">
-                {errorMessage}
-              </p>
-            )}
-
-            {successMessage && (
-              <p className="contact-status contact-status--success">
-                {successMessage}
-              </p>
-            )}
-
-            <button
-              type="submit"
-              className="btn btn-primary full"
-              disabled={isSubmitting}
-            >
-              {isSubmitting ? "Enviando..." : "Enviar mensaje"}
-            </button>
           </form>
 
-          <div className="contact-side">
-            <div className="card contact-highlight">
-              <p className="contact-kicker">Contacto directo</p>
-              <h3 className="contact-side-title">WhatsApp</h3>
-              <p className="contact-text">
-                Si preferís, escribinos por WhatsApp y coordinamos una llamada
-                breve para conocer tu idea.
-              </p>
+          <aside className="contact-side">
+            <div className="contact-next-steps">
+              <p className="contact-side-kicker">Qué pasa después</p>
+              <h3>Un primer paso simple y sin vueltas.</h3>
+
+              <ol>
+                <li>
+                  <span>01</span>
+                  <div>
+                    <strong>Revisamos tu consulta</strong>
+                    <p>Entendemos el contexto y detectamos qué información falta.</p>
+                  </div>
+                </li>
+                <li>
+                  <span>02</span>
+                  <div>
+                    <strong>Coordinamos una conversación</strong>
+                    <p>Profundizamos en el objetivo, alcance y prioridades.</p>
+                  </div>
+                </li>
+                <li>
+                  <span>03</span>
+                  <div>
+                    <strong>Definimos el camino</strong>
+                    <p>Te proponemos una solución y los próximos pasos posibles.</p>
+                  </div>
+                </li>
+              </ol>
+            </div>
+
+            <div className="contact-channels">
+              <p className="contact-side-kicker">Contacto directo</p>
 
               <a
-                href="https://wa.me/5493585729499?text=Hola%2C%20estuve%20viendo%20la%20p%C3%A1gina%20de%20NexoDigital%20y%20me%20gustar%C3%ADa%20recibir%20informaci%C3%B3n%20sobre%20una%20soluci%C3%B3n%20para%20mi%20negocio." 
-                className="btn btn-light contact-wa-btn"
+                className="contact-channel contact-channel--primary"
+                href="https://wa.me/5493585729499?text=Hola%2C%20estuve%20viendo%20la%20p%C3%A1gina%20de%20NexoDigital%20y%20me%20gustar%C3%ADa%20contarles%20sobre%20mi%20proyecto."
                 target="_blank"
                 rel="noreferrer"
               >
-                Abrir WhatsApp
+                <span className="contact-channel-icon" aria-hidden="true">W</span>
+                <div>
+                  <strong>WhatsApp</strong>
+                  <small>Escribinos directamente</small>
+                </div>
+                <i aria-hidden="true">↗</i>
               </a>
 
-              <p className="contact-side-note">Respuesta en el día hábil.</p>
+              <a
+                className="contact-channel"
+                href="mailto:contacto.nexod@gmail.com"
+              >
+                <span className="contact-channel-icon" aria-hidden="true">@</span>
+                <div>
+                  <strong>Email</strong>
+                  <small>contacto.nexod@gmail.com</small>
+                </div>
+                <i aria-hidden="true">↗</i>
+              </a>
+
+              <a
+                className="contact-channel"
+                href="https://www.instagram.com/nexodigital_ar/"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <span className="contact-channel-icon" aria-hidden="true">◎</span>
+                <div>
+                  <strong>Instagram</strong>
+                  <small>@nexodigital_ar</small>
+                </div>
+                <i aria-hidden="true">↗</i>
+              </a>
             </div>
-
-           <div className="card contact-info">
-  <p className="contact-kicker contact-kicker--muted">También podés seguirnos</p>
-  <h3 className="contact-side-title">Redes</h3>
-
-  <div className="contact-socials">
-    <a
-      className="contact-social"
-      href="https://www.instagram.com/nexodigital_ar/"
-      target="_blank"
-      rel="noreferrer"
-      aria-label="Instagram de NexoDigital"
-      title="Instagram"
-    >
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 24 24"
-        width="20"
-        height="20"
-        fill="currentColor"
-        aria-hidden="true"
-      >
-        <path d="M7.75 2h8.5A5.75 5.75 0 0 1 22 7.75v8.5A5.75 5.75 0 0 1 16.25 22h-8.5A5.75 5.75 0 0 1 2 16.25v-8.5A5.75 5.75 0 0 1 7.75 2Zm0 1.5A4.25 4.25 0 0 0 3.5 7.75v8.5A4.25 4.25 0 0 0 7.75 20.5h8.5a4.25 4.25 0 0 0 4.25-4.25v-8.5A4.25 4.25 0 0 0 16.25 3.5h-8.5ZM12 7a5 5 0 1 1 0 10a5 5 0 0 1 0-10Zm0 1.5a3.5 3.5 0 1 0 0 7a3.5 3.5 0 0 0 0-7Zm5.25-.75a.75.75 0 1 1 0 1.5a.75.75 0 0 1 0-1.5Z"/>
-      </svg>
-      <span className="contact-social-text">Instagram</span>
-    </a>
-
-  </div>
-
-  <p className="contact-note">
-    Publicamos novedades, trabajos y tips para mejorar tu negocio.
-  </p>
-</div>
-
-          </div>
+          </aside>
         </div>
       </div>
     </section>
