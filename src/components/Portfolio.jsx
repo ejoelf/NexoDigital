@@ -43,6 +43,12 @@ function ProjectPlaceholder({ work }) {
   );
 }
 
+function getUnavailableLabel(work) {
+  if (work.status === "En planificación") return "Producto en planificación";
+  if (work.status === "En desarrollo") return "Proyecto en desarrollo";
+  return work.status;
+}
+
 function Portfolio() {
   const reduceMotion = useReducedMotion();
   const publicWorks = works.filter((work) => work.isPublic);
@@ -163,7 +169,7 @@ function Portfolio() {
                   </a>
                 ) : (
                   <span className="portfolio-link portfolio-link--disabled">
-                    Proyecto en evolución
+                    {getUnavailableLabel(work)}
                   </span>
                 )}
               </div>
