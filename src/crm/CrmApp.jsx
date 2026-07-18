@@ -16,6 +16,7 @@ import "./styles/crm.css";
 import "./styles/crm-layout.css";
 import "./styles/crm-login.css";
 import "./styles/crm-auth-screen.css";
+import "./styles/crm-v2.css";
 
 const pages = {
   dashboard: {
@@ -43,11 +44,11 @@ const pages = {
     component: <CrmAlerts />,
   },
   "audit-logs": {
-    title: "Auditoria",
+    title: "Auditoría",
     component: <CrmAuditLogs />,
   },
   settings: {
-    title: "Configuracion",
+    title: "Configuración",
     component: <CrmSettings />,
   },
 };
@@ -56,7 +57,7 @@ function CrmLoadingScreen() {
   return (
     <main className="crm-loading-screen">
       <img src="/brand/nexodigital-isotipo.svg" alt="" aria-hidden="true" />
-      <p>Validando sesion...</p>
+      <p>Validando sesión...</p>
     </main>
   );
 }
