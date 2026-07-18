@@ -391,7 +391,7 @@ function Ecosystem() {
           <div>
             <p className="ecosystem-eyebrow">Software y productos digitales</p>
             <h2 id="ecosystem-title" className="section-title">
-              Tecnología que se adapta a tu negocio,{" ""}
+              Tecnología que se adapta a tu negocio,{" "}
               <span>no al revés.</span>
             </h2>
           </div>

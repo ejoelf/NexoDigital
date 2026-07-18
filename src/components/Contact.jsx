@@ -123,7 +123,7 @@ function Contact() {
           <div>
             <p className="contact-eyebrow">Empecemos por una conversación</p>
             <h2 className="section-title">
-              Contanos dónde está hoy tu negocio y{" ""}
+              Contanos dónde está hoy tu negocio y{" "}
               <span>hasta dónde querés llevarlo.</span>
             </h2>
           </div>

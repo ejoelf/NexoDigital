@@ -65,7 +65,7 @@ function Portfolio() {
           <div>
             <p className="portfolio-eyebrow">Proyectos y productos</p>
             <h2 className="section-title">
-              No mostramos código. Mostramos{" ""}
+              No mostramos código. Mostramos{" "}
               <span>problemas convertidos en soluciones.</span>
             </h2>
             <p className="section-subtitle">

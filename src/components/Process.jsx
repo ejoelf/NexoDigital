@@ -29,7 +29,7 @@ function Process() {
           <div className="process-heading">
             <p className="process-eyebrow">Cómo trabajamos</p>
             <h2 id="process-title" className="section-title">
-              Una idea clara, un proceso ordenado y una solución que{" ""}
+              Una idea clara, un proceso ordenado y una solución que{" "}
               <span>puede crecer.</span>
             </h2>
           </div>
