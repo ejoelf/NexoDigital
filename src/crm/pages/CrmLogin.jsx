@@ -62,7 +62,7 @@ function CrmLogin() {
 
             <p className="crm-login-brand-eyebrow">Command Center</p>
             <h1>
-              Todo lo que construimos, conectado en un{" ""}
+              Todo lo que construimos, conectado en un{" "}
               <span>solo lugar.</span>
             </h1>
             <p className="crm-login-brand-text">
@@ -152,9 +152,15 @@ function CrmLogin() {
                         <small>últimos movimientos</small>
                       </div>
                       <ul>
-                        <li><i /> Consulta registrada</li>
-                        <li><i /> Proyecto actualizado</li>
-                        <li><i /> Seguimiento preparado</li>
+                        <li>
+                          <i /> Consulta registrada
+                        </li>
+                        <li>
+                          <i /> Proyecto actualizado
+                        </li>
+                        <li>
+                          <i /> Seguimiento preparado
+                        </li>
                       </ul>
                     </div>
                   </div>
@@ -198,8 +204,8 @@ function CrmLogin() {
             ) : null}
 
             <div className="crm-login-fields">
-              <label className="crm-login-field" htmlFor="crm-login-email">
-                <span>Email</span>
+              <div className="crm-login-field">
+                <label htmlFor="crm-login-email">Email</label>
                 <div className="crm-login-input-wrap">
                   <span className="crm-login-input-icon" aria-hidden="true">
                     <svg viewBox="0 0 24 24" focusable="false">
@@ -218,10 +224,10 @@ function CrmLogin() {
                     value={form.email}
                   />
                 </div>
-              </label>
+              </div>
 
-              <label className="crm-login-field" htmlFor="crm-login-password">
-                <span>Contraseña</span>
+              <div className="crm-login-field">
+                <label htmlFor="crm-login-password">Contraseña</label>
                 <div className="crm-login-input-wrap">
                   <span className="crm-login-input-icon" aria-hidden="true">
                     <svg viewBox="0 0 24 24" focusable="false">
@@ -256,7 +262,7 @@ function CrmLogin() {
                     </svg>
                   </button>
                 </div>
-              </label>
+              </div>
             </div>
 
             <button
