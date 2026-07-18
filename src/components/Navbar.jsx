@@ -10,6 +10,7 @@ const LINKS = [
 ];
 
 const NAV_OFFSET = 96;
+const DESKTOP_BREAKPOINT = 860;
 
 function Navbar() {
   const [isMobileOpen, setIsMobileOpen] = useState(false);
@@ -23,6 +24,7 @@ function Navbar() {
       setIsScrolled(window.scrollY > 18);
     }
 
+    handleScroll();
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
@@ -69,12 +71,43 @@ function Navbar() {
     };
   }, [sectionIds]);
 
+  useEffect(() => {
+    if (!isMobileOpen) return undefined;
+
+    document.body.classList.add("nd-menu-open");
+
+    function handleKeyDown(event) {
+      if (event.key === "Escape") {
+        setIsMobileOpen(false);
+      }
+    }
+
+    function handleResize() {
+      if (window.innerWidth > DESKTOP_BREAKPOINT) {
+        setIsMobileOpen(false);
+      }
+    }
+
+    window.addEventListener("keydown", handleKeyDown);
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      document.body.classList.remove("nd-menu-open");
+      window.removeEventListener("keydown", handleKeyDown);
+      window.removeEventListener("resize", handleResize);
+    };
+  }, [isMobileOpen]);
+
   const handleNavClick = () => {
     setIsMobileOpen(false);
   };
 
   return (
-    <header className={`navbar ${isScrolled ? "navbar--scrolled" : ""}`}>
+    <header
+      className={`navbar ${isScrolled ? "navbar--scrolled" : ""} ${
+        isMobileOpen ? "navbar--menu-open" : ""
+      }`}
+    >
       <nav className="navbar-inner" aria-label="Navegación principal">
         <a href="#inicio" className="navbar-logo" onClick={handleNavClick}>
           <img
@@ -120,12 +153,28 @@ function Navbar() {
         </button>
       </nav>
 
+      <button
+        type="button"
+        className={`navbar-mobile-backdrop ${
+          isMobileOpen ? "navbar-mobile-backdrop--visible" : ""
+        }`}
+        aria-label="Cerrar menú"
+        tabIndex={isMobileOpen ? 0 : -1}
+        onClick={() => setIsMobileOpen(false)}
+      />
+
       <div
         id="navbar-mobile-menu"
         className={`navbar-links navbar-links--mobile ${
           isMobileOpen ? "navbar-links--mobile-open" : ""
         }`}
+        aria-hidden={!isMobileOpen}
       >
+        <div className="navbar-mobile-heading">
+          <span>Explorá NexoDigital</span>
+          <small>Soluciones digitales para negocios reales.</small>
+        </div>
+
         {LINKS.map((link) => (
           <a
             key={link.href}
@@ -136,7 +185,8 @@ function Navbar() {
             aria-current={activeSection === link.id ? "page" : undefined}
             onClick={handleNavClick}
           >
-            {link.label}
+            <span>{link.label}</span>
+            <i aria-hidden="true">→</i>
           </a>
         ))}
 

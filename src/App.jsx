@@ -1,4 +1,5 @@
 import React from "react";
+import ScrollExperience from "./components/ScrollExperience";
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import About from "./components/About";
@@ -13,9 +14,10 @@ import CrmApp from "./crm/CrmApp";
 
 function PublicWebsite() {
   return (
-    <div className="app-root">
+    <div className="app-root public-site">
+      <ScrollExperience />
       <Navbar />
-      <main>
+      <main className="public-main">
         <Hero />
         <About />
         <Services />
