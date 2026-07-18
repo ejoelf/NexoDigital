@@ -33,12 +33,31 @@ jobs:
         run: npm ci
 
       - name: Lint
-        run: npm run lint
+        shell: bash
+        run: |
+          set -o pipefail
+          npm run lint 2>&1 | tee lint.log
 
       - name: Build
-        run: npm run build
+        if: always()
+        shell: bash
+        run: |
+          set -o pipefail
+          npm run build 2>&1 | tee build.log
+
+      - name: Upload diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: quality-diagnostics
+          path: |
+            lint.log
+            build.log
+          if-no-files-found: warn
+          retention-days: 7
 
       - name: Upload production build
+        if: success()
         uses: actions/upload-artifact@v4
         with:
           name: nexodigital-dist
