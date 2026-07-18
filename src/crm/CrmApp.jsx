@@ -15,6 +15,7 @@ import CrmWorks from "./pages/CrmWorks";
 import "./styles/crm.css";
 import "./styles/crm-layout.css";
 import "./styles/crm-login.css";
+import "./styles/crm-auth-screen.css";
 
 const pages = {
   dashboard: {
