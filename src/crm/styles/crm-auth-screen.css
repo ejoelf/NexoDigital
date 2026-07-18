@@ -1,0 +1,91 @@
+.crm-loading-screen {
+  position: relative;
+  min-height: 100svh;
+  overflow: hidden;
+  isolation: isolate;
+  padding: 24px;
+  color: var(--nd-text);
+  background:
+    radial-gradient(circle at 50% 42%, rgba(37, 99, 235, 0.18), transparent 26%),
+    radial-gradient(circle at 58% 54%, rgba(6, 182, 212, 0.09), transparent 22%),
+    linear-gradient(145deg, #040812, #08111f 58%, #0a1424);
+}
+
+.crm-loading-screen::before {
+  position: absolute;
+  z-index: -2;
+  inset: 0;
+  content: "";
+  opacity: 0.28;
+  background-image:
+    linear-gradient(rgba(148, 163, 184, 0.055) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(148, 163, 184, 0.055) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: radial-gradient(circle at center, #000, transparent 72%);
+}
+
+.crm-loading-screen::after {
+  position: absolute;
+  z-index: -1;
+  width: 170px;
+  height: 170px;
+  border: 1px solid rgba(103, 232, 249, 0.14);
+  border-radius: 50%;
+  content: "";
+  box-shadow:
+    0 0 0 24px rgba(37, 99, 235, 0.025),
+    0 0 0 54px rgba(6, 182, 212, 0.018),
+    0 0 80px rgba(37, 99, 235, 0.16);
+  animation: crm-auth-pulse 2.4s var(--nd-ease-soft) infinite;
+}
+
+.crm-loading-screen img {
+  position: relative;
+  z-index: 1;
+  width: 58px;
+  height: 58px;
+  filter: drop-shadow(0 0 24px rgba(6, 182, 212, 0.34));
+  animation: crm-auth-float 2.4s var(--nd-ease-soft) infinite;
+}
+
+.crm-loading-screen p {
+  position: relative;
+  z-index: 1;
+  margin: 20px 0 0;
+  color: var(--nd-text-soft);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+@keyframes crm-auth-pulse {
+  0%,
+  100% {
+    opacity: 0.56;
+    transform: scale(0.94);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1.04);
+  }
+}
+
+@keyframes crm-auth-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .crm-loading-screen::after,
+  .crm-loading-screen img {
+    animation: none;
+  }
+}
