@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+  <title id="title">Electricidad Zacarías</title>
+  <desc id="desc">Portada inspirada en la identidad visual de Electricidad Zacarías.</desc>
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="42%" r="72%">
+      <stop offset="0" stop-color="#171717"/>
+      <stop offset="0.62" stop-color="#050505"/>
+      <stop offset="1" stop-color="#000000"/>
+    </radialGradient>
+    <linearGradient id="metal" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f7f7f7"/>
+      <stop offset="0.28" stop-color="#8d949b"/>
+      <stop offset="0.55" stop-color="#e5e7eb"/>
+      <stop offset="0.82" stop-color="#686d73"/>
+      <stop offset="1" stop-color="#f3f4f6"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#fff0a4"/>
+      <stop offset="0.22" stop-color="#eabf4d"/>
+      <stop offset="0.54" stop-color="#b87913"/>
+      <stop offset="0.78" stop-color="#f5ce5b"/>
+      <stop offset="1" stop-color="#8a5508"/>
+    </linearGradient>
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="9" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="1600" height="900" fill="url(#bg)"/>
+  <g opacity=".22" stroke="#1f2937" stroke-width="1">
+    <path d="M0 150H1600M0 300H1600M0 450H1600M0 600H1600M0 750H1600"/>
+    <path d="M200 0V900M400 0V900M600 0V900M800 0V900M1000 0V900M1200 0V900M1400 0V900"/>
+  </g>
+  <g transform="translate(800 405)">
+    <circle r="287" fill="#020202" stroke="#151515" stroke-width="28"/>
+    <path d="M-215 118A278 278 0 0 1-96-249" fill="none" stroke="url(#metal)" stroke-width="58" stroke-linecap="round"/>
+    <path d="M219-119A278 278 0 0 1 93 252" fill="none" stroke="url(#metal)" stroke-width="58" stroke-linecap="round"/>
+    <g fill="none" stroke-linecap="round" stroke-width="9">
+      <path d="M-264 79l-68 57" stroke="#7f1d1d"/><path d="M-258 95l-55 73" stroke="#1d4ed8"/><path d="M-249 109l-38 77" stroke="#d1d5db"/><path d="M-240 117l-19 76" stroke="#84cc16"/>
+      <path d="M264-75l68-57" stroke="#7f1d1d"/><path d="M258-91l55-73" stroke="#1d4ed8"/><path d="M249-105l38-77" stroke="#d1d5db"/><path d="M240-113l19-76" stroke="#84cc16"/>
+    </g>
+    <text x="0" y="130" text-anchor="middle" font-family="Arial Black, Arial, sans-serif" font-size="430" font-weight="900" fill="url(#gold)" stroke="#7b4b08" stroke-width="5">Z</text>
+    <circle cx="132" cy="-138" r="10" fill="#ffe9a1" filter="url(#glow)"/>
+  </g>
+  <g text-anchor="middle" font-family="Arial, Helvetica, sans-serif">
+    <text x="800" y="785" fill="#f8fafc" font-size="38" font-weight="800" letter-spacing="12">ELECTRICIDAD ZACARÍAS</text>
+    <text x="800" y="835" fill="#94a3b8" font-size="20" font-weight="600" letter-spacing="7">SERVICIOS ELÉCTRICOS</text>
+  </g>
+</svg>
