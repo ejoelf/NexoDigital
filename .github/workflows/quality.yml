@@ -55,6 +55,18 @@ jobs:
           grep -R -q "http://localhost:4000" dist-development/assets
           rm -rf dist-development
 
+      - name: Validate production CRM configuration
+        shell: bash
+        run: |
+          grep -Fxq "VITE_API_BASE_URL=https://nexodigital-wtjy.onrender.com" .env.production
+          npx vite build --mode production --outDir dist-production
+          grep -R -q "https://nexodigital-wtjy.onrender.com" dist-production/assets
+          if grep -R -q "nexodigital-production.up.railway.app" dist-production/assets; then
+            echo "Production build still references Railway."
+            exit 1
+          fi
+          rm -rf dist-production
+
       - name: Lint
         shell: bash
         run: |
