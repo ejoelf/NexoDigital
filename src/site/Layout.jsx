@@ -2,6 +2,7 @@ import { CONTACT, ROUTES, TEXT, whatsappLink } from "./content";
 import {
   IconFacebook,
   IconInstagram,
+  IconLock,
   IconMail,
   IconWhatsApp,
 } from "./Icons";
@@ -126,7 +127,12 @@ export function SiteFooter({ lang }) {
           <span>
             © {year} NexoDigital. {t.footer.rights}
           </span>
-          <a href={ROUTES[lang].privacy}>{t.footer.privacy}</a>
+          <span className="site-footer__links">
+            <a href={ROUTES[lang].privacy}>{t.footer.privacy}</a>
+            <a href="/crm/login" className="site-footer__panel" rel="nofollow">
+              <IconLock /> {t.footer.panel}
+            </a>
+          </span>
         </div>
       </div>
     </footer>

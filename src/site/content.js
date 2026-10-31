@@ -201,6 +201,7 @@ export const TEXT = {
       contact: "Contacto",
       rights: "Todos los derechos reservados.",
       privacy: "Política de privacidad",
+      panel: "Panel privado",
     },
     floating: "Escribinos por WhatsApp",
     privacy: {
@@ -344,6 +345,7 @@ export const TEXT = {
       contact: "Contatti",
       rights: "Tutti i diritti riservati.",
       privacy: "Informativa sulla privacy",
+      panel: "Area riservata",
     },
     floating: "Scrivici su WhatsApp",
     privacy: {

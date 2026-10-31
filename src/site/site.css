@@ -639,6 +639,18 @@ body:has(.site) {
   color: var(--site-text);
 }
 
+.site-footer__links {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 18px;
+}
+
+.site-footer__panel {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
 /* Botón flotante de WhatsApp */
 
 .site-float-wa {
