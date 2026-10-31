@@ -1,41 +1,43 @@
-import React from "react";
-import ScrollExperience from "./components/ScrollExperience";
-import Navbar from "./components/Navbar";
-import Hero from "./components/Hero";
-import About from "./components/About";
-import Services from "./components/Services";
-import IntelligenceAutomation from "./components/IntelligenceAutomation";
-import Ecosystem from "./components/Ecosystem";
-import Process from "./components/Process";
-import Portfolio from "./components/Portfolio";
-import Contact from "./components/Contact";
-import Footer from "./components/Footer";
-import CrmApp from "./crm/CrmApp";
+import React, { Suspense, lazy } from "react";
+import HomePage from "./site/HomePage";
+import PrivacyPage from "./site/PrivacyPage";
+import "./site/site.css";
 
-function PublicWebsite() {
-  return (
-    <div className="app-root public-site">
-      <ScrollExperience />
-      <Navbar />
-      <main className="public-main">
-        <Hero />
-        <About />
-        <Services />
-        <IntelligenceAutomation />
-        <Ecosystem />
-        <Process />
-        <Portfolio />
-        <Contact />
-      </main>
-      <Footer />
-    </div>
-  );
+// El CRM se carga aparte para que la web pública sea más liviana.
+const CrmApp = lazy(() => import("./crm/CrmApp"));
+
+// Rutas públicas:
+//   /              inicio en español
+//   /privacidad    política de privacidad en español
+//   /it            inicio en italiano
+//   /it/privacy    política de privacidad en italiano
+//   /crm/...       panel privado (CRM), sin cambios
+function resolveRoute(pathname) {
+  const path = pathname.replace(/\/+$/, "") || "/";
+
+  if (path === "/it" || path.startsWith("/it/")) {
+    return { lang: "it", page: path === "/it/privacy" ? "privacy" : "home" };
+  }
+
+  return { lang: "es", page: path === "/privacidad" ? "privacy" : "home" };
 }
 
 export default function App() {
-  if (window.location.pathname.startsWith("/crm")) {
-    return <CrmApp />;
+  const { pathname } = window.location;
+
+  if (pathname.startsWith("/crm")) {
+    return (
+      <Suspense fallback={null}>
+        <CrmApp />
+      </Suspense>
+    );
   }
 
-  return <PublicWebsite />;
+  const { lang, page } = resolveRoute(pathname);
+
+  if (page === "privacy") {
+    return <PrivacyPage lang={lang} />;
+  }
+
+  return <HomePage lang={lang} />;
 }

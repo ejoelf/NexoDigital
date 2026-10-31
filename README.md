@@ -1,50 +1,25 @@
 # NexoDigital
 
-Sitio web oficial de **NexoDigital**, un proyecto enfocado en el desarrollo de soluciones digitales para negocios:  
-sitios web profesionales, sistemas a medida y automatización con inteligencia artificial.
+Sitio web de **NexoDigital**: webs, software a medida, automatización con IA y presencia digital para negocios. Trabajo remoto para todo el mundo.
 
-🌐 https://nexo-digital.tech
+🌐 https://nexodigital-ix6r.onrender.com (español) · https://nexodigital-ix6r.onrender.com/it (italiano)
 
----
+## Estructura
 
-## 🚀 Qué es NexoDigital
+- `src/site/` — web pública (textos en `content.js`, en español e italiano).
+- `src/crm/` — panel interno privado (`/crm`).
+- `backend/` — API del CRM.
+- `docs/brand.md` — guía de marca.
+- `CLAUDE.md` — cómo trabajar en el repo, deploy y reglas.
 
-NexoDigital nace con el objetivo de ayudar a negocios y profesionales a:
+## Stack
 
-- mejorar su presencia digital
-- optimizar procesos internos
-- automatizar tareas repetitivas
-- aprovechar la tecnología de forma práctica y rentable
+React, Vite y CSS propio. Tipografía Sora servida desde el sitio. Deploy en Render.
 
-Cada proyecto se aborda con análisis previo, criterio técnico y foco en resultados reales.
-
----
-
-## 🧩 Servicios principales
-
-- **Sitios web profesionales**
-- **Sistemas a medida**
-- **Automatización e inteligencia artificial aplicada**
-- **Integraciones con WhatsApp y herramientas de negocio**
-
----
-
-## 🛠️ Stack tecnológico
-
-Este sitio fue desarrollado con:
-
-- **React**
-- **Vite**
-- **CSS modular**
-- **Framer Motion**
-- **PHP** (para el envío de formularios en hosting)
-
-El proyecto está optimizado para performance, SEO y dispositivos móviles.
-
----
-
-## 📦 Instalación local
+## Desarrollo local
 
 ```bash
 npm install
 npm run dev
+npm run check   # lint + build
+```
