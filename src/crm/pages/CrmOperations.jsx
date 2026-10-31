@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useMemo, useState } from "react";
 import CrmOperationsModule from "../components/CrmOperationsModule";
 import CrmSectionHeader from "../components/CrmSectionHeader";
 import CrmStatusBadge from "../components/CrmStatusBadge";
+import { enumOptions, label } from "../data/crmLabels";
 import { useAuth } from "../hooks/useAuth";
 import { listClients } from "../services/clientsService";
 import {
@@ -90,9 +91,6 @@ function formatMoney(amount, currency = "USD") {
   return `${currency || "USD"} ${Number(amount).toLocaleString("es-AR")}`;
 }
 
-function enumOptions(values) {
-  return values.map((value) => ({ label: value, value }));
-}
 
 function relationOptions(rows, labelKey, emptyLabel) {
   return [
@@ -115,7 +113,7 @@ function projectOptions(projects) {
 
 function subscriptionOptions(subscriptions) {
   return [
-    { label: "Sin suscripcion asociada", value: "" },
+    { label: "Sin suscripción asociada", value: "" },
     ...(subscriptions ?? []).map((subscription) => ({
       label: subscription.provider?.name
         ? `${subscription.name} · ${subscription.provider.name}`
@@ -167,8 +165,8 @@ function booleanChip(active, activeLabel, inactiveLabel) {
 }
 
 function actionErrorMessage(error) {
-  if (error?.status === 403) return "No tenes permisos suficientes para esta accion.";
-  return error?.message || "No se pudo cargar este modulo.";
+  if (error?.status === 403) return "No tenés permisos suficientes para esta acción.";
+  return error?.message || "No se pudo cargar este módulo.";
 }
 
 function syncProjectClient(name, value, next, context) {
@@ -228,7 +226,7 @@ function baseRelationFields(includeProvider = false, includeSubscription = false
     ...(includeSubscription
       ? [
           {
-            label: "Suscripcion",
+            label: "Suscripción",
             name: "subscriptionId",
             type: "select",
             options: (context) => subscriptionOptions(context.subscriptions),
@@ -249,14 +247,15 @@ function buildConfigs() {
     createTitle: "Nuevo proveedor",
     editTitle: "Editar proveedor",
     submitLabel: "Guardar proveedor",
-    archiveButtonLabel: "Deprecated",
-    archiveConfirmLabel: "Marcar deprecated",
-    archiveTitle: "Marcar proveedor como deprecated",
+    archiveButtonLabel: "Dejar de usar",
+    archiveConfirmLabel: "Marcar en desuso",
+    archiveTitle: "Marcar proveedor en desuso",
     archiveMessage: (row) =>
-      `El proveedor ${row?.name || ""} quedara DEPRECATED y dejara de figurar como oficial.`,
+      `${row?.name || "El proveedor"} quedará en desuso y dejará de figurar como oficial.`,
     emptyTitle: "Sin proveedores",
-    emptyMessage: "Todavia no hay proveedores cargados.",
-    formDescription: "Registra proveedores oficiales, candidatos o servicios de apoyo.",
+    emptyMessage: "Todavía no hay proveedores cargados.",
+    formDescription:
+      "Plataformas que usás (Render, Vercel, Neon, Hostinger...). Guardá el email de la cuenta y el enlace al panel, nunca la contraseña.",
     emptyForm: {
       name: "",
       category: "OTHER",
@@ -264,8 +263,10 @@ function buildConfigs() {
       accountEmail: "",
       recommendedUse: "",
       internalOwner: "",
-      status: "CANDIDATE",
-      isOfficial: false,
+      dashboardUrl: "",
+      planName: "",
+      status: "ACTIVE",
+      isOfficial: true,
       notes: "",
     },
     columns: [
@@ -274,17 +275,25 @@ function buildConfigs() {
         label: "Nombre",
         render: (row) => <strong className="crm-table-primary">{row.name}</strong>,
       },
-      { key: "category", label: "Categoria", render: (row) => fieldValue(row.category) },
-      { key: "websiteUrl", label: "Website", render: (row) => fieldValue(row.websiteUrl) },
+      { key: "category", label: "Categoría", render: (row) => label(row.category) },
+      { key: "planName", label: "Plan", render: (row) => fieldValue(row.planName) },
+      { key: "accountEmail", label: "Cuenta", render: (row) => fieldValue(row.accountEmail) },
+      {
+        key: "dashboardUrl",
+        label: "Panel",
+        render: (row) =>
+          row.dashboardUrl ? (
+            <a className="crm-cell-link" href={row.dashboardUrl} rel="noopener noreferrer" target="_blank">
+              Abrir
+            </a>
+          ) : (
+            "—"
+          ),
+      },
       {
         key: "recommendedUse",
         label: "Uso",
         render: (row) => fieldValue(row.recommendedUse),
-      },
-      {
-        key: "internalOwner",
-        label: "Owner",
-        render: (row) => fieldValue(row.internalOwner),
       },
       {
         key: "isOfficial",
@@ -296,11 +305,13 @@ function buildConfigs() {
     ],
     fields: [
       { label: "Nombre", name: "name", required: true },
-      { label: "Categoria", name: "category", type: "select", options: enumOptions(providerCategories), required: true },
-      { label: "Website", name: "websiteUrl" },
-      { label: "Email de cuenta", name: "accountEmail", type: "email" },
-      { label: "Uso recomendado", name: "recommendedUse" },
-      { label: "Owner interno", name: "internalOwner" },
+      { label: "Categoría", name: "category", type: "select", options: enumOptions(providerCategories), required: true },
+      { label: "Sitio web", name: "websiteUrl" },
+      { label: "Enlace al panel", name: "dashboardUrl", placeholder: "https://dashboard..." },
+      { label: "Plan", name: "planName", placeholder: "Gratis, Hobby, Starter..." },
+      { label: "Email de la cuenta", name: "accountEmail", type: "email" },
+      { label: "Para qué lo usás", name: "recommendedUse" },
+      { label: "Responsable", name: "internalOwner" },
       { label: "Estado", name: "status", type: "select", options: enumOptions(providerStatuses) },
       { label: "Proveedor oficial", name: "isOfficial", type: "checkbox" },
       { label: "Notas", name: "notes", type: "textarea" },
@@ -312,6 +323,8 @@ function buildConfigs() {
       accountEmail: row.accountEmail ?? "",
       recommendedUse: row.recommendedUse ?? "",
       internalOwner: row.internalOwner ?? "",
+      dashboardUrl: row.dashboardUrl ?? "",
+      planName: row.planName ?? "",
       status: row.status ?? "CANDIDATE",
       isOfficial: Boolean(row.isOfficial),
       notes: row.notes ?? "",
@@ -326,18 +339,18 @@ function buildConfigs() {
     key: "subscriptions",
     title: "Suscripciones",
     pluralLabel: "suscripciones",
-    singularCountLabel: "suscripcion registrada",
+    singularCountLabel: "suscripción registrada",
     pluralCountLabel: "suscripciones registradas",
-    createLabel: "Nueva suscripcion",
-    createTitle: "Nueva suscripcion",
-    editTitle: "Editar suscripcion",
-    submitLabel: "Guardar suscripcion",
+    createLabel: "Nueva suscripción",
+    createTitle: "Nueva suscripción",
+    editTitle: "Editar suscripción",
+    submitLabel: "Guardar suscripción",
     archiveButtonLabel: "Cancelar",
-    archiveConfirmLabel: "Cancelar suscripcion",
-    archiveTitle: "Cancelar suscripcion",
+    archiveConfirmLabel: "Cancelar suscripción",
+    archiveTitle: "Cancelar suscripción",
     archiveMessage: (row) => `La suscripcion ${row?.name || ""} quedara CANCELLED.`,
     emptyTitle: "Sin suscripciones",
-    emptyMessage: "Todavia no hay suscripciones cargadas.",
+    emptyMessage: "Todavía no hay suscripciones cargadas.",
     formDescription: "Registra servicios contratados, ciclos y responsables de pago.",
     emptyForm: {
       name: "",
@@ -361,9 +374,9 @@ function buildConfigs() {
       { key: "client", label: "Cliente", render: (row) => fieldValue(row.client?.businessName) },
       { key: "project", label: "Proyecto", render: (row) => fieldValue(row.project?.name) },
       { key: "status", label: "Estado", render: (row) => <CrmStatusBadge status={row.status} /> },
-      { key: "billingFrequency", label: "Frecuencia", render: (row) => fieldValue(row.billingFrequency) },
+      { key: "billingFrequency", label: "Frecuencia", render: (row) => label(row.billingFrequency) },
       { key: "amount", label: "Monto", render: (row) => formatMoney(row.amount, row.currency) },
-      { key: "renewalDate", label: "Renovacion", render: (row) => formatDate(row.renewalDate) },
+      { key: "renewalDate", label: "Renovación", render: (row) => formatDate(row.renewalDate) },
       { key: "updatedAt", label: "Actualizado", render: (row) => formatDate(row.updatedAt) },
     ],
     fields: [
@@ -375,7 +388,7 @@ function buildConfigs() {
       { label: "Moneda", name: "currency" },
       { label: "Frecuencia", name: "billingFrequency", type: "select", options: enumOptions(billingFrequencies), required: true },
       { label: "Inicio", name: "startDate", type: "date" },
-      { label: "Proxima renovacion", name: "renewalDate", type: "date" },
+      { label: "Proxima renovación", name: "renewalDate", type: "date" },
       { label: "Responsable de pago", name: "paymentResponsibleName" },
       { label: "Estado", name: "status", type: "select", options: enumOptions(subscriptionStatuses) },
       { label: "Notas", name: "notes", type: "textarea" },
@@ -418,8 +431,8 @@ function buildConfigs() {
     archiveTitle: "Parkear dominio",
     archiveMessage: (row) => `El dominio ${row?.domainName || ""} quedara PARKED y sin auto-renew.`,
     emptyTitle: "Sin dominios",
-    emptyMessage: "Todavia no hay dominios cargados.",
-    formDescription: "Administra dominios, proveedores, expiraciones y renovacion automatica.",
+    emptyMessage: "Todavía no hay dominios cargados.",
+    formDescription: "Administra dominios, proveedores, expiraciones y renovación automática.",
     emptyForm: {
       domainName: "",
       providerId: "",
@@ -450,7 +463,7 @@ function buildConfigs() {
       { label: "Registrador", name: "registrar" },
       { label: "DNS provider", name: "dnsProvider" },
       { label: "Fecha de compra", name: "purchaseDate", type: "date" },
-      { label: "Fecha de expiracion", name: "expirationDate", type: "date" },
+      { label: "Fecha de vencimiento", name: "expirationDate", type: "date" },
       { label: "Auto-renew", name: "autoRenew", type: "checkbox" },
       { label: "Responsable de pago", name: "paymentResponsibleName" },
       { label: "Estado", name: "status", type: "select", options: enumOptions(domainStatuses) },
@@ -481,18 +494,18 @@ function buildConfigs() {
     key: "renewals",
     title: "Renovaciones",
     pluralLabel: "renovaciones",
-    singularCountLabel: "renovacion registrada",
+    singularCountLabel: "renovación registrada",
     pluralCountLabel: "renovaciones registradas",
-    createLabel: "Nueva renovacion",
-    createTitle: "Nueva renovacion",
-    editTitle: "Editar renovacion",
-    submitLabel: "Guardar renovacion",
+    createLabel: "Nueva renovación",
+    createTitle: "Nueva renovación",
+    editTitle: "Editar renovación",
+    submitLabel: "Guardar renovación",
     archiveButtonLabel: "Cancelar",
-    archiveConfirmLabel: "Cancelar renovacion",
-    archiveTitle: "Cancelar renovacion",
+    archiveConfirmLabel: "Cancelar renovación",
+    archiveTitle: "Cancelar renovación",
     archiveMessage: (row) => `La renovacion ${row?.entityType || ""} quedara CANCELLED.`,
     emptyTitle: "Sin renovaciones",
-    emptyMessage: "Todavia no hay renovaciones cargadas.",
+    emptyMessage: "Todavía no hay renovaciones cargadas.",
     formDescription: "Registra vencimientos operativos y recordatorios futuros.",
     emptyForm: {
       entityType: "OTHER",
@@ -508,7 +521,7 @@ function buildConfigs() {
       notes: "",
     },
     columns: [
-      { key: "entityType", label: "Tipo", render: (row) => <strong className="crm-table-primary">{row.entityType}</strong> },
+      { key: "entityType", label: "Tipo", render: (row) => <strong className="crm-table-primary">{label(row.entityType)}</strong> },
       { key: "dueDate", label: "Vence", render: (row) => formatDate(row.dueDate) },
       { key: "status", label: "Estado", render: (row) => <CrmStatusBadge status={row.status} /> },
       { key: "client", label: "Cliente", render: (row) => fieldValue(row.client?.businessName) },
@@ -534,7 +547,7 @@ function buildConfigs() {
       { label: "Monto", name: "amount", type: "number" },
       { label: "Moneda", name: "currency" },
       { label: "Estado", name: "status", type: "select", options: enumOptions(renewalStatuses) },
-      { label: "Dias de recordatorio", name: "reminderDays", type: "number" },
+      { label: "Días de recordatorio", name: "reminderDays", type: "number" },
       { label: "Responsable de pago", name: "paymentResponsibleName" },
       { label: "Notas", name: "notes", type: "textarea" },
     ],
@@ -578,7 +591,7 @@ function buildConfigs() {
     archiveTitle: "Archivar costo",
     archiveMessage: (row) => `El costo ${row?.concept || ""} quedara ARCHIVED.`,
     emptyTitle: "Sin costos",
-    emptyMessage: "Todavia no hay costos cargados.",
+    emptyMessage: "Todavía no hay costos cargados.",
     formDescription: "Registra costos activos, recurrentes, one-time y asociados a operaciones.",
     emptyForm: {
       concept: "",
@@ -599,9 +612,9 @@ function buildConfigs() {
       { key: "provider", label: "Proveedor", render: (row) => fieldValue(row.provider?.name) },
       { key: "client", label: "Cliente", render: (row) => fieldValue(row.client?.businessName) },
       { key: "project", label: "Proyecto", render: (row) => fieldValue(row.project?.name) },
-      { key: "subscription", label: "Suscripcion", render: (row) => fieldValue(row.subscription?.name) },
+      { key: "subscription", label: "Suscripción", render: (row) => fieldValue(row.subscription?.name) },
       { key: "status", label: "Estado", render: (row) => <CrmStatusBadge status={row.status} /> },
-      { key: "frequency", label: "Ciclo", render: (row) => fieldValue(row.frequency) },
+      { key: "frequency", label: "Ciclo", render: (row) => label(row.frequency) },
       { key: "amount", label: "Monto", render: (row) => formatMoney(row.amount, row.currency) },
       { key: "date", label: "Fecha", render: (row) => formatDate(row.date) },
       { key: "updatedAt", label: "Actualizado", render: (row) => formatDate(row.updatedAt) },
@@ -609,7 +622,7 @@ function buildConfigs() {
     fields: [
       { label: "Concepto", name: "concept", required: true },
       ...baseRelationFields(true, true),
-      { label: "Categoria", name: "category", type: "select", options: enumOptions(costCategories), required: true },
+      { label: "Categoría", name: "category", type: "select", options: enumOptions(costCategories), required: true },
       { label: "Monto", name: "amount", type: "number", required: true },
       { label: "Moneda", name: "currency" },
       { label: "Ciclo", name: "frequency", type: "select", options: enumOptions(billingFrequencies), required: true },
@@ -720,14 +733,14 @@ function CrmOperations() {
     <>
       <CrmSectionHeader
         eyebrow="Infraestructura y costos"
-        title="Operaciones"
-        description="Gestion real de proveedores, suscripciones, dominios, renovaciones y costos del ecosistema NexoDigital."
+        title="Proveedores y vencimientos"
+        description="Plataformas que usás, lo que pagás, los dominios y sus vencimientos."
         actionDisabled={isLoading}
         actionLabel={isLoading ? "Actualizando" : "Actualizar"}
         onAction={loadOperations}
       />
 
-      <nav className="crm-operations-tabs" aria-label="Modulos de operaciones">
+      <nav className="crm-operations-tabs" aria-label="Módulos de operaciones">
         {operationConfigs.map((config) => (
           <button
             className={`crm-operations-tab ${

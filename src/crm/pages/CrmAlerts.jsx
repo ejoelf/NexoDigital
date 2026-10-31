@@ -34,7 +34,7 @@ function formatMoney(amount, currency = "USD") {
 }
 
 function errorMessage(error) {
-  if (error?.status === 403) return "No tenes permisos suficientes para esta accion.";
+  if (error?.status === 403) return "No tenés permisos suficientes para esta acción.";
   return error?.message || "No se pudo cargar esta seccion.";
 }
 
@@ -204,7 +204,7 @@ function CrmAlerts() {
     { key: "provider", label: "Proveedor", render: (row) => fieldValue(row.provider?.name) },
     { key: "status", label: "Estado", render: (row) => <CrmStatusBadge status={row.status} /> },
     { key: "amount", label: "Monto", render: (row) => formatMoney(row.amount, row.currency) },
-    { key: "renewalDate", label: "Renovacion", render: (row) => formatDate(row.renewalDate) },
+    { key: "renewalDate", label: "Renovación", render: (row) => formatDate(row.renewalDate) },
   ];
   const costColumns = [
     { key: "concept", label: "Concepto", render: (row) => <strong className="crm-table-primary">{row.concept}</strong> },
@@ -265,7 +265,7 @@ function CrmAlerts() {
               ) : (
                 <CrmEmptyState
                   title="Sin alertas"
-                  message="No hay alertas operativas para este periodo."
+                  message="No hay alertas operativas para este período."
                 />
               )}
             </article>
@@ -292,10 +292,10 @@ function CrmAlerts() {
           <section className="crm-grid-2">
             <AlertsSection
               columns={renewalColumns}
-              emptyMessage="No hay renovaciones proximas en este periodo."
+              emptyMessage="No hay renovaciones próximas en este período."
               error={errors.upcomingRenewals}
               rows={data.upcomingRenewals ?? []}
-              title="Proximas renovaciones"
+              title="Próximas renovaciones"
             />
             <AlertsSection
               columns={renewalColumns}
@@ -309,7 +309,7 @@ function CrmAlerts() {
           <section className="crm-grid-2">
             <AlertsSection
               columns={domainColumns}
-              emptyMessage="No hay dominios por vencer en este periodo."
+              emptyMessage="No hay dominios por vencer en este período."
               error={errors.expiringDomains}
               rows={data.expiringDomains ?? []}
               title="Dominios por vencer"

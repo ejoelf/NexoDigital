@@ -79,6 +79,7 @@ function CrmFormField({
           onChange={handleChange}
           placeholder={placeholder}
           required={required}
+          step={type === "number" ? "any" : undefined}
           type={type}
           value={value ?? ""}
         />

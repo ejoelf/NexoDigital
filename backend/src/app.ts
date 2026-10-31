@@ -4,6 +4,7 @@ import { alertsRouter } from "./routes/alerts.routes.js";
 import { auditLogsRouter } from "./routes/audit-logs.routes.js";
 import { corsOptions } from "./config/cors.js";
 import { authRouter } from "./routes/auth.routes.js";
+import { chargesRouter } from "./routes/charges.routes.js";
 import { clientsRouter } from "./routes/clients.routes.js";
 import { costsRouter } from "./routes/costs.routes.js";
 import { dashboardRouter } from "./routes/dashboard.routes.js";
@@ -14,6 +15,7 @@ import { providersRouter } from "./routes/providers.routes.js";
 import { publicRouter } from "./routes/public.routes.js";
 import { renewalsRouter } from "./routes/renewals.routes.js";
 import { subscriptionsRouter } from "./routes/subscriptions.routes.js";
+import { tasksRouter } from "./routes/tasks.routes.js";
 import { worksRouter } from "./routes/works.routes.js";
 import { notFound } from "./middlewares/not-found.middleware.js";
 import { errorHandler } from "./middlewares/error-handler.middleware.js";
@@ -40,6 +42,8 @@ export function createApp() {
   app.use("/api/domains", domainsRouter);
   app.use("/api/renewals", renewalsRouter);
   app.use("/api/costs", costsRouter);
+  app.use("/api/tasks", tasksRouter);
+  app.use("/api/charges", chargesRouter);
   app.use("/api/public", publicRouter);
 
   app.use(notFound);

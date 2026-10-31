@@ -141,6 +141,44 @@ enum CostStatus {
   CANCELLED
 }
 
+enum LeadStage {
+  NEW
+  CONTACTED
+  PROPOSAL_SENT
+  NEGOTIATION
+  WON
+  LOST
+}
+
+enum TaskStatus {
+  PENDING
+  IN_PROGRESS
+  DONE
+  CANCELLED
+}
+
+enum TaskPriority {
+  LOW
+  MEDIUM
+  HIGH
+}
+
+enum ChargeType {
+  PROJECT
+  MAINTENANCE
+  DOMAIN
+  HOSTING
+  CONSULTING
+  OTHER
+}
+
+enum ChargeStatus {
+  PENDING
+  PAID
+  OVERDUE
+  CANCELLED
+}
+
 enum DocumentType {
   BRIEF
   PROPOSAL
@@ -225,9 +263,17 @@ model Client {
   address      String?
   status       ClientStatus @default(LEAD)
   notes        String?
+  website      String?
+  instagram    String?
+  source       String?
+  leadStage    LeadStage?
+  lastContactAt  DateTime?
+  nextFollowUpAt DateTime?
   createdAt    DateTime     @default(now())
   updatedAt    DateTime     @updatedAt
 
+  tasks         Task[]
+  charges       Charge[]
   projects      Project[]
   works         Work[]
   subscriptions Subscription[]
@@ -257,9 +303,16 @@ model Project {
   launchDate           DateTime?
   maintenanceStartDate DateTime?
   notes                String?
+  adminUrl             String?
+  frontendDashboardUrl String?
+  backendDashboardUrl  String?
+  databaseDashboardUrl String?
+  hostingNotes         String?
   createdAt            DateTime      @default(now())
   updatedAt            DateTime      @updatedAt
 
+  tasks            Task[]
+  charges          Charge[]
   client           Client?    @relation(fields: [clientId], references: [id], onDelete: SetNull)
   frontendProvider Provider?  @relation("ProjectFrontendProvider", fields: [frontendProviderId], references: [id], onDelete: SetNull)
   backendProvider  Provider?  @relation("ProjectBackendProvider", fields: [backendProviderId], references: [id], onDelete: SetNull)
@@ -318,6 +371,8 @@ model Provider {
   notes        String?
   isOfficial   Boolean          @default(false)
   status       ProviderStatus   @default(CANDIDATE)
+  dashboardUrl String?
+  planName     String?
   createdAt    DateTime         @default(now())
   updatedAt    DateTime         @updatedAt
 
@@ -441,4 +496,47 @@ model Document {
   project       Project? @relation(fields: [projectId], references: [id], onDelete: SetNull)
   work          Work?    @relation(fields: [workId], references: [id], onDelete: SetNull)
   createdByUser User?    @relation(fields: [createdByUserId], references: [id], onDelete: SetNull)
+}
+
+model Task {
+  id          String       @id @default(cuid())
+  title       String
+  description String?
+  status      TaskStatus   @default(PENDING)
+  priority    TaskPriority @default(MEDIUM)
+  dueDate     DateTime?
+  completedAt DateTime?
+  clientId    String?
+  projectId   String?
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+
+  client  Client?  @relation(fields: [clientId], references: [id], onDelete: SetNull)
+  project Project? @relation(fields: [projectId], references: [id], onDelete: SetNull)
+
+  @@index([status])
+  @@index([dueDate])
+}
+
+model Charge {
+  id        String           @id @default(cuid())
+  clientId  String?
+  projectId String?
+  concept   String
+  type      ChargeType       @default(OTHER)
+  amount    Decimal          @db.Decimal(12, 2)
+  currency  String           @default("ARS")
+  frequency BillingFrequency @default(ONE_TIME)
+  dueDate   DateTime?
+  status    ChargeStatus     @default(PENDING)
+  paidAt    DateTime?
+  notes     String?
+  createdAt DateTime         @default(now())
+  updatedAt DateTime         @updatedAt
+
+  client  Client?  @relation(fields: [clientId], references: [id], onDelete: SetNull)
+  project Project? @relation(fields: [projectId], references: [id], onDelete: SetNull)
+
+  @@index([status])
+  @@index([dueDate])
 }

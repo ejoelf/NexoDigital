@@ -1,5 +1,12 @@
-import { ClientStatus } from "@prisma/client";
+import { ClientStatus, LeadStage } from "@prisma/client";
+import {
+  createDateFields,
+  createStringFields,
+  updateDateFields,
+  updateStringFields,
+} from "../common/fields.js";
 import { HttpError } from "../common/http-error.js";
+import { parseOptionalEnum } from "../common/validation.js";
 import { toOptionalString, toRequiredString } from "../common/strings.js";
 import { prisma } from "../prisma/client.js";
 
@@ -13,7 +20,24 @@ type ClientInput = {
   industry?: unknown;
   status?: unknown;
   notes?: unknown;
+  whatsapp?: unknown;
+  address?: unknown;
+  website?: unknown;
+  instagram?: unknown;
+  source?: unknown;
+  leadStage?: unknown;
+  lastContactAt?: unknown;
+  nextFollowUpAt?: unknown;
 };
+
+const EXTRA_STRING_FIELDS = [
+  "whatsapp",
+  "address",
+  "website",
+  "instagram",
+  "source",
+] as const;
+const EXTRA_DATE_FIELDS = ["lastContactAt", "nextFollowUpAt"] as const;
 
 function parseClientStatus(value: unknown) {
   if (value === undefined || value === null || value === "") {
@@ -63,6 +87,9 @@ async function ensureUniqueBusinessName(businessName: string, ignoreId?: string)
 
 export async function listClients() {
   return prisma.client.findMany({
+    include: {
+      _count: { select: { projects: true, tasks: true, charges: true } },
+    },
     orderBy: [{ status: "asc" }, { businessName: "asc" }],
   });
 }
@@ -78,6 +105,22 @@ export async function getClientById(id: string) {
           type: true,
           status: true,
           domain: true,
+          publicUrl: true,
+        },
+      },
+      tasks: { orderBy: [{ status: "asc" }, { dueDate: "asc" }] },
+      charges: { orderBy: [{ status: "asc" }, { dueDate: "asc" }] },
+      domains: {
+        select: { id: true, domainName: true, expirationDate: true, status: true },
+      },
+      subscriptions: {
+        select: {
+          id: true,
+          name: true,
+          amount: true,
+          currency: true,
+          renewalDate: true,
+          status: true,
         },
       },
     },
@@ -106,6 +149,9 @@ export async function createClient(input: ClientInput) {
       industry: toOptionalString(input.industry),
       status: parseClientStatus(input.status) ?? ClientStatus.ACTIVE,
       notes: toOptionalString(input.notes),
+      leadStage: parseOptionalEnum(input.leadStage, LeadStage, "leadStage"),
+      ...createStringFields(input, EXTRA_STRING_FIELDS),
+      ...createDateFields(input, EXTRA_DATE_FIELDS),
     },
   });
 }
@@ -141,6 +187,11 @@ export async function updateClient(id: string, input: ClientInput) {
       ...(input.notes !== undefined
         ? { notes: toOptionalString(input.notes) ?? null }
         : {}),
+      ...(input.leadStage !== undefined
+        ? { leadStage: parseOptionalEnum(input.leadStage, LeadStage, "leadStage") ?? null }
+        : {}),
+      ...updateStringFields(input, EXTRA_STRING_FIELDS),
+      ...updateDateFields(input, EXTRA_DATE_FIELDS),
     },
   });
 }

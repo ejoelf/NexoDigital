@@ -1,4 +1,5 @@
 import { ProviderCategory, ProviderStatus } from "@prisma/client";
+import { createStringFields, updateStringFields } from "../common/fields.js";
 import { HttpError } from "../common/http-error.js";
 import { toOptionalString, toRequiredString } from "../common/strings.js";
 import {
@@ -21,7 +22,11 @@ type ProviderInput = {
   isOfficial?: unknown;
   recommendedUse?: unknown;
   internalOwner?: unknown;
+  dashboardUrl?: unknown;
+  planName?: unknown;
 };
+
+const EXTRA_STRING_FIELDS = ["dashboardUrl", "planName"] as const;
 
 function parseAccountEmail(value: unknown) {
   const email = toOptionalString(value);
@@ -91,6 +96,7 @@ export async function createProvider(input: ProviderInput) {
         parseOptionalEnum(input.status, ProviderStatus, "status") ??
         ProviderStatus.CANDIDATE,
       notes: toOptionalString(input.notes),
+      ...createStringFields(input, EXTRA_STRING_FIELDS),
       isOfficial: parseOptionalBoolean(input.isOfficial, "isOfficial") ?? false,
     },
   });
@@ -141,6 +147,7 @@ export async function updateProvider(id: string, input: ProviderInput) {
       ...(input.notes !== undefined
         ? { notes: toOptionalString(input.notes) ?? null }
         : {}),
+      ...updateStringFields(input, EXTRA_STRING_FIELDS),
       ...(input.isOfficial !== undefined
         ? { isOfficial: parseOptionalBoolean(input.isOfficial, "isOfficial") }
         : {}),

@@ -6,37 +6,53 @@ import { useAuth } from "./hooks/useAuth";
 import CrmAlerts from "./pages/CrmAlerts";
 import CrmAuditLogs from "./pages/CrmAuditLogs";
 import CrmClients from "./pages/CrmClients";
-import CrmDashboard from "./pages/CrmDashboard";
+import CrmCharges from "./pages/CrmCharges";
+import CrmHome from "./pages/CrmHome";
 import CrmLogin from "./pages/CrmLogin";
 import CrmOperations from "./pages/CrmOperations";
+import CrmPipeline from "./pages/CrmPipeline";
 import CrmProjects from "./pages/CrmProjects";
 import CrmSettings from "./pages/CrmSettings";
+import CrmTasks from "./pages/CrmTasks";
 import CrmWorks from "./pages/CrmWorks";
 import "./styles/crm.css";
 import "./styles/crm-layout.css";
 import "./styles/crm-login.css";
 import "./styles/crm-auth-screen.css";
 import "./styles/crm-v2.css";
+import "./styles/crm-v3.css";
 
 const pages = {
   dashboard: {
-    title: "Dashboard",
-    component: <CrmDashboard />,
+    title: "Inicio",
+    component: <CrmHome />,
+  },
+  tasks: {
+    title: "Tareas",
+    component: <CrmTasks />,
+  },
+  pipeline: {
+    title: "Prospectos",
+    component: <CrmPipeline />,
+  },
+  charges: {
+    title: "Cobros",
+    component: <CrmCharges />,
   },
   clients: {
     title: "Clientes",
     component: <CrmClients />,
   },
   projects: {
-    title: "Proyectos",
+    title: "Webs y proyectos",
     component: <CrmProjects />,
   },
   works: {
-    title: "Trabajos",
+    title: "Portfolio",
     component: <CrmWorks />,
   },
   operations: {
-    title: "Operaciones",
+    title: "Proveedores y vencimientos",
     component: <CrmOperations />,
   },
   alerts: {
@@ -44,7 +60,7 @@ const pages = {
     component: <CrmAlerts />,
   },
   "audit-logs": {
-    title: "Auditoría",
+    title: "Historial de cambios",
     component: <CrmAuditLogs />,
   },
   settings: {
@@ -56,7 +72,7 @@ const pages = {
 function CrmLoadingScreen() {
   return (
     <main className="crm-loading-screen">
-      <img src="/brand/nexodigital-isotipo.svg" alt="" aria-hidden="true" />
+      <img src="/brand/nd-monogram.webp" alt="" aria-hidden="true" />
       <p>Validando sesión...</p>
     </main>
   );

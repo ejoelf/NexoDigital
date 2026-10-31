@@ -6,7 +6,7 @@ import CrmLoadingState from "./CrmLoadingState";
 
 function CrmMetricGrid({ metrics, isLoading, error }) {
   if (isLoading) {
-    return <CrmLoadingState label="Cargando metricas del dashboard..." />;
+    return <CrmLoadingState label="Cargando métricas del dashboard..." />;
   }
 
   if (error) {
@@ -16,8 +16,8 @@ function CrmMetricGrid({ metrics, isLoading, error }) {
   if (!metrics?.length) {
     return (
       <CrmEmptyState
-        title="Dashboard sin metricas"
-        message="La API respondio correctamente, pero todavia no hay indicadores disponibles."
+        title="Dashboard sin métricas"
+        message="La API respondio correctamente, pero todavía no hay indicadores disponibles."
       />
     );
   }

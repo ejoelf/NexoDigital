@@ -70,10 +70,10 @@ function fieldValue(value) {
 
 function actionErrorMessage(error) {
   if (error?.status === 403) {
-    return "No tenes permisos suficientes para esta accion.";
+    return "No tenés permisos suficientes para esta acción.";
   }
 
-  return error?.message || "No se pudo completar la accion.";
+  return error?.message || "No se pudo completar la acción.";
 }
 
 function arrayToInput(value) {
@@ -257,7 +257,7 @@ function CrmWorks() {
       },
       {
         key: "category",
-        label: "Categoria",
+        label: "Categoría",
         render: (work) => fieldValue(work.category),
       },
       {
@@ -400,7 +400,7 @@ function CrmWorks() {
       <CrmSectionHeader
         eyebrow="Portfolio operativo"
         title="Trabajos realizados"
-        description="Gestion real de trabajos que podran alimentar la seccion publica en una fase futura."
+        description="Gestión real de trabajos que podran alimentar la seccion publica en una fase futura."
       />
 
       <CrmPageToolbar
@@ -453,7 +453,7 @@ function CrmWorks() {
                 : null
             }
             columns={columns}
-            emptyMessage="Todavia no hay trabajos cargados. Crea el primer work para preparar la futura conexion con la web publica."
+            emptyMessage="Todavía no hay trabajos cargados. Crea el primer work para preparar la futura conexion con la web publica."
             emptyTitle="Sin trabajos realizados"
             rows={filteredWorks}
           />
@@ -461,7 +461,7 @@ function CrmWorks() {
       ) : null}
 
       <CrmModal
-        description="Los arrays como tecnologias, galeria y servicios se cargan separados por coma en esta V1."
+        description="Los arrays como tecnologías, galería y servicios se cargan separados por coma en esta V1."
         footer={
           <>
             <button className="crm-button crm-button--secondary" onClick={closeModal} type="button">
@@ -514,7 +514,7 @@ function CrmWorks() {
             value={form.projectId}
           />
           <CrmFormField
-            label="Categoria"
+            label="Categoría"
             name="category"
             onChange={updateForm}
             required
@@ -556,7 +556,7 @@ function CrmWorks() {
             value={form.featured}
           />
           <CrmFormField
-            label="Fecha de publicacion"
+            label="Fecha de publicación"
             name="publishedAt"
             onChange={updateForm}
             type="date"
@@ -575,7 +575,7 @@ function CrmWorks() {
             value={form.mainImageUrl}
           />
           <CrmFormField
-            label="Galeria URLs"
+            label="Galería URLs"
             name="galleryUrls"
             onChange={updateForm}
             placeholder="https://... , https://..."
@@ -594,7 +594,7 @@ function CrmWorks() {
             value={form.backendRepositoryUrl}
           />
           <CrmFormField
-            label="Tecnologias"
+            label="Tecnologías"
             name="technologies"
             onChange={updateForm}
             placeholder="React, Vite, CSS"
@@ -608,7 +608,7 @@ function CrmWorks() {
             value={form.includedServices}
           />
           <CrmFormField
-            label="Descripcion corta"
+            label="Descripción corta"
             name="shortDescription"
             onChange={updateForm}
             required
@@ -616,7 +616,7 @@ function CrmWorks() {
             value={form.shortDescription}
           />
           <CrmFormField
-            label="Descripcion larga"
+            label="Descripción larga"
             name="longDescription"
             onChange={updateForm}
             type="textarea"

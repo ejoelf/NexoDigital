@@ -24,10 +24,10 @@ function shortUserAgent(value) {
 
 function errorMessage(error) {
   if (error?.status === 403) {
-    return "No tenes permisos suficientes para ver auditoria.";
+    return "No tenés permisos suficientes para ver auditoría.";
   }
 
-  return error?.message || "No se pudo cargar auditoria.";
+  return error?.message || "No se pudo cargar auditoría.";
 }
 
 function safeMetadata(metadata) {
@@ -143,12 +143,12 @@ function CrmAuditLogs() {
       <>
         <CrmSectionHeader
           eyebrow="Seguridad"
-          title="Auditoria"
+          title="Auditoría"
           description="Vista restringida para administradores del CRM."
         />
         <CrmErrorState
           title="Acceso restringido"
-          message="No tenes permisos suficientes para ver auditoria."
+          message="No tenés permisos suficientes para ver auditoría."
         />
       </>
     );
@@ -158,7 +158,7 @@ function CrmAuditLogs() {
     <>
       <CrmSectionHeader
         eyebrow="Seguridad"
-        title="Auditoria"
+        title="Auditoría"
         description="Eventos auditados del backend CRM. La metadata sensible se mantiene sanitizada por backend."
         actionDisabled={isLoading}
         actionLabel={isLoading ? "Actualizando" : "Actualizar"}
@@ -169,7 +169,7 @@ function CrmAuditLogs() {
         <label>
           Buscar
           <input
-            placeholder="accion, usuario, entidad, IP..."
+            placeholder="acción, usuario, entidad, IP..."
             type="search"
             value={filters.search}
             onChange={(event) =>
@@ -212,7 +212,7 @@ function CrmAuditLogs() {
       </div>
 
       {error ? <CrmErrorState message={error} /> : null}
-      {isLoading ? <CrmLoadingState label="Cargando auditoria..." /> : null}
+      {isLoading ? <CrmLoadingState label="Cargando auditoría..." /> : null}
 
       {!isLoading && !error ? (
         <section className="crm-panel">
@@ -242,7 +242,7 @@ function CrmAuditLogs() {
         }
         isOpen={Boolean(selectedLog)}
         onClose={() => setSelectedLog(null)}
-        title="Detalle de auditoria"
+        title="Detalle de auditoría"
       >
         {isDetailLoading ? <CrmLoadingState label="Cargando detalle..." /> : null}
         {selectedLog && !isDetailLoading ? (

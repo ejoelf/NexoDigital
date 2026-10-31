@@ -17,6 +17,12 @@ const ICON_PATHS = {
     "M12 2a7 7 0 0 1 7 7v3.59l1.7 2.55A1 1 0 0 1 19.87 17H4.13a1 1 0 0 1-.83-1.56L5 12.59V9a7 7 0 0 1 7-7Zm-2 17h4a2 2 0 1 1-4 0Z",
   "audit-logs":
     "M5 3h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2Zm2 4v2h10V7H7Zm0 4v2h10v-2H7Zm0 4v2h6v-2H7Z",
+  tasks:
+    "M9 11.2 6.8 9l-1.4 1.4L9 14l8-8-1.4-1.4L9 11.2ZM19 19H5V5h9V3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-8h-2v8Z",
+  pipeline:
+    "M3 4h18v3H3V4Zm2 5h14v3H5V9Zm2 5h10v3H7v-3Zm2 5h6v2H9v-2Z",
+  charges:
+    "M12 2a10 10 0 1 1 0 20 10 10 0 0 1 0-20Zm1 4h-2v1.1c-1.7.3-3 1.5-3 3.1 0 1.9 1.6 2.6 3.4 3.1 1.5.4 2.1.7 2.1 1.4 0 .6-.7 1.1-1.7 1.1-1.1 0-1.9-.5-2.1-1.4l-1.9.5c.3 1.4 1.5 2.4 3.2 2.7V18h2v-1.4c1.8-.3 3-1.5 3-3.1 0-2-1.6-2.7-3.4-3.2-1.5-.4-2.1-.7-2.1-1.3 0-.6.6-1 1.5-1 .9 0 1.6.4 1.8 1.2l1.9-.5c-.3-1.3-1.3-2.2-2.7-2.5V6Z",
   settings:
     "M12 2a2 2 0 0 1 2 2v.35c.76.2 1.47.5 2.12.89l.25-.25a2 2 0 1 1 2.83 2.83l-.25.25c.39.65.69 1.36.89 2.12H20a2 2 0 1 1 0 4h-.35a7.9 7.9 0 0 1-.89 2.12l.25.25a2 2 0 1 1-2.83 2.83l-.25-.25a7.9 7.9 0 0 1-2.12.89V20a2 2 0 1 1-4 0v-.35a7.9 7.9 0 0 1-2.12-.89l-.25.25a2 2 0 1 1-2.83-2.83l.25-.25A7.9 7.9 0 0 1 4.35 14H4a2 2 0 1 1 0-4h.35c.2-.76.5-1.47.89-2.12l-.25-.25A2 2 0 1 1 7.82 4.8l.25.25A7.9 7.9 0 0 1 10.19 4.16V4a2 2 0 0 1 2-2ZM12 9a3 3 0 1 0 0 6 3 3 0 0 0 0-6Z",
 };
@@ -49,10 +55,8 @@ function CrmSidebar({ activeKey, isOpen, onClose }) {
     >
       <div className="crm-sidebar-header">
         <a className="crm-sidebar-brand" href="/crm/dashboard">
-          <img
-            src="/brand/nexodigital-monochrome-white.svg"
-            alt="NexoDigital"
-          />
+          <img src="/brand/nd-monogram.webp" alt="" />
+          <span className="crm-sidebar-brand-name">NexoDigital</span>
           <span>CRM</span>
         </a>
 
@@ -71,8 +75,8 @@ function CrmSidebar({ activeKey, isOpen, onClose }) {
       <div className="crm-sidebar-context">
         <span className="crm-sidebar-context-dot" aria-hidden="true" />
         <div>
-          <strong>Centro operativo</strong>
-          <small>Datos y procesos conectados</small>
+          <strong>Panel privado</strong>
+          <small>Clientes, webs y vencimientos</small>
         </div>
       </div>
 
@@ -103,11 +107,11 @@ function CrmSidebar({ activeKey, isOpen, onClose }) {
 
       <div className="crm-sidebar-footer">
         <div className="crm-sidebar-footer-icon" aria-hidden="true">
-          <img src="/brand/nexodigital-isotipo.svg" alt="" />
+          <img src="/brand/nd-monogram.webp" alt="" />
         </div>
         <div>
           <strong>Entorno privado</strong>
-          <p>Sesión protegida y operación centralizada.</p>
+          <p>Sin contraseñas guardadas: usá tu gestor de contraseñas.</p>
         </div>
       </div>
     </aside>

@@ -6,6 +6,7 @@ import {
   getDashboardOverview,
   getDashboardRecentActivity,
 } from "../services/dashboard.service.js";
+import { getDashboardHome } from "../services/home.service.js";
 
 function requestDays(request: Request) {
   return parseAlertDays(request.query.days);
@@ -48,5 +49,12 @@ export async function showDashboardRecentActivity(
   response.json({
     ok: true,
     recentActivity: await getDashboardRecentActivity(),
+  });
+}
+
+export async function showDashboardHome(request: Request, response: Response) {
+  response.json({
+    ok: true,
+    home: await getDashboardHome(requestDays(request)),
   });
 }

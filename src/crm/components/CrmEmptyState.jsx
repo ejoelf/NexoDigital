@@ -1,6 +1,6 @@
 import React from "react";
 
-function CrmEmptyState({ title = "Sin datos todavia", message }) {
+function CrmEmptyState({ title = "Sin datos todavía", message }) {
   return (
     <div className="crm-state crm-state--empty">
       <strong>{title}</strong>

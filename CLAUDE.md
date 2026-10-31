@@ -6,6 +6,19 @@
 - **CRM interno** (`src/crm/`, ruta `/crm`): panel privado. Se carga aparte (lazy) y tiene sus propios estilos. No tocarlo al cambiar la web pública.
 - **Backend del CRM** (`backend/`): Node + Express + Prisma, desplegado aparte.
 
+## CRM (panel privado)
+
+- Secciones: Inicio (agenda de todo lo que vence), Tareas, Clientes (con ficha), Prospectos, Cobros, Webs y proyectos (fichas con enlaces a Render/Vercel/Neon y vencimiento del dominio), Proveedores y vencimientos, Portfolio, Alertas, Historial de cambios y Configuración.
+- Textos de los valores del backend (estados, tipos) en `src/crm/data/crmLabels.js`. La API sigue usando los valores en inglés.
+- Pantallas tipo tabla + formulario: `src/crm/components/CrmOperationsModule.jsx` con una config por módulo (ver `pages/CrmTasks.jsx`).
+- Nunca guardar contraseñas en el CRM: solo el email de la cuenta y el enlace al panel.
+- Nada se borra: tareas y cobros se cancelan, clientes se desactivan, proyectos se cierran.
+
+### Migraciones
+
+- El `start` del backend corre `prisma migrate deploy` antes de levantar el servidor, así cada deploy en Render aplica las migraciones nuevas.
+- Las migraciones solo deben agregar (tipos, columnas opcionales, tablas). Probar el SQL contra un Postgres local antes de subir.
+
 ## Deploy (estado actual)
 
 - Web: Render, sitio estático `nexodigital` → https://nexodigital-ix6r.onrender.com

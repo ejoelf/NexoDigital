@@ -1,6 +1,7 @@
 import { Router } from "express";
 import {
   showDashboardFinancials,
+  showDashboardHome,
   showDashboardOperations,
   showDashboardOverview,
   showDashboardRecentActivity,
@@ -11,6 +12,7 @@ export const dashboardRouter = Router();
 
 dashboardRouter.use(requireAuth);
 
+dashboardRouter.get("/home", showDashboardHome);
 dashboardRouter.get("/overview", showDashboardOverview);
 dashboardRouter.get("/operations", showDashboardOperations);
 dashboardRouter.get("/financials", showDashboardFinancials);

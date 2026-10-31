@@ -1,5 +1,11 @@
 import { ProjectStatus, ProjectType } from "@prisma/client";
 import { toOptionalDate } from "../common/dates.js";
+import {
+  createDateFields,
+  createStringFields,
+  updateDateFields,
+  updateStringFields,
+} from "../common/fields.js";
 import { HttpError } from "../common/http-error.js";
 import {
   createSlug,
@@ -23,7 +29,29 @@ type ProjectInput = {
   startDate?: unknown;
   estimatedDeliveryDate?: unknown;
   notes?: unknown;
+  publicUrl?: unknown;
+  adminUrl?: unknown;
+  frontendDashboardUrl?: unknown;
+  backendDashboardUrl?: unknown;
+  databaseDashboardUrl?: unknown;
+  hostingNotes?: unknown;
+  launchDate?: unknown;
+  maintenanceStartDate?: unknown;
 };
+
+const EXTRA_STRING_FIELDS = [
+  "publicUrl",
+  "adminUrl",
+  "frontendDashboardUrl",
+  "backendDashboardUrl",
+  "databaseDashboardUrl",
+  "hostingNotes",
+] as const;
+const EXTRA_DATE_FIELDS = ["launchDate", "maintenanceStartDate"] as const;
+
+const PROVIDER_SELECT = {
+  select: { id: true, name: true, category: true, planName: true, dashboardUrl: true },
+} as const;
 
 function parseProjectType(value: unknown) {
   if (typeof value !== "string" || value.trim().length === 0) {
@@ -106,9 +134,20 @@ export async function listProjects() {
   return prisma.project.findMany({
     include: {
       client: { select: { id: true, businessName: true, status: true } },
-      frontendProvider: { select: { id: true, name: true, category: true } },
-      backendProvider: { select: { id: true, name: true, category: true } },
-      databaseProvider: { select: { id: true, name: true, category: true } },
+      frontendProvider: PROVIDER_SELECT,
+      backendProvider: PROVIDER_SELECT,
+      databaseProvider: PROVIDER_SELECT,
+      domains: {
+        select: {
+          id: true,
+          domainName: true,
+          expirationDate: true,
+          autoRenew: true,
+          status: true,
+          registrar: true,
+        },
+      },
+      _count: { select: { tasks: true, charges: true } },
     },
     orderBy: [{ status: "asc" }, { name: "asc" }],
   });
@@ -119,9 +158,13 @@ export async function getProjectById(id: string) {
     where: { id },
     include: {
       client: { select: { id: true, businessName: true, status: true } },
-      frontendProvider: { select: { id: true, name: true, category: true } },
-      backendProvider: { select: { id: true, name: true, category: true } },
-      databaseProvider: { select: { id: true, name: true, category: true } },
+      frontendProvider: PROVIDER_SELECT,
+      backendProvider: PROVIDER_SELECT,
+      databaseProvider: PROVIDER_SELECT,
+      domains: true,
+      tasks: { orderBy: [{ status: "asc" }, { dueDate: "asc" }] },
+      charges: { orderBy: [{ status: "asc" }, { dueDate: "asc" }] },
+      subscriptions: true,
     },
   });
 
@@ -164,6 +207,8 @@ export async function createProject(input: ProjectInput) {
         "estimatedDeliveryDate",
       ),
       notes: toOptionalString(input.notes),
+      ...createStringFields(input, EXTRA_STRING_FIELDS),
+      ...createDateFields(input, EXTRA_DATE_FIELDS),
     },
   });
 }
@@ -239,6 +284,8 @@ export async function updateProject(id: string, input: ProjectInput) {
       ...(input.notes !== undefined
         ? { notes: toOptionalString(input.notes) ?? null }
         : {}),
+      ...updateStringFields(input, EXTRA_STRING_FIELDS),
+      ...updateDateFields(input, EXTRA_DATE_FIELDS),
     },
   });
 }

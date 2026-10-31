@@ -55,12 +55,12 @@ function CrmLogin() {
         <aside className="crm-login-brand">
           <div className="crm-login-brand-copy">
             <img
-              src="/brand/nexodigital-monochrome-white.svg"
+              src="/brand/nd-logo-vertical.webp"
               alt="NexoDigital"
               className="crm-login-logo"
             />
 
-            <p className="crm-login-brand-eyebrow">Command Center</p>
+            <p className="crm-login-brand-eyebrow">Panel privado</p>
             <h1>
               Todo lo que construimos, conectado en un{" "}
               <span>solo lugar.</span>
@@ -96,7 +96,7 @@ function CrmLogin() {
 
               <div className="crm-login-preview-shell">
                 <div className="crm-login-preview-sidebar">
-                  <img src="/brand/nexodigital-isotipo.svg" alt="" />
+                  <img src="/brand/nd-monogram.webp" alt="" />
                   <span className="is-active" />
                   <span />
                   <span />

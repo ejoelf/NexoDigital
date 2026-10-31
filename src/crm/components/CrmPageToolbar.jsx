@@ -1,4 +1,5 @@
 import React from "react";
+import { label as statusLabel } from "../data/crmLabels";
 
 function CrmPageToolbar({
   count,
@@ -37,7 +38,7 @@ function CrmPageToolbar({
               <option value="">Todos los estados</option>
               {statusOptions.map((status) => (
                 <option key={status} value={status}>
-                  {status}
+                  {statusLabel(status)}
                 </option>
               ))}
             </select>

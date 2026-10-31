@@ -4,7 +4,7 @@ function CrmErrorState({ title = "No se pudo cargar esta seccion", message }) {
   return (
     <div className="crm-state crm-state--error" role="alert">
       <strong>{title}</strong>
-      <p>{message || "Revisa permisos, sesion o disponibilidad del backend."}</p>
+      <p>{message || "Revisa permisos, sesión o disponibilidad del backend."}</p>
     </div>
   );
 }

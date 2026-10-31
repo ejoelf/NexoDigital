@@ -9,10 +9,10 @@ import CrmPageToolbar from "./CrmPageToolbar";
 
 function actionErrorMessage(error) {
   if (error?.status === 403) {
-    return "No tenes permisos suficientes para esta accion.";
+    return "No tenés permisos suficientes para esta acción.";
   }
 
-  return error?.message || "No se pudo completar la accion.";
+  return error?.message || "No se pudo completar la acción.";
 }
 
 function resolveOptions(field, context, form) {
@@ -34,6 +34,7 @@ function CrmOperationsModule({
   isLoading,
   error,
   onReload,
+  renderList,
 }) {
   const [editingRecord, setEditingRecord] = useState(undefined);
   const [recordToArchive, setRecordToArchive] = useState(null);
@@ -44,7 +45,8 @@ function CrmOperationsModule({
   const statusOptions = [
     ...new Set(rows.map((row) => row.status).filter(Boolean)),
   ].sort();
-  const filteredRows = rows.filter((row) => {
+  const visibleRows = config.sortRows ? config.sortRows(rows) : rows;
+  const filteredRows = visibleRows.filter((row) => {
     const matchesStatus = !filters.status || row.status === filters.status;
     return matchesStatus && matchesSearch(row, filters.search);
   });
@@ -100,6 +102,26 @@ function CrmOperationsModule({
     }
   }
 
+  // Acciones rápidas por fila (por ejemplo "Marcar hecha" o "Ver ficha").
+  async function runQuickAction(action, record) {
+    if (action.onClick) {
+      action.onClick(record);
+      return;
+    }
+
+    setIsSaving(true);
+    setActionError("");
+
+    try {
+      await action.run(authenticatedRequest, record);
+      await onReload();
+    } catch (quickError) {
+      setActionError(actionErrorMessage(quickError));
+    } finally {
+      setIsSaving(false);
+    }
+  }
+
   async function handleArchive() {
     if (!recordToArchive) return;
     setIsSaving(true);
@@ -120,6 +142,8 @@ function CrmOperationsModule({
 
   return (
     <section className="crm-operations-module">
+      {config.intro ? <p className="crm-module-intro">{config.intro}</p> : null}
+
       <CrmPageToolbar
         actionLabel={config.createLabel}
         canCreate={canWrite}
@@ -139,15 +163,37 @@ function CrmOperationsModule({
       />
 
       {error ? <CrmErrorState message={error} /> : null}
+      {actionError && !modalOpen && !recordToArchive ? (
+        <CrmErrorState message={actionError} />
+      ) : null}
       {isLoading ? <CrmLoadingState label={`Cargando ${config.pluralLabel}...`} /> : null}
 
-      {!isLoading && !error ? (
+      {!isLoading && !error && renderList ? (
+        renderList(filteredRows, { edit: openEditModal, canWrite })
+      ) : null}
+
+      {!isLoading && !error && !renderList ? (
         <section className="crm-panel">
           <CrmDataTable
             actions={
-              canWrite
+              canWrite || config.quickActions
                 ? (record) => (
                     <>
+                      {(config.quickActions?.(record) ?? [])
+                        .filter((action) => canWrite || action.onClick)
+                        .map((action) => (
+                          <button
+                            className="crm-row-action crm-row-action--quick"
+                            disabled={isSaving}
+                            key={action.label}
+                            onClick={() => runQuickAction(action, record)}
+                            type="button"
+                          >
+                            {action.label}
+                          </button>
+                        ))}
+                      {canWrite ? (
+                      <>
                       <button
                         className="crm-row-action"
                         onClick={() => openEditModal(record)}
@@ -155,6 +201,7 @@ function CrmOperationsModule({
                       >
                         Editar
                       </button>
+                      {config.canArchive && !config.canArchive(record) ? null : (
                       <button
                         className="crm-row-action crm-row-action--danger"
                         onClick={() => {
@@ -165,6 +212,9 @@ function CrmOperationsModule({
                       >
                         {config.archiveButtonLabel}
                       </button>
+                      )}
+                      </>
+                      ) : null}
                     </>
                   )
                 : null
